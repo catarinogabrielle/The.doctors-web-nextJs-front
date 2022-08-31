@@ -18,7 +18,7 @@ export default function MyCourses() {
                     <div className={styles.boxCard}>
                         <Link href="/classroom">
                             <div className={styles.card}>
-                                <img className={styles.imageCard} alt="imagem do curso" src="/foto.jpg" />
+                                <img className={styles.imageCard} alt="imagem do curso" src="/imageCurso.jpg" />
                                 <div className={styles.descriptionCard}>
                                     <p>DESCRIÇÃO DO CURSO QUE VAI SER OFERECIDO</p>
                                     <div className={styles.course}>
