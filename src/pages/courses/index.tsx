@@ -21,7 +21,7 @@ export default function Courses() {
                         <div className={styles.boxInput}>
                             <input type="text" placeholder="Pesquisar curso" />
                             <button className={styles.buttonSearch} title="pesquisar">
-                                <FiSearch color="#10B2AA" size={20} />
+                                <FiSearch className={styles.icon} size={20} />
                             </button>
                         </div>
                     </div>

@@ -19,50 +19,48 @@ export default function Dashboard() {
                 <title>The.Doctors - Meu Painel</title>
             </Head>
 
-            <div>
-                <Header />
+            <Header />
 
-                <div className={styles.containerInfoDashboard}>
+            <div className={styles.containerInfoDashboard}>
 
-                    <div className={styles.contentMenu}>
-                        {user?.type === 'teacher' &&
-                            (
-                                <Link href="/myclasses">
-                                    <button className={styles.boxMenu}>
-                                        <FiVideo color="#e9e9e9" size={20} />
-                                        <p>Minhas Aulas</p>
-                                    </button>
-                                </Link>
-                            )}
+                <div className={styles.contentMenu}>
+                    {user?.type === 'teacher' &&
+                        (
+                            <Link href="/myclasses">
+                                <button className={styles.boxMenu}>
+                                    <FiVideo className={styles.iconMenu} size={22} />
+                                    <p>Minhas Aulas</p>
+                                </button>
+                            </Link>
+                        )}
 
-                        <Link href="/mycourses">
-                            <button className={styles.boxMenu}>
-                                <FiUser color="#e9e9e9" size={20} />
-                                <p>Meus Cursos</p>
-                            </button>
-                        </Link>
+                    <Link href="/mycourses">
+                        <button className={styles.boxMenu}>
+                            <FiUser className={styles.iconMenu} size={22} />
+                            <p>Meus Cursos</p>
+                        </button>
+                    </Link>
 
-                        <Link href="/courses">
-                            <button className={styles.boxMenu}>
-                                <FiBook color="#e9e9e9" size={20} />
-                                <p>Novos Cursos</p>
-                            </button>
-                        </Link>
+                    <Link href="/courses">
+                        <button className={styles.boxMenu}>
+                            <FiBook className={styles.iconMenu} size={22} />
+                            <p>Novos Cursos</p>
+                        </button>
+                    </Link>
 
-                        <Link href="/materials">
-                            <button className={styles.boxMenu}>
-                                <FiFile color="#e9e9e9" size={20} />
-                                <p>Materiais</p>
-                            </button>
-                        </Link>
+                    <Link href="/materials">
+                        <button className={styles.boxMenu}>
+                            <FiFile className={styles.iconMenu} size={22} />
+                            <p>Materiais</p>
+                        </button>
+                    </Link>
 
-                        <Link href="/settings">
-                            <button className={styles.boxMenu}>
-                                <FiSettings color="#e9e9e9" size={20} />
-                                <p>Configurações</p>
-                            </button>
-                        </Link>
-                    </div>
+                    <Link href="/settings">
+                        <button className={styles.boxMenu}>
+                            <FiSettings className={styles.iconMenu} size={22} />
+                            <p>Configurações</p>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </>

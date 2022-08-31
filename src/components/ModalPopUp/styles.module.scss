@@ -6,7 +6,7 @@
     right: auto;
     padding: 30px;
     transform: translate(-50%, -50%);
-    background: #3d424a;
+    background: var(--Cinza);
     border-radius: 20px;
 }
 
@@ -14,6 +14,10 @@
     justify-content: flex-end;
     display: flex;
     margin-bottom: 1rem;
+}
+
+.icon {
+    color: var(--Branco);
 }
 
 .containerForm {

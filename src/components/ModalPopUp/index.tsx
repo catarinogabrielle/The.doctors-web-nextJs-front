@@ -21,13 +21,13 @@ export function ModalPopUp({ isOpen, onRequestClose, infoUser }: ModalPopUpProps
 
             <div className={styles.containerButton}>
                 <button
-                    title='title'
+                    title='Usuário'
                     type="button"
                     onClick={onRequestClose}
                     className="react-modal-close"
                     style={{ background: 'transparent', border: 0 }}
                 >
-                    <FiX color="#e9e9e9" size={30} />
+                    <FiX className={styles.icon} size={30} />
                 </button>
             </div>
 

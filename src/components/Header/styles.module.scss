@@ -62,17 +62,20 @@
         margin-left: 2rem;
         background: transparent;
         border: 0;
-        transition: transform 0.8s;
     }
 
     .buttonOutbutton {
         margin-left: 2rem;
         background: transparent;
         border: 0;
-        transition: transform 0.8s;
     }
 
-    .buttonOut:hover {
-        transform: scale(1.2);
+    .icon {
+        color: var(--Cinza);
+        transition: 0.8s;
+    }
+
+    .icon:hover {
+        color: var(--Verde);
     }
 }

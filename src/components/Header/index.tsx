@@ -60,8 +60,8 @@ export function Header() {
                         <a className={styles.linkHeader}>Usuário</a>
                     </button>
 
-                    <button title='title' className={styles.buttonOut} onClick={signOut}>
-                        <FiLogOut color="#3d424a" size={24} />
+                    <button title='Sair' className={styles.buttonOut} onClick={signOut}>
+                        <FiLogOut className={styles.icon} size={24} />
                     </button>
                 </nav>
 
