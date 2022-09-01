@@ -59,20 +59,15 @@ export default function Classroom() {
                     </div>
                     <div className={styles.cardVideos}>
                         <div className={styles.scroll}>
-                            <div className={styles.boxInfoVideo}>
-                                <div className={styles.imageVideo}>
-                                    <img alt="imagem teste" src="/banner1.png" />
-                                </div>
-                                <div className={styles.info}>
-                                    <h1>Aula1 - como editar um video</h1>
-                                    {active ? (
-                                        <button className={styles.button} title="check" onClick={() => setActive(!active)}></button>
-                                    ) : (
-                                        <button className={styles.buttonChech} title="check" onClick={() => setActive(!active)}>
-                                            <FiCheck color="#ffffff" size={13} />
-                                        </button>
-                                    )}
-                                </div>
+                            <div className={styles.boxInfo}>
+                                <h1>Aula1 - como editar um video</h1>
+                                {active ? (
+                                    <button className={styles.button} title="check" onClick={() => setActive(!active)}></button>
+                                ) : (
+                                    <button className={styles.buttonChech} title="check" onClick={() => setActive(!active)}>
+                                        <FiCheck color="#ffffff" size={13} />
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
