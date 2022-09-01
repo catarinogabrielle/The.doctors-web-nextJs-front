@@ -71,26 +71,10 @@
     border-radius: 14px;
     margin-top: 22px;
     cursor: pointer;
-}
-
-.boxInfo {
-    display: flex;
-    flex-direction: column;
-    margin-left: 15px;
 
     text {
         font-size: 14px;
+        margin-left: 14px;
         color: var(--Preto);
-    }
-}
-
-.typeInfo {
-    border-left: 1px solid rgba(30, 30, 42, 0.4);
-    margin-top: 10px;
-
-    p {
-        color: rgba(30, 30, 42, 0.4);
-        font-size: 13px;
-        margin-left: 8px;
     }
 }

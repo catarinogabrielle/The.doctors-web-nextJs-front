@@ -28,32 +28,17 @@ export default function Materials() {
                     <div className={styles.boxCard}>
                         <div className={styles.card}>
                             <FaFileWord color="#003cff" size={30} />
-                            <div className={styles.boxInfo}>
-                                <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                                <div className={styles.typeInfo}>
-                                    <p>PDF</p>
-                                </div>
-                            </div>
+                            <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
                         </div>
 
                         <div className={styles.card}>
                             <FaFilePowerpoint color="#f53a01" size={30} />
-                            <div className={styles.boxInfo}>
-                                <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                                <div className={styles.typeInfo}>
-                                    <p>PDF</p>
-                                </div>
-                            </div>
+                            <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
                         </div>
 
                         <div className={styles.card}>
                             <FaFilePdf color="#ff0e0e" size={30} />
-                            <div className={styles.boxInfo}>
-                                <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                                <div className={styles.typeInfo}>
-                                    <p>PDF</p>
-                                </div>
-                            </div>
+                            <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
                         </div>
                     </div>
                 </div>
