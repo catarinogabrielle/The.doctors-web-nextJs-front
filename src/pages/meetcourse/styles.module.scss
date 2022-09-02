@@ -72,16 +72,15 @@
     display: flex;
     width: 90%;
     padding: 8px;
-    background: var(--Cinza);
-    border-radius: 18px;
     justify-content: space-between;
     margin-bottom: 14px;
     margin-top: 4px;
     align-items: center;
+    border-bottom: 1px solid rgba(30, 30, 42, 0.19);
 
     text {
         font-size: 14px;
-        color: var(--Verde);
+        color: var(--Cinza);
     }
 }
 
