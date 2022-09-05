@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Header } from '../../components/Header/index'
+import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 
@@ -76,3 +77,9 @@ export default function Classroom() {
         </>
     )
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+    return {
+        props: {}
+    }
+})

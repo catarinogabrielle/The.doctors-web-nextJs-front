@@ -1,4 +1,5 @@
 import { Header } from '../../components/Header/index'
+import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -31,3 +32,9 @@ export default function Settings() {
         </>
     )
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+    return {
+        props: {}
+    }
+})
