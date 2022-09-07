@@ -1,0 +1,21 @@
+.content {
+    position: absolute;
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    background: var(--Branco2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+}
+
+.containerButton {
+    justify-content: flex-end;
+    display: flex;
+}
+
+.icon {
+    color: var(--Cinza);
+}
