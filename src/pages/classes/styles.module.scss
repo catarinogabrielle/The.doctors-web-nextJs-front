@@ -9,6 +9,11 @@
     width: 90%;
     margin-top: 120px;
     flex-direction: column;
+
+    h1 {
+        color: var(--Preto);
+        font-size: 32px;
+    }
 }
 
 .form {
@@ -39,12 +44,19 @@
     height: 40px;
     border: 0;
     background-color: #09c00f;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--Branco2);
     transition: 0.4s;
     margin-top: 20px;
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    p {
+        color: var(--Branco2);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
 }
 
 .buttonAdd:hover {

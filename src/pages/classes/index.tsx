@@ -43,9 +43,9 @@ export default function Classes() {
                             placeholder="Descrição sobre o professor..."
                             className={styles.input}
                         />
-                        <button className={styles.buttonAdd} type="submit">
-                            Criar Curso
-                        </button>
+                        <div className={styles.buttonAdd}>
+                            <p>Criar Curso</p>
+                        </div>
                     </form>
                 </main>
             </div>
