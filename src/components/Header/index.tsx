@@ -48,7 +48,7 @@ export function Header() {
                         <img alt="logo" src="/logo.png" />
                     </Link>
 
-                    <a>Seja Bem Vindo(a) {user?.name}</a>
+                    <a>Seja Bem Vindo (a) {user?.name}</a>
                 </div>
 
                 <nav className={styles.menuNav}>
