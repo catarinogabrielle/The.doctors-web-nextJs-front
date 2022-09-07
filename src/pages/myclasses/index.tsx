@@ -32,7 +32,7 @@ export default function MyClasses() {
                             <p>Fabrica de Aplicativos - React native</p>
                             <div className={styles.buttonClasses}>
                                 <p>Adicionar aulas</p>
-                                <FiFolderPlus color="#FFFFFF" size={18} className={styles.iconClasses} />
+                                <FiFolderPlus color="#FFFFFF" size={17} className={styles.iconClasses} />
                             </div>
                         </div>
                     </div>
