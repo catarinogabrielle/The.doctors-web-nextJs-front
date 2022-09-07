@@ -12,7 +12,7 @@
 
     h1 {
         color: var(--Preto);
-        font-size: 32px;
+        font-size: 34px;
     }
 }
 
@@ -25,6 +25,22 @@
         min-height: 120px;
         resize: none;
         padding: 0.5rem;
+    }
+
+    h2 {
+        color: var(--Preto);
+        font-size: 25px;
+        font-weight: normal;
+        margin-bottom: 15px;
+        margin-top: 30px;
+    }
+
+    h5 {
+        color: var(--Preto);
+        font-size: 15px;
+        font-weight: normal;
+        margin-bottom: 8px;
+        margin-top: 10px;
     }
 }
 
@@ -45,7 +61,7 @@
     border: 0;
     background-color: #09c00f;
     transition: 0.4s;
-    margin-top: 20px;
+    margin-top: 28px;
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -61,4 +77,42 @@
 
 .buttonAdd:hover {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.labelAvatar {
+    color: var(--Preto);
+    background: var(--Branco2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 300px;
+    height: 240px;
+
+    input {
+        display: none;
+    }
+
+    span {
+        z-index: 99;
+        position: absolute;
+        opacity: 0.7;
+        transition: all 0.7s;
+    }
+
+    span:hover {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.preview {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
 }
