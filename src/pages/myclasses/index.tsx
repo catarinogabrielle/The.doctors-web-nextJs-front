@@ -29,8 +29,11 @@ export default function MyClasses() {
 
                     <div className={styles.contentCard}>
                         <div className={styles.card}>
-                            <p>Titulo informando sobre o que é o curso</p>
-                            <button title='Sair' className={styles.buttonDetails}>Sobre o curso</button>
+                            <p>Fabrica de Aplicativos - React native</p>
+                            <div className={styles.buttonClasses}>
+                                <p>Adicionar aulas</p>
+                                <FiFolderPlus color="#FFFFFF" size={18} className={styles.iconClasses} />
+                            </div>
                         </div>
                     </div>
                 </div>
