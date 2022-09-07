@@ -11,15 +11,47 @@ export default function Classes() {
             </Head>
 
             <Header />
-
             <div className={styles.container}>
-                <div className={styles.content}>
-                    <h1>aqui</h1>
-                </div>
+                <main className={styles.content}>
+                    <h1>Novo curso</h1>
+                    <form className={styles.form}>
+                        <input
+                            type="text"
+                            placeholder="Digite o titulo do curso"
+                            className={styles.input}
+                        />
+                        <textarea
+                            placeholder="Descreva sobre o curso..."
+                            className={styles.input}
+                        />
+                        <input
+                            type="number"
+                            placeholder="Tempo de duração do curso"
+                            className={styles.input}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Nome do professor"
+                            className={styles.input}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Função do professor"
+                            className={styles.input}
+                        />
+                        <textarea
+                            placeholder="Descrição sobre o professor..."
+                            className={styles.input}
+                        />
+                        <button className={styles.buttonAdd} type="submit">
+                            Criar Curso
+                        </button>
+                    </form>
+                </main>
             </div>
         </>
     )
-} 
+}
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     return {
