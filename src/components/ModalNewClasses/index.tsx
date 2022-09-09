@@ -58,10 +58,21 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
                         placeholder="Título da aula"
                         className={styles.input}
                     />
+
+                    <select>
+                        <option>
+                            Bebida
+                        </option>
+                        <option>
+                            Pizzas
+                        </option>
+                    </select>
+
                     <textarea
                         placeholder="Descreva sobre a aula..."
                         className={styles.input}
                     />
+
                     <h5>Material para aula</h5>
                     <label className={styles.labelAvatar}>
                         <span>
@@ -76,7 +87,7 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
                     </label>
 
                     <div className={styles.buttonAdd}>
-                        <p>Criar Aula</p>
+                        <p>Adicionar Aula</p>
                     </div>
                 </form>
             </main>

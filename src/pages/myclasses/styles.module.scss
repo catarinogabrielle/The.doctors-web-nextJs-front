@@ -26,14 +26,20 @@
     padding-bottom: 12px;
 }
 
+.boxButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .buttonCreate {
     background: #09c00f;
     border: none;
     color: var(--Branco2);
-    padding: 12px 5px;
+    padding: 12px 15px;
     text-decoration: none;
     font-size: 18px;
-    width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +48,7 @@
 }
 
 .icon {
-    margin-left: 12px;
+    margin-left: 8px;
 }
 
 .buttonCreate:hover {
@@ -53,7 +59,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 30px;
+    margin-top: 35px;
 }
 
 .card {
@@ -78,27 +84,22 @@
 .buttonClasses {
     background: var(--Cinza);
     border: none;
-    padding: 7px 5px;
+    color: var(--Branco2);
+    padding: 12px;
     text-decoration: none;
-    width: 60%;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     transition: 0.4s;
-    margin-top: 45px;
-    cursor: pointer;
+    margin-right: 22px;
 
     p {
         color: var(--Branco2);
-        font-size: 16px;
+        font-size: 17px;
         font-weight: normal;
     }
-}
-
-.iconClasses {
-    margin-left: 7px;
-    margin-top: 3px;
 }
 
 .buttonClasses:hover {
