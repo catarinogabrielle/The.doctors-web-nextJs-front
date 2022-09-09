@@ -3,6 +3,7 @@ import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { FiUpload } from 'react-icons/fi'
 
@@ -124,9 +125,11 @@ export default function Classes() {
                             )}
                         </label>
 
-                        <div className={styles.buttonAdd}>
-                            <p>Criar Curso</p>
-                        </div>
+                        <Link href="/myclasses">
+                            <div className={styles.buttonAdd}>
+                                <p>Criar Curso</p>
+                            </div>
+                        </Link>
                     </form>
                 </main>
             </div>
