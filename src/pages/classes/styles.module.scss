@@ -62,7 +62,6 @@
     background-color: #09c00f;
     transition: 0.4s;
     margin-top: 28px;
-    margin-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,7 +69,7 @@
 
     p {
         color: var(--Branco2);
-        font-size: 1.2rem;
+        font-size: 20px;
         font-weight: bold;
     }
 }
@@ -98,7 +97,7 @@
     }
 
     span {
-        z-index: 99;
+        z-index: 1;
         position: absolute;
         opacity: 0.7;
         transition: all 0.7s;
@@ -115,4 +114,29 @@
     height: 100%;
     border-radius: 8px;
     object-fit: cover;
+}
+
+.button {
+    border-radius: 8px;
+    height: 40px;
+    border: 0;
+    background-color: var(--Cinza2);
+    transition: 0.4s;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    p {
+        color: var(--Branco2);
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+}
+
+.button:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
 }

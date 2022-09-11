@@ -1,12 +1,33 @@
+import { useState } from 'react'
 import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 import Link from 'next/link'
 
+import { setupAPIClient } from '../../services/api'
+
 import { FiSearch } from 'react-icons/fi'
 
-export default function Courses() {
+export type infoProps = {
+    id: string;
+    title: string;
+    image: string;
+    teachername: string;
+    teacherphoto: string;
+    teacherwork: string;
+    teacherinfo: string;
+    description: string;
+    time: string;
+}
+
+interface infoCourses {
+    info: infoProps[];
+}
+
+export default function Courses({ info }: infoCourses) {
+    const [infoList, setInfoList] = useState(info || [])
+
     return (
         <>
             <Head>
@@ -27,17 +48,19 @@ export default function Courses() {
                         </div>
                     </div>
                     <div className={styles.boxCard}>
-                        <Link href="/meetcourse">
-                            <div className={styles.card}>
-                                <img className={styles.imageCard} alt="imagem do curso" src="/imageCurso.jpg" />
-                                <div className={styles.descriptionCard}>
-                                    <p>DESCRIÇÃO DO CURSO QUE VAI SER OFERECIDO</p>
-                                    <div className={styles.course}>
-                                        <p>Curso Online</p>
+                        {infoList.map(item => (
+                            <Link key={item.id} href="/meetcourse">
+                                <div className={styles.card}>
+                                    <img className={styles.imageCard} alt={item.title} src={item.image} />
+                                    <div className={styles.descriptionCard}>
+                                        <p>{item.title}</p>
+                                        <div className={styles.course}>
+                                            <p>Curso Online</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -46,7 +69,13 @@ export default function Courses() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx)
+
+    const response = await apiClient.get('/myclasses')
+
     return {
-        props: {}
+        props: {
+            info: response.data
+        }
     }
 })

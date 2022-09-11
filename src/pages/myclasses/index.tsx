@@ -8,22 +8,36 @@ import Modal from 'react-modal'
 
 import { FiFolderPlus, FiPlus } from "react-icons/fi";
 import { ModalNewClasses } from '../../components/ModalNewClasses'
+import { setupAPIClient } from '../../services/api'
 
-export type infoModalProps = {
-    material: string;
+export type infoProps = {
+    id: string;
+    title: string;
+    image: string;
+    teachername: string;
+    teacherphoto: string;
+    teacherwork: string;
+    teacherinfo: string;
     description: string;
-    myclasse_id: string;
+    time: string;
 }
 
-export default function MyClasses() {
-    const [modalItem, setModalItem] = useState<infoModalProps[]>()
+interface infoCourses {
+    info: infoProps[];
+}
+
+export default function MyClasses({ info }: infoCourses) {
+    const [modalItem, setModalItem] = useState<infoProps[]>()
     const [modalVisible, setModalVisible] = useState(false)
+
+    const [infoList, setInfoList] = useState(info || [])
 
     function handleCloseModal() {
         setModalVisible(false)
     }
 
     async function handleOpenModal() {
+        setModalItem(infoList)
         setModalVisible(true)
     }
 
@@ -40,9 +54,9 @@ export default function MyClasses() {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div className={styles.contentButton}>
-                        <h1>Meus Cursos</h1>
+                        <h1>Minhas Aulas</h1>
                         <div className={styles.boxButton}>
-                            <button title='Adicionar aulas' className={styles.buttonClasses} onClick={handleOpenModal}>
+                            <button title='Adicionar aulas' className={styles.buttonClasses} onClick={() => handleOpenModal()}>
                                 Adicionar aulas
                                 <FiFolderPlus color="#FFFFFF" size={19} className={styles.icon} />
                             </button>
@@ -56,9 +70,12 @@ export default function MyClasses() {
                     </div>
 
                     <div className={styles.contentCard}>
-                        <div className={styles.card}>
-                            <p>Fabrica de Aplicativos - React native</p>
-                        </div>
+                        {infoList.map(item => (
+                            <div key={item.id} className={styles.card}>
+                                <img className={styles.imageCard} alt={item.title} src={item.image} />
+                                <p>{item.title}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -75,7 +92,13 @@ export default function MyClasses() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx)
+
+    const response = await apiClient.get('/myclasses')
+
     return {
-        props: {}
+        props: {
+            info: response.data
+        }
     }
 })

@@ -32,14 +32,19 @@ export default function Dashboard() {
                                     <p>Minhas Aulas</p>
                                 </button>
                             </Link>
-                        )}
+                        )
+                    }
 
-                    <Link href="/mycourses">
-                        <button className={styles.boxMenu}>
-                            <FiUser className={styles.iconMenu} size={22} />
-                            <p>Meus Cursos</p>
-                        </button>
-                    </Link>
+                    {user?.type === 'student' &&
+                        (
+                            <Link href="/mycourses">
+                                <button className={styles.boxMenu}>
+                                    <FiUser className={styles.iconMenu} size={22} />
+                                    <p>Meus Cursos</p>
+                                </button>
+                            </Link>
+                        )
+                    }
 
                     <Link href="/courses">
                         <button className={styles.boxMenu}>

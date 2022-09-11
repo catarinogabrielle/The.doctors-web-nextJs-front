@@ -1,20 +1,61 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import Modal from 'react-modal'
 import styles from './styles.module.scss'
 
 import { FiX, FiUpload } from 'react-icons/fi'
 
-import { infoModalProps } from '../Header'
+import { setupAPIClient } from '../../services/api'
+import { infoProps } from '../../pages/myclasses'
+import { toast } from 'react-toastify'
 
 interface ModalNewClassesProps {
     isOpen: boolean;
     onRequestClose: () => void;
-    infoClasses: infoModalProps;
+    infoClasses: infoProps[];
 }
 
 export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNewClassesProps) {
-    const [uploadedFiles, setUploadedFiles] = useState()
+    var modalStyles = { overlay: { zIndex: 10 } };
+
+    const [uploadedFiles, setUploadedFiles] = useState('')
     const [fileAvatar, setFileAvatar] = useState(null)
+    const [infoClassesSelected, setInfoClassesSelected] = useState(0)
+
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+
+    async function handleRegister(event: FormEvent) {
+        event.preventDefault()
+
+        try {
+            const data = new FormData()
+
+            if (title === '' || description === '' || fileAvatar === null) {
+                toast.warning("Preencha todos os campos!")
+                return
+            }
+
+            data.append('title', title)
+            data.append('description', description)
+            data.append('material', fileAvatar)
+            data.append('myclasse_id', infoClasses[infoClassesSelected].id)
+
+            const apiClient = setupAPIClient()
+
+            await apiClient.post('/classes', data)
+
+            toast.success('Aula cadastrada com sucesso!')
+
+        } catch (err) {
+            console.log(err)
+            toast.error('Ops erro ao cadastrar a aula!')
+        }
+
+        setTitle('')
+        setDescription('')
+        setFileAvatar(null)
+        setUploadedFiles('')
+    }
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
         if (!e.target.files) {
@@ -22,13 +63,18 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
         }
 
         const chosenFiles = Array.prototype.slice.call(e.target.files)
+        const files = e.target.files[0]
 
         if (!chosenFiles) {
             return
         }
 
-        setFileAvatar(chosenFiles)
+        setFileAvatar(files)
         setUploadedFiles(chosenFiles.map(item => item.name))
+    }
+
+    function handleChangeClasses(event) {
+        setInfoClassesSelected(event.target.value)
     }
 
     return (
@@ -36,6 +82,7 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             className={styles.content}
+            style={modalStyles}
         >
 
             <div className={styles.containerButton}>
@@ -52,25 +99,29 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
 
             <main className={styles.contentForm}>
                 <h1>Nova aula</h1>
-                <form className={styles.form}>
+                <form className={styles.form} onSubmit={handleRegister}>
                     <input
                         type="text"
                         placeholder="Título da aula"
                         className={styles.input}
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                     />
-
-                    <select>
-                        <option>
-                            Bebida
-                        </option>
-                        <option>
-                            Pizzas
-                        </option>
+                    <select value={infoClassesSelected} onChange={handleChangeClasses}>
+                        {infoClasses.map((item, index) => {
+                            return (
+                                <option key={item.id} value={index}>
+                                    {item.title}
+                                </option>
+                            )
+                        })}
                     </select>
 
                     <textarea
                         placeholder="Descreva sobre a aula..."
                         className={styles.input}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
 
                     <h5>Material para aula</h5>
@@ -78,7 +129,7 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
                         <span>
                             <FiUpload size={20} color="#3d424a" />
                         </span>
-                        <input type="file" accept=".docx, .pptx, .pdf" multiple onChange={handleFile} />
+                        <input type="file" accept=".docx, .pptx, .pdf" onChange={handleFile} />
                         {uploadedFiles && (
                             <div className={styles.boxFiles}>
                                 <h1>{uploadedFiles}</h1>
@@ -86,9 +137,9 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
                         )}
                     </label>
 
-                    <div className={styles.buttonAdd}>
+                    <button className={styles.buttonAdd} type="submit">
                         <p>Adicionar Aula</p>
-                    </div>
+                    </button>
                 </form>
             </main>
 

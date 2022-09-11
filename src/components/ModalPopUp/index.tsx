@@ -12,11 +12,14 @@ interface ModalPopUpProps {
 }
 
 export function ModalPopUp({ isOpen, onRequestClose, infoUser }: ModalPopUpProps) {
+    var modalStyles = { overlay: { zIndex: 10 } };
+
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             className={styles.content}
+            style={modalStyles}
         >
 
             <div className={styles.containerButton}>
