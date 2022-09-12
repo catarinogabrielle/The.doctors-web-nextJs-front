@@ -4,8 +4,7 @@ import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 
-import { FaFileWord, FaFilePowerpoint, FaFilePdf } from "react-icons/fa";
-import { FiCheck } from "react-icons/fi";
+import { FiCheck, FiDownload } from "react-icons/fi";
 
 export default function Classroom() {
     const [active, setActive] = useState(false)
@@ -35,26 +34,26 @@ export default function Classroom() {
                         <div className={styles.material}>
                             <h2>Material para download</h2>
                             <div className={styles.boxMaterial}>
-                                <div className={styles.card}>
+                                <button className={styles.card}>
                                     <div>
-                                        <FaFileWord color="#003cff" size={30} />
+                                        <FiDownload color="#3d424a" size={26} />
                                     </div>
                                     <text>CURSO SOBRE ESTUDO VOL1</text>
-                                </div>
+                                </button>
 
-                                <div className={styles.card}>
+                                <button className={styles.card}>
                                     <div>
-                                        <FaFilePowerpoint color="#f53a01" size={30} />
+                                        <FiDownload color="#3d424a" size={26} />
                                     </div>
                                     <text>PARA ESTUDO VOL1 teste de linha teste de corde de quebrando</text>
-                                </div>
+                                </button>
 
-                                <div className={styles.card}>
+                                <button className={styles.card}>
                                     <div>
-                                        <FaFilePdf color="#ff0e0e" size={30} />
+                                        <FiDownload color="#3d424a" size={26} />
                                     </div>
                                     <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>

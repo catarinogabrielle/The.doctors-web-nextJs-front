@@ -1,12 +1,32 @@
+import { useState } from 'react'
 import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 
-import { FiSearch } from 'react-icons/fi'
-import { FaFileWord, FaFilePowerpoint, FaFilePdf } from "react-icons/fa";
+import { FiSearch, FiDownload } from 'react-icons/fi'
 
-export default function Materials() {
+import { setupAPIClient } from '../../services/api'
+
+export type infoProps = {
+    id: string;
+    title: string;
+    status: boolean;
+    draft: boolean;
+    material: string;
+    description: string;
+    myclasse_id: string;
+}
+
+interface infoCourses {
+    info: infoProps[];
+}
+
+export default function Materials({ info }: infoCourses) {
+    const [infoList, setInfoList] = useState(info || [])
+
+    console.log(infoList)
+
     return (
         <>
             <Head>
@@ -27,20 +47,12 @@ export default function Materials() {
                         </div>
                     </div>
                     <div className={styles.boxCard}>
-                        <div className={styles.card}>
-                            <FaFileWord color="#003cff" size={30} />
-                            <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                        </div>
-
-                        <div className={styles.card}>
-                            <FaFilePowerpoint color="#f53a01" size={30} />
-                            <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                        </div>
-
-                        <div className={styles.card}>
-                            <FaFilePdf color="#ff0e0e" size={30} />
-                            <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
-                        </div>
+                        {infoList.map(item => (
+                            <button className={styles.card} key={item.id}>
+                                <FiDownload color="#3d424a" size={26} />
+                                <text>{item.title}</text>
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -49,7 +61,13 @@ export default function Materials() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx)
+
+    const response = await apiClient.get('/classes')
+
     return {
-        props: {}
+        props: {
+            info: response.data
+        }
     }
 })

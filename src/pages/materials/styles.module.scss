@@ -64,17 +64,22 @@
 .card {
     display: flex;
     padding: 10px 18px;
-    width: 70%;
+    width: 65%;
     align-items: center;
     background: var(--Branco2);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
     border-radius: 14px;
     margin-top: 22px;
-    cursor: pointer;
+    transition: .4s;
+    border: none;
 
     text {
-        font-size: 14px;
+        font-size: 18px;
         margin-left: 14px;
         color: var(--Preto);
     }
+}
+
+.card:hover {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
 }
