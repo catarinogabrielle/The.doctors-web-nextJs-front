@@ -25,7 +25,10 @@ interface infoCourses {
 export default function Materials({ info }: infoCourses) {
     const [infoList, setInfoList] = useState(info || [])
 
-    console.log(infoList)
+    function novaAba(material: string) {
+        var win = window.open(`http://localhost:3333/files/${material}`);
+        win.focus();
+    }
 
     return (
         <>
@@ -48,7 +51,7 @@ export default function Materials({ info }: infoCourses) {
                     </div>
                     <div className={styles.boxCard}>
                         {infoList.map(item => (
-                            <button className={styles.card} key={item.id}>
+                            <button className={styles.card} key={item.id} onClick={() => novaAba(item.material)} >
                                 <FiDownload color="#3d424a" size={26} />
                                 <text>{item.title}</text>
                             </button>

@@ -28,6 +28,10 @@ interface infoCourses {
 export default function Courses({ info }: infoCourses) {
     const [infoList, setInfoList] = useState(info || [])
 
+    function handleMeetCourse(id: string) {
+        console.log(id)
+    }
+
     return (
         <>
             <Head>
@@ -35,7 +39,7 @@ export default function Courses({ info }: infoCourses) {
             </Head>
 
             <Header />
- 
+
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div className={styles.boxTitle}>
@@ -50,8 +54,8 @@ export default function Courses({ info }: infoCourses) {
                     <div className={styles.boxCard}>
                         {infoList.map(item => (
                             <Link key={item.id} href="/meetcourse">
-                                <div className={styles.card} onClick={() => console.log(item.id)}>
-                                    <img className={styles.imageCard} alt={item.title} src={item.image} />
+                                <div className={styles.card} onClick={() => handleMeetCourse(item.id)}>
+                                    <img className={styles.imageCard} alt={item.title} src={`http://localhost:3333/files/${item.image}`} />
                                     <div className={styles.descriptionCard}>
                                         <p>{item.title}</p>
                                         <div className={styles.course}>

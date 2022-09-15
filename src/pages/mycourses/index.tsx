@@ -41,7 +41,7 @@ export default function MyCourses({ info }: infoCourses) {
                         {infoList.map(item => (
                             <Link key={item.id} href="/classroom">
                                 <div className={styles.card}>
-                                    <img className={styles.imageCard} alt={item.title} src={item.image} />
+                                    <img className={styles.imageCard} alt={item.title} src={`http://localhost:3333/files/${item.image}`} />
                                     <div className={styles.descriptionCard}>
                                         <p>{item.title}</p>
                                         <div className={styles.course}>
