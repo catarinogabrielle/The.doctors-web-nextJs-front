@@ -12,7 +12,7 @@ interface ModalPopUpProps {
 }
 
 export function ModalPopUp({ isOpen, onRequestClose, infoUser }: ModalPopUpProps) {
-    var modalStyles = { overlay: { zIndex: 10 } };
+    var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } };
 
     return (
         <Modal

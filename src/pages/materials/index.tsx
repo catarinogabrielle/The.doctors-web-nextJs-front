@@ -66,7 +66,7 @@ export default function Materials({ info }: infoCourses) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
-    const response = await apiClient.get('/classes')
+    const response = await apiClient.get('/myclasses/classes/')
 
     return {
         props: {

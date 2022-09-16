@@ -23,7 +23,6 @@ export default function MeetCourse() {
                             <div className={styles.boxScrollClass}>
                                 <div className={styles.infoClass}>
                                     <text>Aulas 1 - Javascript para iniciante</text>
-                                    <text>20m</text>
                                 </div>
                             </div>
                         </div>

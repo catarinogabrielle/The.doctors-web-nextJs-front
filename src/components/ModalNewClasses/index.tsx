@@ -5,17 +5,17 @@ import styles from './styles.module.scss'
 import { FiX, FiUpload } from 'react-icons/fi'
 
 import { setupAPIClient } from '../../services/api'
-import { infoProps } from '../../pages/myclasses'
+import { InfoProps } from '../../pages/myclasses'
 import { toast } from 'react-toastify'
 
 interface ModalNewClassesProps {
     isOpen: boolean;
     onRequestClose: () => void;
-    infoClasses: infoProps[];
+    infoClasses: InfoProps[];
 }
 
 export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNewClassesProps) {
-    var modalStyles = { overlay: { zIndex: 10 } };
+    var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
 
     const [uploadedFiles, setUploadedFiles] = useState('')
     const [fileAvatar, setFileAvatar] = useState(null)

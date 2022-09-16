@@ -9,7 +9,7 @@ import { setupAPIClient } from '../../services/api'
 
 import { FiSearch } from 'react-icons/fi'
 
-export type infoProps = {
+export type InfoProps = {
     id: string;
     title: string;
     image: string;
@@ -21,15 +21,34 @@ export type infoProps = {
     time: string;
 }
 
-interface infoCourses {
-    info: infoProps[];
+interface InfoCourses {
+    info: InfoProps[];
 }
 
-export default function Courses({ info }: infoCourses) {
-    const [infoList, setInfoList] = useState(info || [])
+export type ClasseProps = {
+    id: string;
+    title: string;
+    status: boolean;
+    draft: boolean;
+    material: string;
+    description: string;
+    myclasse_id: string;
+}
 
-    function handleMeetCourse(id: string) {
-        console.log(id)
+export default function Courses({ info }: InfoCourses) {
+    const [infoList, setInfoList] = useState(info || [])
+    const [classes, setClasses] = useState<ClasseProps[]>()
+
+    async function handleMeetCourse(id: string) {
+        const apiClient = setupAPIClient()
+
+        const response = await apiClient.get('/myclasses/classes', {
+            params: {
+                myclasse_id: id
+            }
+        })
+
+        setClasses(response.data)
     }
 
     return (
