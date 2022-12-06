@@ -44,51 +44,63 @@ export default function MyClasses({ info }: infoCourses) {
     Modal.setAppElement('#__next')
 
     return (
-        <>
-            <Head>
-                <title>The.Doctors - Criar Cursos</title>
-            </Head>
+      <>
+        <Head>
+          <title>The.Doctors - Criar Cursos</title>
+        </Head>
 
-            <Header />
+        <Header />
 
-            <div className={styles.container}>
-                <div className={styles.content}>
-                    <div className={styles.contentButton}>
-                        <h1>Cursos</h1>
-                        <div className={styles.boxButton}>
-                            <button title='Adicionar aulas' className={styles.buttonClasses} onClick={() => handleOpenModal()}>
-                                Adicionar aulas
-                                <FiFolderPlus color="#FFFFFF" size={19} className={styles.icon} />
-                            </button>
-                            <Link href="/classes">
-                                <button title='Novo curso' className={styles.buttonCreate}>
-                                    Novo curso
-                                    <FiPlus color="#FFFFFF" size={20} className={styles.icon} />
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className={styles.contentCard}>
-                        {infoList.map(item => (
-                            <div key={item.id} className={styles.card}>
-                                <img className={styles.imageCard} alt={item.title} src={`http://localhost:3333/files/${item.image}`} />
-                                <p>{item.title}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <div className={styles.contentButton}>
+              <h1>Cursos</h1>
+              <div className={styles.boxButton}>
+                <button
+                  title="Adicionar aulas"
+                  className={styles.buttonClasses}
+                  onClick={() => handleOpenModal()}
+                >
+                  Adicionar aulas
+                  <FiFolderPlus
+                    color="#FFFFFF"
+                    size={19}
+                    className={styles.icon}
+                  />
+                </button>
+                <Link href="/classes">
+                  <button title="Novo curso" className={styles.buttonCreate}>
+                    Novo curso
+                    <FiPlus color="#FFFFFF" size={20} className={styles.icon} />
+                  </button>
+                </Link>
+              </div>
             </div>
 
-            {modalVisible && (
-                <ModalNewClasses
-                    isOpen={modalVisible}
-                    onRequestClose={handleCloseModal}
-                    infoClasses={modalItem}
-                />
-            )}
-        </>
-    )
+            <div className={styles.contentCard}>
+              {infoList.map((item) => (
+                <div key={Math.random()} className={styles.card}>
+                  <img
+                    className={styles.imageCard}
+                    alt={item.title}
+                    src={`http://localhost:3333/files/${item.image}`}
+                  />
+                  <p>{item.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {modalVisible && (
+          <ModalNewClasses
+            isOpen={modalVisible}
+            onRequestClose={handleCloseModal}
+            infoClasses={modalItem}
+          />
+        )}
+      </>
+    );
 }
 
 
