@@ -19,7 +19,7 @@ export type ClasseProps = {
   material: string;
   description: string;
   myclasse_id: string;
-};
+}
 
 interface InfoCourses {
   info: CourseProps[];
@@ -35,51 +35,51 @@ type CourseProps = {
   teacherwork: string;
   time: string;
   title: string;
-};
+}
 
 export default function Courses({ info }: InfoCourses) {
-  const [classes, setClasses] = useState<ClasseProps[]>();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [input, setInput] = useState("");
-  const [course, setCourse] = useState({});
+  const [classes, setClasses] = useState<ClasseProps[]>()
+  const [modalVisible, setModalVisible] = useState(false)
+  const [input, setInput] = useState("")
+  const [course, setCourse] = useState({})
 
   const [infoList, setInfoList] = useState(info || []);
-  const apiClient = setupAPIClient();
+  const apiClient = setupAPIClient()
 
   async function handleMeetCourse(id: string) {
     const response = await apiClient.get("/myclasses/classes", {
       params: {
         myclasse_id: id,
       },
-    });
+    })
 
     setClasses(response.data);
-    handleOpenModal();
+    handleOpenModal()
   }
 
   function handleCloseModal() {
-    setModalVisible(false);
+    setModalVisible(false)
   }
 
   async function handleOpenModal() {
-    setModalVisible(true);
+    setModalVisible(true)
   }
 
-  Modal.setAppElement("#__next");
+  Modal.setAppElement("#__next")
 
   const handleInputChange = async (event) => {
-    setInput(event.target.value);
+    setInput(event.target.value)
   };
 
   const searchCourse = async () => {
     await apiClient.get(`/myclasses/search?title=${input}`).then((res) => {
-      setInfoList(res.data);
-    });
-  };
+      setInfoList(res.data)
+    })
+  }
 
   useEffect(() => {
-    searchCourse();
-  }, [input]);
+    searchCourse()
+  }, [input])
 
   return (
     <>

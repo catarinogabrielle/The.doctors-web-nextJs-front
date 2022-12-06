@@ -27,7 +27,7 @@ export default function Materials({ info }: infoCourses) {
 
     function novaAba(material: string) {
         var win = window.open(`http://localhost:3333/files/${material}`);
-        win.focus();
+        win.focus()
     }
 
     return (
