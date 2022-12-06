@@ -24,37 +24,6 @@
     }
 }
 
-.boxInput {
-    display: flex;
-    margin-left: 22px;
-
-    input {
-        background: var(--Branco2);
-        border: 1px solid var(--Branco3);
-        border-radius: 8px 0px 0px 8px;
-        border: none;
-        height: 42px;
-        width: 380px;
-        padding-left: 10px;
-        font-size: 14px;
-        color: var(--Cinza2);
-    }
-}
-
-.buttonSearch {
-    display: flex;
-    align-items: center;
-    background: var(--Branco2);
-    border: none;
-    border-left: 1px solid var(--Branco3);
-    padding: 0 12px;
-    border-radius: 0px 8px 8px 0px;
-}
-
-.icon {
-    color: var(--Verde);
-}
-
 .boxCard {
     display: flex;
     flex-direction: column;

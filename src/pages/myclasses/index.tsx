@@ -46,7 +46,7 @@ export default function MyClasses({ info }: infoCourses) {
     return (
         <>
             <Head>
-                <title>The.Doctors - Minhas Aulas</title>
+                <title>The.Doctors - Criar Cursos</title>
             </Head>
 
             <Header />
@@ -54,7 +54,7 @@ export default function MyClasses({ info }: infoCourses) {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div className={styles.contentButton}>
-                        <h1>Minhas Aulas</h1>
+                        <h1>Cursos</h1>
                         <div className={styles.boxButton}>
                             <button title='Adicionar aulas' className={styles.buttonClasses} onClick={() => handleOpenModal()}>
                                 Adicionar aulas
@@ -90,6 +90,7 @@ export default function MyClasses({ info }: infoCourses) {
         </>
     )
 }
+
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)

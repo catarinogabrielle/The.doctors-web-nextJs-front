@@ -4,7 +4,7 @@ import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 
-import { FiSearch, FiDownload } from 'react-icons/fi'
+import { FiDownload } from 'react-icons/fi'
 
 import { setupAPIClient } from '../../services/api'
 
@@ -42,18 +42,12 @@ export default function Materials({ info }: infoCourses) {
                 <div className={styles.content}>
                     <div className={styles.boxTitle}>
                         <h1>Materiais Disponiveis</h1>
-                        <div className={styles.boxInput}>
-                            <input type="text" placeholder="Pesquisar material" />
-                            <button className={styles.buttonSearch} title="pesquisar">
-                                <FiSearch className={styles.icon} size={20} />
-                            </button>
-                        </div>
                     </div>
                     <div className={styles.boxCard}>
-                        {infoList.map(item => (
-                            <button className={styles.card} key={item.id} onClick={() => novaAba(item.material)} >
+                        {infoList.map(aula => (
+                            <button className={styles.card} key={aula.id} onClick={() => novaAba(aula.material)} >
                                 <FiDownload color="#3d424a" size={26} />
-                                <text>{item.title}</text>
+                                <text>{aula.title}</text>
                             </button>
                         ))}
                     </div>
@@ -63,14 +57,28 @@ export default function Materials({ info }: infoCourses) {
     )
 }
 
+
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
-    const response = await apiClient.get('/myclasses/classes/')
+    const allCourses = await apiClient.get('/myclasses')
+    const user = await apiClient.get('/me')
+    const myCourses = []
+
+    allCourses.data.forEach(course => {
+        user.data.mycourse_id.forEach(myCourseId => {
+            if (course.id === myCourseId) myCourses.push(course);
+        });
+    });
+
+    const myClasses = []
+    myCourses.forEach(classe => {
+        myClasses.push(classe)
+    });
 
     return {
         props: {
-            info: response.data
+            info: myClasses
         }
     }
 })

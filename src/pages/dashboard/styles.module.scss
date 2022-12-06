@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: row;
     padding: 0 50px;
+
+    @media (max-width: 659px) {
+        padding: 0;
+        justify-content: center;
+    }
 }
 
 .contentMenu {
@@ -12,6 +17,12 @@
     background-color: var(--Cinza);
     border-radius: 20px;
     margin-top: 130px;
+
+    @media (max-width: 659px) {
+        width: 70%;
+        margin-top: 100px;
+        background-color: var(--Branco4);
+    }
 }
 
 .boxMenu {
@@ -32,11 +43,22 @@
         font-size: 17px;
         transition: 0.8s;
     }
+
+    @media (max-width: 659px) {
+        p {
+            color: var(--Cinza);
+            font-weight: bold;
+        }
+    }
 }
 
 .iconMenu {
     color: var(--Branco);
     transition: 0.8s;
+
+    @media (max-width: 659px) {
+        color: var(--Cinza);
+    }
 }
 
 .boxMenu:hover {
@@ -48,5 +70,9 @@
 
     .iconMenu {
         color: var(--Verde);
+    }
+
+    @media (max-width: 659px) {
+        transform: none;
     }
 }

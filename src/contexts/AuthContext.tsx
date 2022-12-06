@@ -12,6 +12,7 @@ type AuthContextData = {
     isAuthenticated: boolean;
     signIn: (credentials: SignInProps) => Promise<void>;
     signOut: () => void;
+    update: () => void;
     signUp: (credentials: SignUpProps) => Promise<void>;
 }
 
@@ -20,6 +21,8 @@ type UserProps = {
     name: string;
     email: string;
     type: string;
+    mycourse_id: string[];
+    stripe_customer_id: String;
 }
 
 type SignInProps = {
@@ -53,29 +56,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>()
     const isAuthenticated = !!user
 
-    useEffect(() => {
-
-        // tentar pegar algo no cookie
-        const { '@nextauth.token': token } = parseCookies()
-
-        if (token) {
-            api.get('/me').then(response => {
-                const { id, name, email, type } = response.data
-
-                setUser({
-                    id,
-                    name,
-                    email,
-                    type,
-                })
-            }).catch(() => {
-                // se deu erro deslogar o user
-                signOut()
-            })
-        }
-
-    }, [])
-
     async function signIn({ email, password }: SignInProps) {
         try {
             const response = await api.post('/session', {
@@ -83,7 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password,
             })
 
-            const { id, name, token, type } = response.data
+            const { id, name, token, type, mycourse_id, stripe_customer_id } = response.data
             setCookie(undefined, '@nextauth.token', token, {
                 maxAge: 60 * 60 * 24 * 30, // expirar em 1 mes
                 path: "/" // quais caminhos terao acesso ao cookie
@@ -94,6 +74,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 name,
                 email,
                 type,
+                mycourse_id,
+                stripe_customer_id,
             })
 
             // passar para proximas requisicoes o nosso token
@@ -108,6 +90,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
             toast.error("Erro ao acessar!")
             console.log('erro', err)
         }
+    }
+
+    async function update() {
+        api.get('/me').then(response => {
+            const { id, name, email, type, mycourse_id, stripe_customer_id } = response.data
+
+            setUser({
+                id,
+                name,
+                email,
+                type,
+                mycourse_id,
+                stripe_customer_id,
+            })
+
+        }).catch(() => {
+            // se deu erro deslogar o user
+            signOut()
+        })
     }
 
     async function signUp({ name, email, password }: SignUpProps) {
@@ -129,8 +130,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+
+    useEffect(() => {
+
+        // tentar pegar algo no cookie
+        const { '@nextauth.token': token } = parseCookies()
+
+        if (token) {
+            update()
+        }
+
+    }, [])
+
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, signUp }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, signUp, update }}>
             {children}
         </AuthContext.Provider>
     )

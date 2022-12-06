@@ -1,29 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
-import Link from 'next/link'
+import Modal from 'react-modal'
 
 import { setupAPIClient } from '../../services/api'
+import { ModalCourses } from '../../components/ModalCourses'
 
 import { FiSearch } from 'react-icons/fi'
-
-export type InfoProps = {
-    id: string;
-    title: string;
-    image: string;
-    teachername: string;
-    teacherphoto: string;
-    teacherwork: string;
-    teacherinfo: string;
-    description: string;
-    time: string;
-}
-
-interface InfoCourses {
-    info: InfoProps[];
-}
+import { DebounceInput } from 'react-debounce-input';
 
 export type ClasseProps = {
     id: string;
@@ -35,12 +21,32 @@ export type ClasseProps = {
     myclasse_id: string;
 }
 
+interface InfoCourses {
+    info: CourseProps[];
+}
+
+type CourseProps = {
+    id: string;
+    description: string;
+    image: string;
+    teacherinfo: boolean;
+    teachername: string;
+    teacherphoto: string;
+    teacherwork: string;
+    time: string;
+    title: string;
+}
+
 export default function Courses({ info }: InfoCourses) {
-    const [infoList, setInfoList] = useState(info || [])
     const [classes, setClasses] = useState<ClasseProps[]>()
+    const [modalVisible, setModalVisible] = useState(false)
+    const [input, setInput] = useState('')
+    const [course, setCourse] = useState({})
+
+    const [infoList, setInfoList] = useState(info || [])
+    const apiClient = setupAPIClient()
 
     async function handleMeetCourse(id: string) {
-        const apiClient = setupAPIClient()
 
         const response = await apiClient.get('/myclasses/classes', {
             params: {
@@ -49,7 +55,30 @@ export default function Courses({ info }: InfoCourses) {
         })
 
         setClasses(response.data)
+        handleOpenModal()
     }
+
+    function handleCloseModal() {
+        setModalVisible(false)
+    }
+
+    async function handleOpenModal() {
+        setModalVisible(true)
+    }
+
+    Modal.setAppElement('#__next')
+
+    const handleInputChange = async (event) => {
+        setInput(event.target.value)
+    }
+
+    const searchCourse = async () => {
+        await apiClient.get(`/myclasses/search?title=${input}`).then((res) => { console.log(res.data); setInfoList(res.data); })
+    }
+
+    useEffect(() => {
+        searchCourse()
+    }, [input])
 
     return (
         <>
@@ -64,7 +93,10 @@ export default function Courses({ info }: InfoCourses) {
                     <div className={styles.boxTitle}>
                         <h1>Novos Cursos</h1>
                         <div className={styles.boxInput}>
-                            <input type="text" placeholder="Pesquisar curso" />
+                            <DebounceInput
+                                debounceTimeout={500}
+                                placeholder="Pesquisar curso"
+                                onChange={handleInputChange} />
                             <button className={styles.buttonSearch} title="pesquisar">
                                 <FiSearch className={styles.icon} size={20} />
                             </button>
@@ -72,24 +104,35 @@ export default function Courses({ info }: InfoCourses) {
                     </div>
                     <div className={styles.boxCard}>
                         {infoList.map(item => (
-                            <Link key={item.id} href="/meetcourse">
-                                <div className={styles.card} onClick={() => handleMeetCourse(item.id)}>
-                                    <img className={styles.imageCard} alt={item.title} src={`http://localhost:3333/files/${item.image}`} />
-                                    <div className={styles.descriptionCard}>
-                                        <p>{item.title}</p>
-                                        <div className={styles.course}>
-                                            <p>Curso Online</p>
-                                        </div>
+                            <div key={item.id} className={styles.card} onClick={() => {
+                                handleMeetCourse(item.id)
+                                setCourse(item)
+                            }}>
+                                <img className={styles.imageCard} alt={item.title} src={`http://localhost:3333/files/${item.image}`} />
+                                <div className={styles.descriptionCard}>
+                                    <p>{item.title}</p>
+                                    <div className={styles.course}>
+                                        <p>Curso Online</p>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         ))}
                     </div>
                 </div>
             </div>
+
+            {modalVisible && (
+                <ModalCourses
+                    isOpen={modalVisible}
+                    onRequestClose={handleCloseModal}
+                    course={course}
+                    infoClasses={classes}
+                />
+            )}
         </>
     )
 }
+
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)

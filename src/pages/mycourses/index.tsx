@@ -24,7 +24,7 @@ interface infoCourses {
 }
 
 export default function MyCourses({ info }: infoCourses) {
-    const [infoList, setInfoList] = useState(info || [])
+    const [myCourses, setMyCourses] = useState(info || [])
 
     return (
         <>
@@ -38,12 +38,12 @@ export default function MyCourses({ info }: infoCourses) {
                 <div className={styles.content}>
                     <h1>Meus Cursos</h1>
                     <div className={styles.boxCard}>
-                        {infoList.map(item => (
-                            <Link key={item.id} href="/classroom">
+                        {myCourses.map(course => (
+                            <Link key={course.id} href={`/classroom?id=${course.id}`}>
                                 <div className={styles.card}>
-                                    <img className={styles.imageCard} alt={item.title} src={`http://localhost:3333/files/${item.image}`} />
+                                    <img className={styles.imageCard} alt={course.title} src={`http://localhost:3333/files/${course.image}`} />
                                     <div className={styles.descriptionCard}>
-                                        <p>{item.title}</p>
+                                        <p>{course.title}</p>
                                         <div className={styles.course}>
                                             <p>Curso Online</p>
                                         </div>
@@ -58,14 +58,23 @@ export default function MyCourses({ info }: infoCourses) {
     )
 }
 
+
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
-    const response = await apiClient.get('/myclasses')
+    const allCourses = await apiClient.get('/myclasses')
+    const user = await apiClient.get('/me')
+    const myCourses = []
+
+    allCourses.data.forEach(course => {
+        user.data.mycourse_id.forEach(myCourseId => {
+            if (course.id === myCourseId) myCourses.push(course);
+        });
+    });
 
     return {
         props: {
-            info: response.data
+            info: myCourses
         }
     }
 })

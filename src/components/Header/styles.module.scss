@@ -23,6 +23,12 @@
         width: 170px;
         height: auto;
     }
+
+    @media (max-width: 659px) {
+        img {
+            width: 100px;
+        }
+    }
 }
 
 .infoContentHeader {
@@ -31,6 +37,12 @@
 
     a {
         margin-left: 2.5rem;
+    }
+
+    @media (max-width: 659px) {
+        a {
+            display: none;
+        }
     }
 }
 
@@ -47,6 +59,12 @@
 
         &+a {
             margin-left: 2rem;
+        }
+    }
+
+    @media (max-width: 659px) {
+        a {
+            padding: 0 0.1rem;
         }
     }
 

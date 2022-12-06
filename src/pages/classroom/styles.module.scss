@@ -10,12 +10,21 @@
     margin-top: 130px;
     flex-direction: row;
     justify-content: space-between;
+
+    @media (max-width: 659px) {
+        margin-top: 110px;
+        flex-direction: column;
+    }
 }
 
 .boxVideo {
     display: flex;
     flex-direction: column;
     width: 70%;
+
+    @media (max-width: 659px) {
+        width: 100%;
+    }
 }
 
 .video {
@@ -45,6 +54,19 @@
         color: var(--Preto);
         margin-bottom: 12px;
     }
+
+    @media (max-width: 659px) {
+        width: 100%;
+        margin-top: 30px;
+
+        h1 {
+            font-size: 18px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+    }
 }
 
 .material {
@@ -58,6 +80,15 @@
         font-size: 24px;
         color: var(--Preto);
         margin-bottom: 3px;
+    }
+
+    @media (max-width: 659px) {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 18px;
     }
 }
 
@@ -85,6 +116,10 @@
         color: var(--Preto);
         margin-left: 10px;
     }
+
+    @media (max-width: 659px) {
+        width: 70%;
+    }
 }
 
 .cardVideos {
@@ -94,11 +129,21 @@
     width: 25%;
     height: 73vh;
     padding: 10px 10px 0 25px;
+
+    @media (max-width: 659px) {
+        width: 95%;
+        padding: 10px;
+        height: 26vh;
+    }
 }
 
 .scroll {
     overflow-y: auto;
     height: 70vh;
+
+    @media (max-width: 659px) {
+        height: max-content;
+    }
 }
 
 .scroll::-webkit-scrollbar {
@@ -127,6 +172,12 @@
         color: var(--Preto);
         font-weight: normal;
         margin-left: 10px;
+    }
+
+    @media (max-width: 659px) {
+        h1 {
+            font-size: 14px;
+        }
     }
 }
 

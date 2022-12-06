@@ -1,13 +1,39 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
+import { setupAPIClient } from '../../services/api'
 
 import { FiCheck, FiDownload } from "react-icons/fi";
 
 export default function Classroom() {
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(0)
+    const [listOfClasses, setListOfClasses] = useState([])
+
+    async function getClassById(id) {
+        const apiClient = setupAPIClient()
+
+        const response = await apiClient.get('/myclasses/classes', {
+            params: {
+                myclasse_id: id
+            }
+        })
+
+        setListOfClasses(response.data)
+    }
+
+    function novaAba(material: string) {
+        var win = window.open(`http://localhost:3333/files/${material}`);
+        win.focus();
+    }
+
+    useEffect(() => {
+        const urlParams = typeof window !== undefined && new URLSearchParams(window.location.search)
+        const idClass = urlParams.get('id')
+        getClassById(idClass);
+    }, [])
+
 
     return (
         <>
@@ -25,50 +51,36 @@ export default function Classroom() {
                         </div>
                         <div className={styles.boxDescription}>
                             <h1>Descrição</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                                commodo tempor metus at iaculis. Cras lobortis, tortor ac pellentesque
-                                placerat, lorem diam tempus arcu, consequat finibus eros nisl ac
-                                tortor. Ut volutpat fermentum tortor, in malesuada nisl ornare dignissim.
-                                Suspendisse gravida odio in orci suscipit semper. In quis pulvinar magna.</p>
+                            <p>{listOfClasses[active]?.description}</p>
                         </div>
                         <div className={styles.material}>
                             <h2>Material para download</h2>
+
                             <div className={styles.boxMaterial}>
-                                <button className={styles.card}>
-                                    <div>
-                                        <FiDownload color="#3d424a" size={26} />
-                                    </div>
-                                    <text>CURSO SOBRE ESTUDO VOL1</text>
-                                </button>
 
-                                <button className={styles.card}>
+                                <button className={styles.card} onClick={() => novaAba(listOfClasses[active]?.material)}>
                                     <div>
                                         <FiDownload color="#3d424a" size={26} />
                                     </div>
-                                    <text>PARA ESTUDO VOL1 teste de linha teste de corde de quebrando</text>
-                                </button>
-
-                                <button className={styles.card}>
-                                    <div>
-                                        <FiDownload color="#3d424a" size={26} />
-                                    </div>
-                                    <text>CURSO SOBRE ALGUMA COISA - MATERIAL PARA ESTUDO VOL1</text>
+                                    <text>Material da aula {listOfClasses[active]?.title}</text>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div className={styles.cardVideos}>
                         <div className={styles.scroll}>
-                            <div className={styles.boxInfo}>
-                                <h1>Aula1 - como editar um video</h1>
-                                {active ? (
-                                    <button className={styles.button} title="check" onClick={() => setActive(!active)}></button>
-                                ) : (
-                                    <button className={styles.buttonChech} title="check" onClick={() => setActive(!active)}>
-                                        <FiCheck color="#ffffff" size={13} />
-                                    </button>
-                                )}
-                            </div>
+                            {listOfClasses.map((aula, index) => (
+                                <div className={styles.boxInfo} key={aula} onClick={() => setActive(index)} style={{ cursor: 'pointer' }}>
+                                    <h1>{aula.title}</h1>
+                                    {active === index ? (
+                                        <button className={styles.buttonChech} title="check" >
+                                            <FiCheck color="#ffffff" size={13} />
+                                        </button>
+                                    ) : (
+                                        <button className={styles.button} title="check"></button>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -76,6 +88,7 @@ export default function Classroom() {
         </>
     )
 }
+
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     return {

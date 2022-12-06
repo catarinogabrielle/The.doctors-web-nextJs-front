@@ -15,6 +15,14 @@
         font-size: 33px;
         margin-left: 12px;
     }
+
+    @media (max-width: 659px) {
+        margin-top: 100px;
+
+        h1 {
+            font-size: 26px;
+        }
+    }
 }
 
 .contentButton {
@@ -24,13 +32,26 @@
     border-bottom: 1px solid rgba(30, 30, 42, 0.2);
     align-items: center;
     padding-bottom: 12px;
+
+    @media (max-width: 659px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 }
 
 .boxButton {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+
+    @media (max-width: 659px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 .buttonCreate {
@@ -45,10 +66,21 @@
     justify-content: center;
     border-radius: 8px;
     transition: 0.4s;
+
+    @media (max-width: 659px) {
+        font-size: 16px;
+        width: 100%;
+        padding: 6px 0px;
+        margin-top: 12px;
+    }
 }
 
 .icon {
     margin-left: 8px;
+
+    @media (max-width: 659px) {
+        width: 16px;
+    }
 }
 
 .buttonCreate:hover {
@@ -60,6 +92,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 35px;
+
+    @media (max-width: 659px) {
+        justify-content: center;
+    }
 }
 
 .card {
@@ -80,6 +116,11 @@
         color: var(--Preto);
         margin: 12px 8px 0 8px;
     }
+
+    @media (max-width: 659px) {
+        width: 84%;
+        margin-right: 0px;
+    }
 }
 
 .imageCard {
@@ -87,6 +128,11 @@
     height: 170px;
     border-radius: 14px 14px 0px 0px;
     object-fit: cover;
+
+    @media (max-width: 659px) {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .buttonClasses {
@@ -103,10 +149,12 @@
     transition: 0.4s;
     margin-right: 22px;
 
-    p {
-        color: var(--Branco2);
-        font-size: 17px;
-        font-weight: normal;
+    @media (max-width: 659px) {
+        font-size: 16px;
+        width: 100%;
+        padding: 6px 0px;
+        margin-top: 12px;
+        margin-right: 0px;
     }
 }
 

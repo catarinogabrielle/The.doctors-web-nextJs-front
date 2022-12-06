@@ -8,6 +8,11 @@
     transform: translate(-50%, -50%);
     background: var(--Cinza);
     border-radius: 20px;
+
+    @media (max-width: 659px) {
+        top: 40%;
+        padding: 20px;
+    }
 }
 
 .containerButton {

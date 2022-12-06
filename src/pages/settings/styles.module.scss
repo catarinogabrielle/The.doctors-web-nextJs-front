@@ -19,6 +19,12 @@
         color: var(--Preto);
         font-size: 26px;
     }
+
+    @media (max-width: 659px) {
+        padding: 15px;
+        width: 83%;
+        margin-top: 100px;
+    }
 }
 
 .boxInfo {
@@ -38,6 +44,14 @@
         height: auto;
         border-radius: 18px;
         margin-top: 30px;
+    }
+
+    @media (max-width: 659px) {
+        margin-top: 20px;
+
+        img {
+            display: none;
+        }
     }
 }
 
