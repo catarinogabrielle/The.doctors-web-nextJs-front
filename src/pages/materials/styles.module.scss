@@ -11,6 +11,18 @@
     margin-top: 130px;
 }
 
+.content {
+    display: flex;
+    width: 90%;
+    margin-top: 130px;
+    flex-direction: column;
+    margin-bottom: 22px;
+
+    @media (max-width: 659px) {
+        margin-top: 100px;
+    }
+}
+
 .boxTitle {
     display: flex;
     flex-direction: row;
@@ -22,12 +34,24 @@
         font-size: 33px;
         margin-left: 12px;
     }
+
+    @media (max-width: 659px) {
+        h1 {
+            font-size: 26px;
+            margin-left: 0px;
+            margin-bottom: 12px;
+        }
+    }
 }
 
 .boxCard {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+
+    @media (max-width: 659px) {
+        margin-top: 2px;
+    }
 }
 
 .card {
@@ -38,7 +62,7 @@
     background: var(--Branco2);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
     border-radius: 14px;
-    margin-top: 22px;
+    margin-top: 20px;
     transition: .4s;
     border: none;
 
@@ -46,6 +70,10 @@
         font-size: 18px;
         margin-left: 14px;
         color: var(--Preto);
+    }
+
+    @media (max-width: 659px) {
+        width: 100%;
     }
 }
 

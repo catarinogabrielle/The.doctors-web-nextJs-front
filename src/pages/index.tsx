@@ -1,9 +1,6 @@
 import { useContext, FormEvent, useState } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../../styles/home.module.scss'
-
-import logoImg from '../../public/logo.png';
 
 import { Input } from '../components/ui/Input/index'
 import { Button } from '../components/ui/Button/index'
@@ -49,7 +46,7 @@ export default function Login() {
       </Head>
 
       <div className={styles.containerCenter}>
-        <Image width="350" height="90" src={logoImg} alt="logo community" />
+        <img className={styles.image} src="./logo.png" alt="logo community" />
 
         <div className={styles.login}>
           <form onSubmit={handleLogin}>
