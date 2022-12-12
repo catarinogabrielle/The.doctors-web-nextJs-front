@@ -55,6 +55,10 @@
             margin: 8px 0 26px 0;
             padding: 5px;
             color: var(--Branco);
+
+            @media (max-width: 659px) {
+                width: 18em;
+            }
         }
     }
 }

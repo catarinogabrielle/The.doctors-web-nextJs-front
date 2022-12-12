@@ -118,7 +118,8 @@
     }
 
     @media (max-width: 659px) {
-        width: 70%;
+        width: 100%;
+        padding: 7px 10px;
     }
 }
 
@@ -134,6 +135,7 @@
         width: 95%;
         padding: 10px;
         height: 26vh;
+        margin-bottom: 18px;
     }
 }
 
@@ -142,7 +144,7 @@
     height: 70vh;
 
     @media (max-width: 659px) {
-        height: max-content;
+        height: 23vh;
     }
 }
 
@@ -175,6 +177,8 @@
     }
 
     @media (max-width: 659px) {
+        margin: 12px 0 0 0;
+
         h1 {
             font-size: 14px;
         }
