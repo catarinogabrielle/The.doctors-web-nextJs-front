@@ -8,7 +8,7 @@ import { Header } from '../../components/Header'
 
 import { AuthContext } from '../../contexts/AuthContext'
 
-import { FiUser, FiBook, FiFile, FiSettings, FiVideo } from 'react-icons/fi'
+import { FiUser, FiBook, FiFile, FiBox, FiVideo } from 'react-icons/fi'
 
 export default function Dashboard() {
     const { user } = useContext(AuthContext)
@@ -60,12 +60,16 @@ export default function Dashboard() {
                         </button>
                     </Link>
 
-                    <Link href="/settings">
-                        <button className={styles.boxMenu}>
-                            <FiSettings className={styles.iconMenu} size={22} />
-                            <p>Configurações</p>
-                        </button>
-                    </Link>
+                    {user?.type === 'student' &&
+                        (
+                            <Link href="/payment">
+                                <button className={styles.boxMenu}>
+                                    <FiBox className={styles.iconMenu} size={22} />
+                                    <p>Planos</p>
+                                </button>
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </>
