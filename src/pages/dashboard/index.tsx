@@ -34,17 +34,12 @@ export default function Dashboard() {
                             </Link>
                         )
                     }
-
-                    {user?.type === 'student' &&
-                        (
-                            <Link href="/mycourses">
-                                <button className={styles.boxMenu}>
-                                    <FiUser className={styles.iconMenu} size={22} />
-                                    <p>Meus Cursos</p>
-                                </button>
-                            </Link>
-                        )
-                    }
+                    <Link href="/mycourses">
+                        <button className={styles.boxMenu}>
+                            <FiUser className={styles.iconMenu} size={22} />
+                            <p>Meus Cursos</p>
+                        </button>
+                    </Link>
 
                     <Link href="/courses">
                         <button className={styles.boxMenu}>
@@ -60,16 +55,12 @@ export default function Dashboard() {
                         </button>
                     </Link>
 
-                    {user?.type === 'student' &&
-                        (
-                            <Link href="/payment">
-                                <button className={styles.boxMenu}>
-                                    <FiBox className={styles.iconMenu} size={22} />
-                                    <p>Planos</p>
-                                </button>
-                            </Link>
-                        )
-                    }
+                    <Link href="/payment">
+                        <button className={styles.boxMenu}>
+                            <FiBox className={styles.iconMenu} size={22} />
+                            <p>Planos</p>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </>
