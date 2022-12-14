@@ -18,17 +18,19 @@ export type infoProps = {
     myclasse_id: string;
 }
 
-interface infoCourses {
+interface infoClasses {
     info: infoProps[];
 }
 
-export default function Materials({ info }: infoCourses) {
+export default function Materials({ info }: infoClasses) {
     const [infoList, setInfoList] = useState(info || [])
 
     function novaAba(material: string) {
         var win = window.open(`http://localhost:3333/files/${material}`);
         win.focus()
     }
+
+    console.log(infoList)
 
     return (
         <>
@@ -61,24 +63,24 @@ export default function Materials({ info }: infoCourses) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
-    const allCourses = await apiClient.get('/myclasses')
+    const allClasses = await apiClient.get('/myclasses/classes')
     const user = await apiClient.get('/me')
-    const myCourses = []
+    const myClasses = []
 
-    allCourses.data.forEach(course => {
+    allClasses.data.forEach(course => {
         user.data.mycourse_id.forEach(myCourseId => {
-            if (course.id === myCourseId) myCourses.push(course);
+            if (course.myclasse_id === myCourseId) myClasses.push(course);
         });
     });
 
-    const myClasses = []
-    myCourses.forEach(classe => {
-        myClasses.push(classe)
+    const classes = []
+    myClasses.forEach(classe => {
+        classes.push(classe)
     });
 
     return {
         props: {
-            info: myClasses
+            info: classes
         }
     }
 })
