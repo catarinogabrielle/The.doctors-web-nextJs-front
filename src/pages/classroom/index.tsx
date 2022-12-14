@@ -5,7 +5,8 @@ import styles from './styles.module.scss'
 import Head from 'next/head'
 import { setupAPIClient } from '../../services/api'
 
-import { FiCheck, FiDownload } from "react-icons/fi";
+import { FiDownload } from "react-icons/fi";
+import { FaPlay } from "react-icons/fa";
 
 export default function Classroom() {
     const [active, setActive] = useState(0)
@@ -34,6 +35,7 @@ export default function Classroom() {
         getClassById(idClass);
     }, [])
 
+    const src = listOfClasses[active]?.link
 
     return (
         <>
@@ -46,9 +48,10 @@ export default function Classroom() {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div className={styles.boxVideo}>
-                        <div className={styles.video}>
-                            <img alt="imagem teste" src="/banner1.png" />
-                        </div>
+                        <iframe
+                            src={`https://www.youtube.com/embed/${src}`}
+                            title="YouTube video player"
+                        ></iframe>
                         <div className={styles.boxDescription}>
                             <h1>Descrição</h1>
                             <p>{listOfClasses[active]?.description}</p>
@@ -74,7 +77,7 @@ export default function Classroom() {
                                     <h1>{aula.title}</h1>
                                     {active === index ? (
                                         <button className={styles.buttonChech} title="check" >
-                                            <FiCheck color="#ffffff" size={13} />
+                                            <FaPlay color="#ffffff" size={10} />
                                         </button>
                                     ) : (
                                         <button className={styles.button} title="check"></button>

@@ -14,12 +14,7 @@ interface ModalNewClassesProps {
   course: CourseProps;
 }
 
-export function ModalCourses({
-  isOpen,
-  onRequestClose,
-  infoClasses,
-  course,
-}: ModalNewClassesProps) {
+export function ModalCourses({ isOpen, onRequestClose, infoClasses, course }: ModalNewClassesProps) {
   var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } };
   const [registered, setRegistered] = useState(false);
   const { user, update } = useContext(AuthContext);
@@ -58,6 +53,8 @@ export function ModalCourses({
     checkCourseIncription();
   }, []);
 
+  const src = "Rkk3_8fCq6Q"
+
   return (
     <Modal
       isOpen={isOpen}
@@ -80,9 +77,10 @@ export function ModalCourses({
 
       <div className={styles.content}>
         <div className={styles.boxVideoInfo}>
-          <div className={styles.video}>
-            <img alt="imagem teste" src="/banner1.png" />
-          </div>
+          <iframe
+            src={`https://www.youtube.com/embed/${src}`}
+            title="YouTube video player"
+          ></iframe>
           <div className={styles.class}>
             <h1>Aulas que serão lecionadas durante o curso</h1>
             <div className={styles.boxScrollClass}>

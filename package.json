@@ -21,15 +21,9 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-modal": "^3.15.1",
-    "react-redux": "^8.0.5",
     "react-toastify": "^9.0.5",
-    "redux": "^4.2.0",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.2",
     "sass": "^1.53.0",
-    "vue-runtime-helpers": "^1.1.2",
-    "youtube-api-v3-search": "^1.2.1"
+    "vue-runtime-helpers": "^1.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
