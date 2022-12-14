@@ -83,6 +83,57 @@ export default function Payment() {
                             <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
                         </div>
                     </div>
+
+                    <div className={styles.card}>
+                        <div className={styles.boxInfo}>
+                            <BsBox color="#10b2aa" size={38} />
+                            <h1>MENSAL</h1>
+
+                            <div className={styles.boxValue}>
+                                <text>12X<strong>R$120</strong></text>
+                                <p>à vista R$1.440</p>
+                            </div>
+
+                            <div className={styles.boxDescription}>
+                                <AiOutlineCheck color="#10b2aa" size={18} />
+                                <div className={styles.description}>
+                                    <text>Acesso a TODOS os cursos da plataforma</text>
+                                </div>
+                            </div>
+
+                            <div className={styles.boxDescription}>
+                                <AiOutlineCheck color="#10b2aa" size={18} />
+                                <div className={styles.description}>
+                                    <text>Certificado</text>
+                                </div>
+                            </div>
+
+                            <div className={styles.boxDescription}>
+                                <AiOutlineCheck color="#10b2aa" size={18} />
+                                <div className={styles.description}>
+                                    <text>The Doctors Língua (incluindo curso Inglês)</text>
+                                </div>
+                            </div>
+
+                            <div className={styles.boxDescription}>
+                                <AiOutlineCheck color="#10b2aa" size={18} />
+                                <div className={styles.description}>
+                                    <text>The Doctors Challenges</text>
+                                </div>
+                            </div>
+
+                            <div className={styles.boxDescription}>
+                                <AiOutlineCheck color="#10b2aa" size={18} />
+                                <div className={styles.description}>
+                                    <text>Materiais para estudo</text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={styles.boxButton}>
+                            <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
