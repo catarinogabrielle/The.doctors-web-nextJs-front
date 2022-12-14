@@ -17,6 +17,7 @@ export default function Classes() {
     const [imageAvatarTeacher, setImageAvatarTeacher] = useState(null)
 
     const [title, setTitle] = useState('')
+    const [link, setLink] = useState('')
     const [name, setName] = useState('')
     const [work, setWork] = useState('')
     const [info, setInfo] = useState('')
@@ -29,12 +30,13 @@ export default function Classes() {
         try {
             const data = new FormData()
 
-            if (title === '' || name === '' || work === '' || info === '' || description === '' || time === '' || imageAvatarBanner === null || imageAvatarTeacher === null) {
+            if (title === '' || link === '' || name === '' || work === '' || info === '' || description === '' || time === '' || imageAvatarBanner === null || imageAvatarTeacher === null) {
                 toast.warning("Preencha todos os campos!")
                 return
             }
 
             data.append('title', title)
+            data.append('link', link)
             data.append('teachername', name)
             data.append('teacherwork', work)
             data.append('teacherinfo', info)
@@ -55,6 +57,7 @@ export default function Classes() {
         }
 
         setTitle('')
+        setLink('')
         setName('')
         setWork('')
         setInfo('')
@@ -119,6 +122,13 @@ export default function Classes() {
                             className={styles.input}
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Chave de link para video"
+                            className={styles.input}
+                            value={link}
+                            onChange={(e) => setLink(e.target.value)}
                         />
                         <textarea
                             placeholder="Descreva sobre o curso..."

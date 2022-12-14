@@ -53,7 +53,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course }: Mo
     checkCourseIncription();
   }, []);
 
-  const src = "Rkk3_8fCq6Q"
+  const src = course.link
 
   return (
     <Modal
