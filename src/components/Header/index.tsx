@@ -44,7 +44,7 @@ export function Header() {
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <div className={styles.infoContentHeader}>
-                    <Link href="/dashboard">
+                    <Link href="/home">
                         <img alt="logo" src="/logo.png" />
                     </Link>
 
@@ -52,7 +52,7 @@ export function Header() {
                 </div>
 
                 <nav className={styles.menuNav}>
-                    <Link href="/dashboard">
+                    <Link href="/home">
                         <a className={styles.linkHeader}>Home</a>
                     </Link>
 

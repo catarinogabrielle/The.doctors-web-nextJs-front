@@ -83,8 +83,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             toast.success("Logado com sucesso!")
 
-            // redirecionar o user para /dashboard
-            Router.push('/dashboard')
+            // redirecionar o user para /home
+            Router.push('/home')
 
         } catch (err) {
             toast.error("Erro ao acessar!")

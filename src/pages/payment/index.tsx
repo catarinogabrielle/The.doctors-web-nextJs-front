@@ -14,7 +14,6 @@ export default function Payment() {
         try {
             const apiClient = setupAPIClient()
             const response = await apiClient.post('/subscribe')
-            console.log(response)
             const { sessionId } = response.data
             const stripe = await getStripeJs()
 

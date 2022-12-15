@@ -10,18 +10,18 @@ import { AuthContext } from '../../contexts/AuthContext'
 
 import { FiUser, FiBook, FiFile, FiBox, FiVideo } from 'react-icons/fi'
 
-export default function Dashboard() {
+export default function Home() {
     const { user } = useContext(AuthContext)
 
     return (
         <>
             <Head>
-                <title>The.Doctors - Meu Painel</title>
+                <title>The.Doctors</title>
             </Head>
 
             <Header />
 
-            <div className={styles.containerInfoDashboard}>
+            <div className={styles.containerInfoHome}>
 
                 <div className={styles.contentMenu}>
                     {user?.type === 'teacher' &&
