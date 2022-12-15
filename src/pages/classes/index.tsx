@@ -207,7 +207,7 @@ export default function Classes() {
                         <Link href="/myclasses">
                             <div className={styles.button}>
                                 <FiArrowLeft size={24} color="#ffffff" />
-                                <p>Minhas Aulas</p>
+                                <p>Adicionar Aulas</p>
                             </div>
                         </Link>
                     </form>

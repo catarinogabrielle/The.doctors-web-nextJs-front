@@ -29,7 +29,7 @@ export default function Dashboard() {
                             <Link href="/myclasses">
                                 <button className={styles.boxMenu}>
                                     <FiVideo className={styles.iconMenu} size={22} />
-                                    <p>Cursos</p>
+                                    <p>Gerenciar Cursos</p>
                                 </button>
                             </Link>
                         )
