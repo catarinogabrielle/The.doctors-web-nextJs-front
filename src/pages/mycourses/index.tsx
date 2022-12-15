@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Header } from "../../components/Header/index";
-import { canSSRAuth } from "../../utils/canSSRAuth";
-import styles from "./styles.module.scss";
-import Head from "next/head";
-import Link from "next/link";
+import { useState } from "react"
+import { Header } from "../../components/Header/index"
+import { canSSRAuth } from "../../utils/canSSRAuth"
+import styles from "./styles.module.scss"
+import Head from "next/head"
+import Link from "next/link"
 
-import { setupAPIClient } from "../../services/api";
+import { setupAPIClient } from "../../services/api"
 
 export type infoProps = {
   id: string;
@@ -17,14 +17,14 @@ export type infoProps = {
   teacherinfo: string;
   description: string;
   time: string;
-};
+}
 
 interface infoCourses {
   info: infoProps[];
 }
 
 export default function MyCourses({ info }: infoCourses) {
-  const [myCourses, setMyCourses] = useState(info || []);
+  const [myCourses, setMyCourses] = useState(info || [])
 
   return (
     <>
@@ -59,25 +59,25 @@ export default function MyCourses({ info }: infoCourses) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-  const apiClient = setupAPIClient(ctx);
+  const apiClient = setupAPIClient(ctx)
 
-  const allCourses = await apiClient.get("/myclasses");
-  const user = await apiClient.get("/me");
-  const myCourses = [];
+  const allCourses = await apiClient.get("/myclasses")
+  const user = await apiClient.get("/me")
+  const myCourses = []
 
   allCourses.data.forEach((course) => {
     user.data.mycourse_id.forEach((myCourseId) => {
-      if (course.id === myCourseId) myCourses.push(course);
-    });
-  });
+      if (course.id === myCourseId) myCourses.push(course)
+    })
+  })
 
   return {
     props: {
       info: myCourses,
     },
-  };
-});
+  }
+})

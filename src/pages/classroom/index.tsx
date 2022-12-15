@@ -5,8 +5,8 @@ import styles from './styles.module.scss'
 import Head from 'next/head'
 import { setupAPIClient } from '../../services/api'
 
-import { FiDownload } from "react-icons/fi";
-import { FaPlay } from "react-icons/fa";
+import { FiDownload } from "react-icons/fi"
+import { FaPlay } from "react-icons/fa"
 
 export default function Classroom() {
     const [active, setActive] = useState(0)
@@ -25,14 +25,14 @@ export default function Classroom() {
     }
 
     function novaAba(material: string) {
-        var win = window.open(`http://localhost:3333/files/${material}`);
-        win.focus();
+        var win = window.open(`http://localhost:3333/files/${material}`)
+        win.focus()
     }
 
     useEffect(() => {
         const urlParams = typeof window !== undefined && new URLSearchParams(window.location.search)
         const idClass = urlParams.get('id')
-        getClassById(idClass);
+        getClassById(idClass)
     }, [])
 
     const src = listOfClasses[active]?.link

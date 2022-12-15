@@ -26,7 +26,7 @@ export default function Materials({ info }: infoClasses) {
     const [infoList, setInfoList] = useState(info || [])
 
     function novaAba(material: string) {
-        var win = window.open(`http://localhost:3333/files/${material}`);
+        var win = window.open(`http://localhost:3333/files/${material}`)
         win.focus()
     }
 
@@ -69,14 +69,14 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 
     allClasses.data.forEach(course => {
         user.data.mycourse_id.forEach(myCourseId => {
-            if (course.myclasse_id === myCourseId) myClasses.push(course);
-        });
-    });
+            if (course.myclasse_id === myCourseId) myClasses.push(course)
+        })
+    })
 
     const classes = []
     myClasses.forEach(classe => {
         classes.push(classe)
-    });
+    })
 
     return {
         props: {

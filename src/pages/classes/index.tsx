@@ -82,7 +82,7 @@ export default function Classes() {
 
         if (image.type === 'image/jpeg' || image.type === 'image/png') {
 
-            setImageAvatarBanner(image);
+            setImageAvatarBanner(image)
             setAvatarUrlBanner(URL.createObjectURL(e.target.files[0]))
         }
     }
@@ -100,7 +100,7 @@ export default function Classes() {
 
         if (image.type === 'image/jpeg' || image.type === 'image/png') {
 
-            setImageAvatarTeacher(image);
+            setImageAvatarTeacher(image)
             setAvatarUrlTeacher(URL.createObjectURL(e.target.files[0]))
         }
     }

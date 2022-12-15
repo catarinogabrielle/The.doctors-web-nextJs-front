@@ -6,7 +6,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Modal from 'react-modal'
 
-import { FiFolderPlus, FiPlus } from "react-icons/fi";
+import { FiFolderPlus, FiPlus } from "react-icons/fi"
 import { ModalNewClasses } from '../../components/ModalNewClasses'
 import { setupAPIClient } from '../../services/api'
 
@@ -100,7 +100,7 @@ export default function MyClasses({ info }: infoCourses) {
         />
       )}
     </>
-  );
+  )
 }
 
 

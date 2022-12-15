@@ -20,7 +20,7 @@ export default function SignUp() {
     const [loading, setLoading] = useState(false)
 
     async function handleSignUp(event: FormEvent) {
-        event.preventDefault();
+        event.preventDefault()
 
         if (name === '' || email === '' || password === '') {
             toast.warning("Preencha todos os campos!")

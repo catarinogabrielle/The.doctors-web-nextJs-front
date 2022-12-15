@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { Header } from "../../components/Header/index";
-import { canSSRAuth } from "../../utils/canSSRAuth";
-import styles from "./styles.module.scss";
-import Head from "next/head";
-import Modal from "react-modal";
+import { useState, useEffect } from "react"
+import { Header } from "../../components/Header/index"
+import { canSSRAuth } from "../../utils/canSSRAuth"
+import styles from "./styles.module.scss"
+import Head from "next/head"
+import Modal from "react-modal"
 
-import { setupAPIClient } from "../../services/api";
-import { ModalCourses } from "../../components/ModalCourses";
+import { setupAPIClient } from "../../services/api"
+import { ModalCourses } from "../../components/ModalCourses"
 
-import { FiSearch } from "react-icons/fi";
-import { DebounceInput } from "react-debounce-input";
+import { FiSearch } from "react-icons/fi"
+import { DebounceInput } from "react-debounce-input"
 
 export type ClasseProps = {
   id: string;
@@ -43,7 +43,7 @@ export default function Courses({ info }: InfoCourses) {
   const [input, setInput] = useState("")
   const [course, setCourse] = useState({})
 
-  const [infoList, setInfoList] = useState(info || []);
+  const [infoList, setInfoList] = useState(info || [])
   const apiClient = setupAPIClient()
 
   async function handleMeetCourse(id: string) {
@@ -53,7 +53,7 @@ export default function Courses({ info }: InfoCourses) {
       },
     })
 
-    setClasses(response.data);
+    setClasses(response.data)
     handleOpenModal()
   }
 
@@ -69,7 +69,7 @@ export default function Courses({ info }: InfoCourses) {
 
   const handleInputChange = async (event) => {
     setInput(event.target.value)
-  };
+  }
 
   const searchCourse = async () => {
     await apiClient.get(`/myclasses/search?title=${input}`).then((res) => {
@@ -114,8 +114,8 @@ export default function Courses({ info }: InfoCourses) {
                 key={item.id}
                 className={styles.card}
                 onClick={() => {
-                  handleMeetCourse(item.id);
-                  setCourse(item);
+                  handleMeetCourse(item.id)
+                  setCourse(item)
                 }}
               >
                 <img
@@ -144,17 +144,17 @@ export default function Courses({ info }: InfoCourses) {
         />
       )}
     </>
-  );
+  )
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-  const apiClient = setupAPIClient(ctx);
+  const apiClient = setupAPIClient(ctx)
 
-  const response = await apiClient.get("/myclasses");
+  const response = await apiClient.get("/myclasses")
 
   return {
     props: {
       info: response.data,
     },
-  };
-});
+  }
+})

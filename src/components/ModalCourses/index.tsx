@@ -1,11 +1,11 @@
-import Modal from "react-modal";
-import styles from "./styles.module.scss";
+import Modal from "react-modal"
+import styles from "./styles.module.scss"
 
-import { FiX } from "react-icons/fi";
-import { InfoProps, CourseProps } from "../../pages/courses";
-import { setupAPIClient } from "../../services/api";
-import { AuthContext } from "../../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { FiX } from "react-icons/fi"
+import { InfoProps, CourseProps } from "../../pages/courses"
+import { setupAPIClient } from "../../services/api"
+import { AuthContext } from "../../contexts/AuthContext"
+import { useContext, useEffect, useState } from "react"
 
 interface ModalNewClassesProps {
   isOpen: boolean;
@@ -15,43 +15,43 @@ interface ModalNewClassesProps {
 }
 
 export function ModalCourses({ isOpen, onRequestClose, infoClasses, course }: ModalNewClassesProps) {
-  var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } };
-  const [registered, setRegistered] = useState(false);
-  const { user, update } = useContext(AuthContext);
-  const apiClient = setupAPIClient();
+  var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
+  const [registered, setRegistered] = useState(false)
+  const { user, update } = useContext(AuthContext)
+  const apiClient = setupAPIClient()
 
   const handleMyCourse = async () => {
-    const courseId = course.id;
-    const userId = user.id;
+    const courseId = course.id
+    const userId = user.id
 
     await apiClient
       .put("/users/update", { courseId, userId })
       .then((response) => {
-        setRegistered(true);
-        onRequestClose();
+        setRegistered(true)
+        onRequestClose()
       })
       .catch((err) => {
-        console.log("erro", err);
-      });
-  };
+        console.log("erro", err)
+      })
+  }
 
   const checkCourseIncription = async () => {
     await apiClient
       .get("/me")
       .then((response) => {
-        const { mycourse_id } = response.data;
+        const { mycourse_id } = response.data
         mycourse_id.forEach((myCourseId) => {
-          if (myCourseId === course.id) setRegistered(true);
-        });
+          if (myCourseId === course.id) setRegistered(true)
+        })
       })
       .catch((error) => {
-        console.log(error);
-      });
-  };
+        console.log(error)
+      })
+  }
 
   useEffect(() => {
-    checkCourseIncription();
-  }, []);
+    checkCourseIncription()
+  }, [])
 
   const src = course.link
 
@@ -128,5 +128,5 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course }: Mo
         )}
       </div>
     </Modal>
-  );
+  )
 }
