@@ -77,7 +77,7 @@ export default function Classroom() {
                                     <h1>{aula.title}</h1>
                                     {active === index ? (
                                         <button className={styles.buttonChech} title="check" >
-                                            <FaPlay color="#ffffff" size={10} />
+                                            <FaPlay color="#ffffff" size={8} />
                                         </button>
                                     ) : (
                                         <button className={styles.button} title="check"></button>
