@@ -15,10 +15,24 @@ interface PlanosProps {
 
 export default function Payment({ premium }: PlanosProps) {
 
-    const handleMyCourse = async () => {
+    const handleMyCourseYearly = async () => {
         try {
             const apiClient = setupAPIClient()
-            const response = await apiClient.post('/subscribe')
+            const response = await apiClient.post('/subscribe/yearly')
+            const { sessionId } = response.data
+            const stripe = await getStripeJs()
+
+            await stripe.redirectToCheckout({ sessionId: sessionId })
+
+        } catch (err) {
+            console.log('erro', err)
+        }
+    }
+
+    const handleMyCourseMonthly = async () => {
+        try {
+            const apiClient = setupAPIClient()
+            const response = await apiClient.post('/subscribe/monthly')
             const { sessionId } = response.data
             const stripe = await getStripeJs()
 
@@ -105,7 +119,7 @@ export default function Payment({ premium }: PlanosProps) {
                             {premium ? (
                                 <button className={styles.button} style={{ background: "#cecece", color: "#1e1e2a" }} onClick={handleCreatePortal}>ALTERAR ASSINATURA</button>
                             ) : (
-                                <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                                <button className={styles.button} onClick={handleMyCourseYearly}>MATRICULAR-SE</button>
                             )}
                         </div>
                     </div>
@@ -159,7 +173,7 @@ export default function Payment({ premium }: PlanosProps) {
                             {premium ? (
                                 <button className={styles.button} style={{ background: "#cecece", color: "#1e1e2a" }} onClick={handleCreatePortal}>ALTERAR ASSINATURA</button>
                             ) : (
-                                <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                                <button className={styles.button} onClick={handleMyCourseMonthly}>MATRICULAR-SE</button>
                             )}
                         </div>
                     </div>
