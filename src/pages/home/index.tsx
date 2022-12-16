@@ -3,6 +3,7 @@ import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
 import Link from 'next/link'
+import { ThreeDots } from 'react-loader-spinner'
 
 import { Header } from '../../components/Header'
 
@@ -22,46 +23,59 @@ export default function Home() {
             <Header />
 
             <div className={styles.containerInfoHome}>
+                {user ? (
+                    <div className={styles.contentMenu}>
+                        {user?.type === 'teacher' &&
+                            (
+                                <Link href="/myclasses">
+                                    <button className={styles.boxMenu}>
+                                        <FiVideo className={styles.iconMenu} size={22} />
+                                        <p>Gerenciar Cursos</p>
+                                    </button>
+                                </Link>
+                            )
+                        }
+                        <Link href="/mycourses">
+                            <button className={styles.boxMenu}>
+                                <FiUser className={styles.iconMenu} size={22} />
+                                <p>Meus Cursos</p>
+                            </button>
+                        </Link>
 
-                <div className={styles.contentMenu}>
-                    {user?.type === 'teacher' &&
-                        (
-                            <Link href="/myclasses">
-                                <button className={styles.boxMenu}>
-                                    <FiVideo className={styles.iconMenu} size={22} />
-                                    <p>Gerenciar Cursos</p>
-                                </button>
-                            </Link>
-                        )
-                    }
-                    <Link href="/mycourses">
-                        <button className={styles.boxMenu}>
-                            <FiUser className={styles.iconMenu} size={22} />
-                            <p>Meus Cursos</p>
-                        </button>
-                    </Link>
+                        <Link href="/courses">
+                            <button className={styles.boxMenu}>
+                                <FiBook className={styles.iconMenu} size={22} />
+                                <p>Novos Cursos</p>
+                            </button>
+                        </Link>
 
-                    <Link href="/courses">
-                        <button className={styles.boxMenu}>
-                            <FiBook className={styles.iconMenu} size={22} />
-                            <p>Novos Cursos</p>
-                        </button>
-                    </Link>
+                        <Link href="/materials">
+                            <button className={styles.boxMenu}>
+                                <FiFile className={styles.iconMenu} size={22} />
+                                <p>Materiais</p>
+                            </button>
+                        </Link>
 
-                    <Link href="/materials">
-                        <button className={styles.boxMenu}>
-                            <FiFile className={styles.iconMenu} size={22} />
-                            <p>Materiais</p>
-                        </button>
-                    </Link>
-
-                    <Link href="/payment">
-                        <button className={styles.boxMenu}>
-                            <FiBox className={styles.iconMenu} size={22} />
-                            <p>Planos</p>
-                        </button>
-                    </Link>
-                </div>
+                        <Link href="/payment">
+                            <button className={styles.boxMenu}>
+                                <FiBox className={styles.iconMenu} size={22} />
+                                <p>Planos</p>
+                            </button>
+                        </Link>
+                    </div>
+                ) : (
+                    <div className={styles.contentMenulLoader}>
+                        <ThreeDots
+                            height="88"
+                            width="88"
+                            radius="9"
+                            color='#10b2aa'
+                            ariaLabel='three-dots-loading'
+                            wrapperStyle
+                            wrapperClass
+                        />
+                    </div>
+                )}
             </div>
         </>
     )

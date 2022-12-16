@@ -31,7 +31,7 @@
     background: rgba(211, 211, 211, 0.1);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     border-radius: 18px;
-    padding: 0px 34px;
+    padding: 0px 38px;
     flex-direction: column;
     height: 600px;
     justify-content: space-between;
@@ -92,11 +92,16 @@
     cursor: pointer;
     padding: 9px 13px;
     width: 100%;
-    transition: 0.4s;
+    transition: 0.8s;
 }
 
 .button:hover {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1);
+
+    @media (max-width: 659px) {
+        transform: none;
+    }
 }
 
 .boxValue {

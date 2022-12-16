@@ -9,7 +9,12 @@ import Head from 'next/head'
 import { BsBox } from 'react-icons/bs'
 import { AiOutlineCheck } from 'react-icons/ai'
 
-export default function Payment() {
+interface PlanosProps {
+    premium: boolean
+}
+
+export default function Payment({ premium }: PlanosProps) {
+
     const handleMyCourse = async () => {
         try {
             const apiClient = setupAPIClient()
@@ -18,6 +23,24 @@ export default function Payment() {
             const stripe = await getStripeJs()
 
             await stripe.redirectToCheckout({ sessionId: sessionId })
+
+        } catch (err) {
+            console.log('erro', err)
+        }
+    }
+
+    const handleCreatePortal = async () => {
+        try {
+            if (!premium) {
+                return
+            }
+
+            const apiClient = setupAPIClient()
+            const response = await apiClient.post('/create-portal')
+
+            const { sessionId } = response.data
+
+            window.location.href = sessionId
 
         } catch (err) {
             console.log('erro', err)
@@ -79,7 +102,11 @@ export default function Payment() {
                         </div>
 
                         <div className={styles.boxButton}>
-                            <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                            {premium ? (
+                                <button className={styles.button} style={{ background: "#cecece", color: "#1e1e2a" }} onClick={handleCreatePortal}>ALTERAR ASSINATURA</button>
+                            ) : (
+                                <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                            )}
                         </div>
                     </div>
 
@@ -128,9 +155,12 @@ export default function Payment() {
                                 </div>
                             </div>
                         </div>
-
-                        <div className={styles.boxButton}>
-                            <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                        <div className={styles.boxButton} >
+                            {premium ? (
+                                <button className={styles.button} style={{ background: "#cecece", color: "#1e1e2a" }} onClick={handleCreatePortal}>ALTERAR ASSINATURA</button>
+                            ) : (
+                                <button className={styles.button} onClick={handleMyCourse}>MATRICULAR-SE</button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -141,7 +171,12 @@ export default function Payment() {
 
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx)
+    const response = await apiClient.get("/me")
+
     return {
-        props: {}
+        props: {
+            premium: response.data?.subscriptions?.status === 'active' ? true : false
+        }
     }
 })

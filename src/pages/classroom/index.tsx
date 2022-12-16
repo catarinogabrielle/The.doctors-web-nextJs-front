@@ -60,7 +60,6 @@ export default function Classroom() {
                             <h2>Material para download</h2>
 
                             <div className={styles.boxMaterial}>
-
                                 <button className={styles.card} onClick={() => novaAba(listOfClasses[active]?.material)}>
                                     <div>
                                         <FiDownload color="#3d424a" size={26} />

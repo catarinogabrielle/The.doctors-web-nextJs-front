@@ -2,20 +2,23 @@ import Modal from "react-modal"
 import styles from "./styles.module.scss"
 
 import { FiX } from "react-icons/fi"
-import { InfoProps, CourseProps } from "../../pages/courses"
+import { InfoProps, CourseProps, PlanosProps } from "../../pages/courses"
 import { setupAPIClient } from "../../services/api"
 import { AuthContext } from "../../contexts/AuthContext"
 import { useContext, useEffect, useState } from "react"
+import Link from 'next/link'
 
 interface ModalNewClassesProps {
   isOpen: boolean;
   onRequestClose: () => void;
   infoClasses: InfoProps[];
   course: CourseProps;
+  premium: PlanosProps
 }
 
-export function ModalCourses({ isOpen, onRequestClose, infoClasses, course }: ModalNewClassesProps) {
+export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, premium }: ModalNewClassesProps) {
   var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
+
   const [registered, setRegistered] = useState(false)
   const { user, update } = useContext(AuthContext)
   const apiClient = setupAPIClient()
@@ -117,14 +120,22 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course }: Mo
           </div>
         </div>
 
-        {!registered && (
-          <button
-            className={styles.button}
-            title="iniciar curso"
-            onClick={() => handleMyCourse()}
-          >
-            Iniciar Curso
-          </button>
+        {premium ? (
+          <>
+            {!registered && (
+              <button
+                className={styles.button}
+                title="iniciar curso"
+                onClick={() => handleMyCourse()}
+              >
+                Iniciar Curso
+              </button>
+            )}
+          </>
+        ) : (
+          <Link href="/payment">
+            <button className={styles.buttonPayment}>Escolher plano</button>
+          </Link>
         )}
       </div>
     </Modal>

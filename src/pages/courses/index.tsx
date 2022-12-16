@@ -4,6 +4,7 @@ import { canSSRAuth } from "../../utils/canSSRAuth"
 import styles from "./styles.module.scss"
 import Head from "next/head"
 import Modal from "react-modal"
+import { ThreeDots } from 'react-loader-spinner'
 
 import { setupAPIClient } from "../../services/api"
 import { ModalCourses } from "../../components/ModalCourses"
@@ -21,8 +22,13 @@ export type ClasseProps = {
   myclasse_id: string;
 }
 
+interface PlanosProps {
+  premium: boolean
+}
+
 interface InfoCourses {
   info: CourseProps[];
+  premium: PlanosProps[]
 }
 
 type CourseProps = {
@@ -37,7 +43,7 @@ type CourseProps = {
   title: string;
 }
 
-export default function Courses({ info }: InfoCourses) {
+export default function Courses({ info, premium }: InfoCourses) {
   const [classes, setClasses] = useState<ClasseProps[]>()
   const [modalVisible, setModalVisible] = useState(false)
   const [input, setInput] = useState("")
@@ -108,30 +114,44 @@ export default function Courses({ info }: InfoCourses) {
               </button>
             </div>
           </div>
-          <div className={styles.boxCard}>
-            {infoList.map((item) => (
-              <div
-                key={item.id}
-                className={styles.card}
-                onClick={() => {
-                  handleMeetCourse(item.id)
-                  setCourse(item)
-                }}
-              >
-                <img
-                  className={styles.imageCard}
-                  alt={item.title}
-                  src={`http://localhost:3333/files/${item.image}`}
-                />
-                <div className={styles.descriptionCard}>
-                  <p>{item.title}</p>
-                  <div className={styles.course}>
-                    <p>Curso Online</p>
+          {infoList ? (
+            <div className={styles.boxCard}>
+              {infoList.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.card}
+                  onClick={() => {
+                    handleMeetCourse(item.id)
+                    setCourse(item)
+                  }}
+                >
+                  <img
+                    className={styles.imageCard}
+                    alt={item.title}
+                    src={`http://localhost:3333/files/${item.image}`}
+                  />
+                  <div className={styles.descriptionCard}>
+                    <p>{item.title}</p>
+                    <div className={styles.course}>
+                      <p>Curso Online</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.contentMenulLoader}>
+              <ThreeDots
+                height="88"
+                width="88"
+                radius="9"
+                color='#10b2aa'
+                ariaLabel='three-dots-loading'
+                wrapperStyle
+                wrapperClass
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -141,6 +161,7 @@ export default function Courses({ info }: InfoCourses) {
           onRequestClose={handleCloseModal}
           course={course}
           infoClasses={classes}
+          premium={premium}
         />
       )}
     </>
@@ -151,10 +172,12 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
   const apiClient = setupAPIClient(ctx)
 
   const response = await apiClient.get("/myclasses")
+  const responseMe = await apiClient.get("/me")
 
   return {
     props: {
       info: response.data,
+      premium: responseMe.data?.subscriptions?.status === 'active' ? true : false,
     },
   }
 })
