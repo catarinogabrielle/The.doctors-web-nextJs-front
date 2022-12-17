@@ -16,14 +16,20 @@ export default function SignUp() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('')
 
     const [loading, setLoading] = useState(false)
 
     async function handleSignUp(event: FormEvent) {
         event.preventDefault()
 
-        if (name === '' || email === '' || password === '') {
+        if (name === '' || email === '' || password === '' || confirm === '') {
             toast.warning("Preencha todos os campos!")
+            return
+        }
+
+        if (password != confirm) {
+            toast.warning("Senhas diferentes!")
             return
         }
 
@@ -47,11 +53,9 @@ export default function SignUp() {
             </Head>
 
             <div className={styles.containerCenter}>
-                <img className={styles.image} src="./logo.png" alt="logo community" />
+                <img className={styles.imageSignUp} src="./logo.png" alt="logo community" />
 
                 <div className={styles.login}>
-                    <p>Criando sua conta</p>
-
                     <form onSubmit={handleSignUp}>
                         <Input
                             placeholder="Digite seu usuário"
@@ -72,6 +76,13 @@ export default function SignUp() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <Input
+                            placeholder="Confirmar senha"
+                            type="password"
+                            value={confirm}
+                            onChange={(e) => setConfirm(e.target.value)}
                         />
 
                         <Button
