@@ -37,25 +37,31 @@ export default function MyCourses({ info }: infoCourses) {
       <div className={styles.container}>
         <div className={styles.content}>
           <h1>Meus Cursos</h1>
-          <div className={styles.boxCard}>
-            {myCourses.map((course) => (
-              <Link key={Math.random()} href={`/classroom?id=${course.id}`}>
-                <div className={styles.card}>
-                  <img
-                    className={styles.imageCard}
-                    alt={course.title}
-                    src={`http://localhost:3333/files/${course.image}`}
-                  />
-                  <div className={styles.descriptionCard}>
-                    <p>{course.title}</p>
-                    <div className={styles.course}>
-                      <p>Curso Online</p>
+          {myCourses.length === 0 ? (
+            <div className={styles.contentLength}>
+              <h2>Você ainda não possui nenhum curso!</h2>
+            </div>
+          ) : (
+            <div className={styles.boxCard}>
+              {myCourses.map((course) => (
+                <Link key={Math.random()} href={`/classroom?id=${course.id}`}>
+                  <div className={styles.card}>
+                    <img
+                      className={styles.imageCard}
+                      alt={course.title}
+                      src={`http://localhost:3333/files/${course.image}`}
+                    />
+                    <div className={styles.descriptionCard}>
+                      <p>{course.title}</p>
+                      <div className={styles.course}>
+                        <p>Curso Online</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

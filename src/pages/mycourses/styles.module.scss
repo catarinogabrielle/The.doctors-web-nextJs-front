@@ -83,3 +83,24 @@
         font-size: 14px;
     }
 }
+
+.contentLength {
+    display: flex;
+    margin: 22px 0px 0 11px;
+
+    h2 {
+        color: var(--Preto);
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    @media (max-width: 659px) {
+        margin: 15px 0 0 0;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+            font-size: 16px;
+        }
+    }
+}
