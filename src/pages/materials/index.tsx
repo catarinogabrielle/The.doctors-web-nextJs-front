@@ -20,9 +20,10 @@ export type infoProps = {
 
 interface infoClasses {
     info: infoProps[];
+    premium: boolean;
 }
 
-export default function Materials({ info }: infoClasses) {
+export default function Materials({ info, premium }: infoClasses) {
     const [infoList, setInfoList] = useState(info || [])
 
     function novaAba(material: string) {
@@ -45,14 +46,20 @@ export default function Materials({ info }: infoClasses) {
                     <div className={styles.boxTitle}>
                         <h1>Materiais Disponiveis</h1>
                     </div>
-                    <div className={styles.boxCard}>
-                        {infoList.map(aula => (
-                            <button className={styles.card} key={aula.id} onClick={() => novaAba(aula.material)} >
-                                <FiDownload color="#3d424a" size={26} />
-                                <text>{aula.title}</text>
-                            </button>
-                        ))}
-                    </div>
+                    {infoList.length === 0 || !premium ? (
+                        <div className={styles.contentLength}>
+                            <h2>Você não possui nenhum material!</h2>
+                        </div>
+                    ) : (
+                        <div className={styles.boxCard}>
+                            {infoList.map(aula => (
+                                <button className={styles.card} key={aula.id} onClick={() => novaAba(aula.material)} >
+                                    <FiDownload color="#3d424a" size={26} />
+                                    <text>{aula.title}</text>
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </>
@@ -80,7 +87,8 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 
     return {
         props: {
-            info: classes
+            info: classes,
+            premium: user.data?.subscriptions?.status === 'active' ? true : false
         }
     }
 })

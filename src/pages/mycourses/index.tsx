@@ -21,9 +21,10 @@ export type infoProps = {
 
 interface infoCourses {
   info: infoProps[];
+  premium: boolean;
 }
 
-export default function MyCourses({ info }: infoCourses) {
+export default function MyCourses({ info, premium }: infoCourses) {
   const [myCourses, setMyCourses] = useState(info || [])
 
   return (
@@ -37,9 +38,9 @@ export default function MyCourses({ info }: infoCourses) {
       <div className={styles.container}>
         <div className={styles.content}>
           <h1>Meus Cursos</h1>
-          {myCourses.length === 0 ? (
+          {myCourses.length === 0 || !premium ? (
             <div className={styles.contentLength}>
-              <h2>Você ainda não possui nenhum curso!</h2>
+              <h2>Você não possui nenhum curso!</h2>
             </div>
           ) : (
             <div className={styles.boxCard}>
@@ -84,6 +85,7 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
   return {
     props: {
       info: myCourses,
+      premium: user.data?.subscriptions?.status === 'active' ? true : false
     },
   }
 })

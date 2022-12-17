@@ -13,7 +13,7 @@ interface ModalNewClassesProps {
   onRequestClose: () => void;
   infoClasses: InfoProps[];
   course: CourseProps;
-  premium: PlanosProps
+  premium: PlanosProps;
 }
 
 export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, premium }: ModalNewClassesProps) {

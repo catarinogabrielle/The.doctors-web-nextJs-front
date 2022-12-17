@@ -10,7 +10,7 @@ import { BsBox } from 'react-icons/bs'
 import { AiOutlineCheck } from 'react-icons/ai'
 
 interface PlanosProps {
-    premium: boolean
+    premium: boolean;
 }
 
 export default function Payment({ premium }: PlanosProps) {
