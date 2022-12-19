@@ -48,7 +48,7 @@ export default function Materials({ info, premium }: infoClasses) {
                     </div>
                     {infoList.length === 0 || !premium ? (
                         <div className={styles.contentLength}>
-                            <h2>Você não possui nenhum material!</h2>
+                            <h2>Você não possui materiais!</h2>
                         </div>
                     ) : (
                         <div className={styles.boxCard}>

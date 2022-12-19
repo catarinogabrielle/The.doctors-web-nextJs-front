@@ -40,7 +40,7 @@ export default function MyCourses({ info, premium }: infoCourses) {
           <h1>Meus Cursos</h1>
           {myCourses.length === 0 || !premium ? (
             <div className={styles.contentLength}>
-              <h2>Você não possui nenhum curso!</h2>
+              <h2>Você não possui cursos!</h2>
             </div>
           ) : (
             <div className={styles.boxCard}>
