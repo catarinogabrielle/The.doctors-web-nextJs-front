@@ -22,7 +22,19 @@ export type ClasseProps = {
   myclasse_id: string;
 }
 
-interface PlanosProps {
+export type infoProps = {
+  id: string;
+  title: string;
+  image: string;
+  teachername: string;
+  teacherphoto: string;
+  teacherwork: string;
+  teacherinfo: string;
+  description: string;
+  time: string;
+}
+
+export interface PlanosProps {
   premium: boolean
 }
 
@@ -31,7 +43,7 @@ interface InfoCourses {
   premium: PlanosProps[]
 }
 
-type CourseProps = {
+export type CourseProps = {
   id: string;
   description: string;
   image: string;
@@ -41,13 +53,14 @@ type CourseProps = {
   teacherwork: string;
   time: string;
   title: string;
+  link: string;
 }
 
 export default function Courses({ info, premium }: InfoCourses) {
-  const [classes, setClasses] = useState<ClasseProps[]>()
+  const [classes, setClasses] = useState<infoProps[]>()
   const [modalVisible, setModalVisible] = useState(false)
   const [input, setInput] = useState("")
-  const [course, setCourse] = useState({})
+  const [course, setCourse] = useState<CourseProps>()
 
   const [infoList, setInfoList] = useState(info || [])
   const apiClient = setupAPIClient()
@@ -147,8 +160,6 @@ export default function Courses({ info, premium }: InfoCourses) {
                 radius="9"
                 color='#10b2aa'
                 ariaLabel='three-dots-loading'
-                wrapperStyle
-                wrapperClass
               />
             </div>
           )}

@@ -6,13 +6,13 @@ import styles from "./styles.module.scss"
 import { FiX, FiUpload } from "react-icons/fi"
 
 import { setupAPIClient } from "../../services/api"
-import { InfoProps } from "../../pages/myclasses"
+import { infoProps } from "../../pages/myclasses"
 import { toast } from "react-toastify"
 
 interface ModalNewClassesProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  infoClasses: InfoProps[];
+  infoClasses: infoProps[];
 }
 
 export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNewClassesProps) {

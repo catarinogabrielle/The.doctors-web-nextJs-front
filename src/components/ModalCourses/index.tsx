@@ -2,7 +2,7 @@ import Modal from "react-modal"
 import styles from "./styles.module.scss"
 
 import { FiX } from "react-icons/fi"
-import { InfoProps, CourseProps, PlanosProps } from "../../pages/courses"
+import { CourseProps, PlanosProps, infoProps } from "../../pages/courses"
 import { setupAPIClient } from "../../services/api"
 import { AuthContext } from "../../contexts/AuthContext"
 import { useContext, useEffect, useState } from "react"
@@ -11,9 +11,9 @@ import Link from 'next/link'
 interface ModalNewClassesProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  infoClasses: InfoProps[];
+  infoClasses: infoProps[];
   course: CourseProps;
-  premium: PlanosProps;
+  premium: PlanosProps[];
 }
 
 export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, premium }: ModalNewClassesProps) {
@@ -25,6 +25,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
 
   const handleMyCourse = async () => {
     const courseId = course.id
+    console.log(course.id)
     const userId = user.id
 
     await apiClient

@@ -71,8 +71,6 @@ export default function Home() {
                             radius="9"
                             color='#10b2aa'
                             ariaLabel='three-dots-loading'
-                            wrapperStyle
-                            wrapperClass
                         />
                     </div>
                 )}

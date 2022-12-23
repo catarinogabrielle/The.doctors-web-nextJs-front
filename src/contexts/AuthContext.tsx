@@ -28,7 +28,6 @@ type UserProps = {
 type SignInProps = {
     email: string;
     password: string;
-    type: string;
 }
 
 type SignUpProps = {
