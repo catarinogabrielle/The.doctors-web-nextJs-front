@@ -17,7 +17,7 @@ export type infoModalProps = {
 }
 
 export function Header() {
-    const [modalItem, setModalItem] = useState<infoModalProps[]>()
+    const [modalItem, setModalItem] = useState<infoModalProps>()
     const [modalVisible, setModalVisible] = useState(false)
 
     const { signOut, user } = useContext(AuthContext)
