@@ -25,7 +25,6 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
 
   const handleMyCourse = async () => {
     const courseId = course.id
-    console.log(course.id)
     const userId = user.id
 
     await apiClient
