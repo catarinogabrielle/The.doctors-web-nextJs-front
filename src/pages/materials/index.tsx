@@ -31,8 +31,6 @@ export default function Materials({ info, premium }: infoClasses) {
         win.focus()
     }
 
-    console.log(infoList)
-
     return (
         <>
             <Head>
