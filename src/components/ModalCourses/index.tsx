@@ -120,7 +120,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
           </div>
         </div>
 
-        {premium ? (
+        {/*premium ? (
           <>
             {!registered && (
               <button
@@ -134,7 +134,13 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
           </>
         ) : (
           <Link href="/payment">
-            <button className={styles.buttonPayment}>Escolher plano</button>
+            <button className={styles.button}>Iniciar Curso</button>
+          </Link>
+        )*/}
+
+        {!registered && (
+          <Link href="/payment">
+            <button className={styles.button}>Iniciar Curso</button>
           </Link>
         )}
       </div>

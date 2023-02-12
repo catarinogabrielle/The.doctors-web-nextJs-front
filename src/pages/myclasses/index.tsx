@@ -7,7 +7,9 @@ import Link from 'next/link'
 import Modal from 'react-modal'
 
 import { FiFolderPlus, FiPlus } from "react-icons/fi"
+import { AiOutlineUserAdd } from "react-icons/ai"
 import { ModalNewClasses } from '../../components/ModalNewClasses'
+import { ModalNewStudent } from '../../components/ModalNewStudent'
 import { setupAPIClient } from '../../services/api'
 
 export type infoProps = {
@@ -27,18 +29,29 @@ interface infoCourses {
 }
 
 export default function MyClasses({ info }: infoCourses) {
-  const [modalItem, setModalItem] = useState<infoProps[]>()
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalItemClasses, setModalItemClasses] = useState<infoProps[]>()
+  const [modalVisibleClasses, setModalVisibleClasses] = useState(false)
+  const [modalItemStudent, setModalItemStudent] = useState<infoProps[]>()
+  const [modalVisibleStudent, setModalVisibleStudent] = useState(false)
 
   const [infoList, setInfoList] = useState(info || [])
 
-  function handleCloseModal() {
-    setModalVisible(false)
+  function handleCloseModalClasses() {
+    setModalVisibleClasses(false)
   }
 
-  async function handleOpenModal() {
-    setModalItem(infoList)
-    setModalVisible(true)
+  async function handleOpenModalClasses() {
+    setModalItemClasses(infoList)
+    setModalVisibleClasses(true)
+  }
+
+  function handleCloseModalStudent() {
+    setModalVisibleStudent(false)
+  }
+
+  async function handleOpenModalStudent() {
+    setModalItemStudent(infoList)
+    setModalVisibleStudent(true)
   }
 
   Modal.setAppElement('#__next')
@@ -59,7 +72,19 @@ export default function MyClasses({ info }: infoCourses) {
               <button
                 title="Adicionar aulas"
                 className={styles.buttonClasses}
-                onClick={() => handleOpenModal()}
+                onClick={() => handleOpenModalStudent()}
+              >
+                Adicionar aluno
+                <AiOutlineUserAdd
+                  color="#FFFFFF"
+                  size={19}
+                  className={styles.icon}
+                />
+              </button>
+              <button
+                title="Adicionar aulas"
+                className={styles.buttonClasses}
+                onClick={() => handleOpenModalClasses()}
               >
                 Adicionar aulas
                 <FiFolderPlus
@@ -86,17 +111,26 @@ export default function MyClasses({ info }: infoCourses) {
                   src={`http://localhost:3333/files/${item.image}`}
                 />
                 <p>{item.title}</p>
+                <text>{item.id}</text>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {modalVisible && (
+      {modalVisibleClasses && (
         <ModalNewClasses
-          isOpen={modalVisible}
-          onRequestClose={handleCloseModal}
-          infoClasses={modalItem}
+          isOpen={modalVisibleClasses}
+          onRequestClose={handleCloseModalClasses}
+          infoClasses={modalItemClasses}
+        />
+      )}
+
+      {modalVisibleStudent && (
+        <ModalNewStudent
+          isOpen={modalVisibleStudent}
+          onRequestClose={handleCloseModalStudent}
+          infoClasses={modalItemStudent}
         />
       )}
     </>
