@@ -108,10 +108,10 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
           <text>{course.description}</text>
         </div>
 
-        <div key={Math.random()} className={styles.boxTeacher}>
+        <div key={Fev37TI14HAMath.random()} className={styles.boxTeacher}>
           <img
             alt={course.title}
-            src={`https://thdacademy.com:8443/files/${course.teacherphoto}`}
+            src={`/files/${course.teacherphoto}`}
           />
           <div className={styles.infoTeacher}>
             <h1>{course.teachername}</h1>

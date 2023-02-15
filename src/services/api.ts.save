@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios'
+cdimport axios, { AxiosError } from 'axios'
 import { parseCookies } from 'nookies'
 import { AuthTokenError } from './errors/AuthTokenError'
 
@@ -8,7 +8,7 @@ export function setupAPIClient(ctx = undefined) {
     let cookies = parseCookies(ctx)
 
     const api = axios.create({
-        baseURL: 'https://thdacademy.com:8443',
+        baseURL: 'http://207.244.238.126:3333',
         headers: {
             Authorization: `Bearer ${cookies['@nextauth.token']}`
         }
