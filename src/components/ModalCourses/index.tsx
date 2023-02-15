@@ -7,6 +7,7 @@ import { setupAPIClient } from "../../services/api"
 import { AuthContext } from "../../contexts/AuthContext"
 import { useContext, useEffect, useState } from "react"
 import Link from 'next/link'
+import { toast } from 'react-toastify'
 
 interface ModalNewClassesProps {
   isOpen: boolean;
@@ -23,6 +24,13 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
   const { user, update } = useContext(AuthContext)
   const apiClient = setupAPIClient()
 
+  const [values, setValues] = useState({
+    email: user.email,
+    name: user.name,
+    courseName: course.title,
+    link: course.paymentlink
+  })
+
   const handleMyCourse = async () => {
     const courseId = course.id
     const userId = user.id
@@ -36,6 +44,24 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
       .catch((err) => {
         console.log("erro", err)
       })
+  }
+
+  const sendEmail = async (e) => {
+    e.preventDefault()
+
+    try {
+      fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: ({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(values)
+      })
+      toast.success(`Foi enviado um email para ${user.email}`)
+    } catch (err) {
+      toast.error("Erro ao enviar!")
+      console.log('erro', err)
+    }
   }
 
   const checkCourseIncription = async () => {
@@ -111,7 +137,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
         <div key={Math.random()} className={styles.boxTeacher}>
           <img
             alt={course.title}
-            src={`http://localhost:3333/files/${course.teacherphoto}`}
+            src={`https://thdacademy.com:8443/files/${course.teacherphoto}`}
           />
           <div className={styles.infoTeacher}>
             <h1>{course.teachername}</h1>
@@ -139,9 +165,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
         )*/}
 
         {!registered && (
-          <Link href="/payment">
-            <button className={styles.button}>Iniciar Curso</button>
-          </Link>
+          <button onClick={sendEmail} className={styles.button}>Iniciar Curso</button>
         )}
       </div>
     </Modal>

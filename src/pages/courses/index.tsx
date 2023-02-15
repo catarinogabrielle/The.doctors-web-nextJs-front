@@ -141,7 +141,7 @@ export default function Courses({ info, premium }: InfoCourses) {
                   <img
                     className={styles.imageCard}
                     alt={item.title}
-                    src={`http://localhost:3333/files/${item.image}`}
+                    src={`https://thdacademy.com:8443/files/${item.image}`}
                   />
                   <div className={styles.descriptionCard}>
                     <p>{item.title}</p>
