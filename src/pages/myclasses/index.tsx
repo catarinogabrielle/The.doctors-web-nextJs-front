@@ -108,7 +108,7 @@ export default function MyClasses({ info }: infoCourses) {
                 <img
                   className={styles.imageCard}
                   alt={item.title}
-                  src={`https://thdacademy.com:8443/files/${item.image}`}
+                  src={`http://localhost:3333/files/${item.image}`}
                 />
                 <p>{item.title}</p>
                 <text>{item.id}</text>

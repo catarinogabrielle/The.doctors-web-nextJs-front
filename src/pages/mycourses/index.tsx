@@ -50,7 +50,7 @@ export default function MyCourses({ info, premium }: infoCourses) {
                     <img
                       className={styles.imageCard}
                       alt={course.title}
-                      src={`https://thdacademy.com:8443/files/${course.image}`}
+                      src={`http://localhost:3333/files/${course.image}`}
                     />
                     <div className={styles.descriptionCard}>
                       <p>{course.title}</p>
