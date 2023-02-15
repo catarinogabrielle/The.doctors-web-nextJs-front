@@ -54,6 +54,7 @@ export type CourseProps = {
   time: string;
   title: string;
   link: string;
+  paymentlink: string;
 }
 
 export default function Courses({ info, premium }: InfoCourses) {
