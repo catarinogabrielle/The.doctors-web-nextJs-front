@@ -1,0 +1,79 @@
+.content {
+    position: absolute;
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    padding: 30px 30px 0px 30px;
+    transform: translate(-50%, -50%);
+    background: var(--Branco2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    width: 50%;
+
+    @media (max-width: 659px) {
+        width: 80%;
+        padding: 25px 25px 0px 25px;
+    }
+}
+
+.containerButton {
+    justify-content: flex-end;
+    display: flex;
+}
+
+.icon {
+    color: var(--Cinza);
+}
+
+.contentForm {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        color: var(--Preto);
+        font-size: 25px;
+        font-weight: normal;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.input {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    color: var(--Preto);
+    background: var(--Branco2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border: none;
+    height: 40px;
+    padding: 0 0.5rem;
+}
+
+.buttonAdd {
+    border-radius: 8px;
+    height: 40px;
+    border: 0;
+    background-color: #09c00f;
+    transition: 0.4s;
+    margin-top: 28px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    p {
+        color: var(--Branco2);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+}
+
+.buttonAdd:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+}

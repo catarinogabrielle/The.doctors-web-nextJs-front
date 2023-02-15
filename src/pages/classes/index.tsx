@@ -18,6 +18,7 @@ export default function Classes() {
 
     const [title, setTitle] = useState('')
     const [link, setLink] = useState('')
+    const [paymentlink, setPaymentlink] = useState('')
     const [name, setName] = useState('')
     const [work, setWork] = useState('')
     const [info, setInfo] = useState('')
@@ -30,13 +31,14 @@ export default function Classes() {
         try {
             const data = new FormData()
 
-            if (title === '' || link === '' || name === '' || work === '' || info === '' || description === '' || time === '' || imageAvatarBanner === null || imageAvatarTeacher === null) {
+            if (title === '' || link === '' || paymentlink === '' || name === '' || work === '' || info === '' || description === '' || time === '' || imageAvatarBanner === null || imageAvatarTeacher === null) {
                 toast.warning("Preencha todos os campos!")
                 return
             }
 
             data.append('title', title)
             data.append('link', link)
+            data.append('paymentlink', paymentlink)
             data.append('teachername', name)
             data.append('teacherwork', work)
             data.append('teacherinfo', info)
@@ -58,6 +60,7 @@ export default function Classes() {
 
         setTitle('')
         setLink('')
+        setPaymentlink('')
         setName('')
         setWork('')
         setInfo('')
@@ -129,6 +132,13 @@ export default function Classes() {
                             className={styles.input}
                             value={link}
                             onChange={(e) => setLink(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Link de pagamento do curso"
+                            className={styles.input}
+                            value={paymentlink}
+                            onChange={(e) => setPaymentlink(e.target.value)}
                         />
                         <textarea
                             placeholder="Descreva sobre o curso..."

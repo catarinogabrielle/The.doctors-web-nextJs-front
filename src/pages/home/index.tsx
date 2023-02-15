@@ -55,13 +55,14 @@ export default function Home() {
                                 <p>Materiais</p>
                             </button>
                         </Link>
-
+                        {/** 
                         <Link href="/payment">
                             <button className={styles.boxMenu}>
                                 <FiBox className={styles.iconMenu} size={22} />
                                 <p>Planos</p>
                             </button>
                         </Link>
+                        */}
                     </div>
                 ) : (
                     <div className={styles.contentMenulLoader}>

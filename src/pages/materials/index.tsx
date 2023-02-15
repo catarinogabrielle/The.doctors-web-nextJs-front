@@ -44,7 +44,7 @@ export default function Materials({ info, premium }: infoClasses) {
                     <div className={styles.boxTitle}>
                         <h1>Materiais Disponiveis</h1>
                     </div>
-                    {infoList.length === 0 || !premium ? (
+                    {infoList.length === 0 ? (
                         <div className={styles.contentLength}>
                             <h2>Você não possui materiais!</h2>
                         </div>

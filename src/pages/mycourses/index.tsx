@@ -38,7 +38,7 @@ export default function MyCourses({ info, premium }: infoCourses) {
       <div className={styles.container}>
         <div className={styles.content}>
           <h1>Meus Cursos</h1>
-          {myCourses.length === 0 || !premium ? (
+          {myCourses.length === 0 ? (
             <div className={styles.contentLength}>
               <h2>Você não possui cursos!</h2>
             </div>
@@ -75,6 +75,8 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
   const allCourses = await apiClient.get("/myclasses")
   const user = await apiClient.get("/me")
   const myCourses = []
+
+  console.log(user.data.mycourse_id)
 
   allCourses.data.forEach((course) => {
     user.data.mycourse_id.forEach((myCourseId) => {
