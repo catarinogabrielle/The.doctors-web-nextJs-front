@@ -1,5 +1,4 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
@@ -114,7 +113,6 @@ export default function Classes() {
                 <title>The.Doctors - Aulas</title>
             </Head>
 
-            <Header />
             <div className={styles.container}>
                 <main className={styles.content}>
                     <h1>Novo curso</h1>

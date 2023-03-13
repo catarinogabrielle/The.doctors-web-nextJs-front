@@ -76,7 +76,7 @@ export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps
           />
 
           <button className={styles.buttonAdd} title="iniciar curso" onClick={() => handleRegister()}>
-            <p>Iniciar Curso</p>
+            <p>Matricular Aluno</p>
           </button>
         </div>
       </main>
