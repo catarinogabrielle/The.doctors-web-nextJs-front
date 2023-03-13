@@ -76,8 +76,6 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
   const user = await apiClient.get("/me")
   const myCourses = []
 
-  console.log(user.data.mycourse_id)
-
   allCourses.data.forEach((course) => {
     user.data.mycourse_id.forEach((myCourseId) => {
       if (course.id === myCourseId) myCourses.push(course)

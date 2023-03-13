@@ -122,6 +122,12 @@
         font-weight: lighter;
         color: var(--Preto);
         margin: 10px 8px 0 8px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    text:hover {
+        color: var(--Verde);
     }
 
     @media (max-width: 659px) {
