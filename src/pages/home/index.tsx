@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { ThreeDots } from 'react-loader-spinner'
 
 import { Header } from '../../components/Header'
-
 import { AuthContext } from '../../contexts/AuthContext'
 
 import { FiUser, FiBook, FiFile, FiBox, FiVideo } from 'react-icons/fi'

@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, FormEvent } from "react"
+import { useState, useContext } from "react"
 import Modal from "react-modal"
 import styles from "./styles.module.scss"
 
@@ -7,6 +7,8 @@ import { FiX } from "react-icons/fi"
 
 import { setupAPIClient } from "../../services/api"
 import { infoProps } from "../../pages/myclasses"
+import { AuthContext } from '../../contexts/AuthContext'
+
 import { toast } from "react-toastify"
 
 interface ModalNewClassesProps {
@@ -22,6 +24,10 @@ export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps
 
   const [courseId, setCourseId] = useState("")
   const [userId, setUserId] = useState("")
+
+  const { user } = useContext(AuthContext)
+
+  console.log(user)
 
   async function handleRegister() {
     await apiClient
