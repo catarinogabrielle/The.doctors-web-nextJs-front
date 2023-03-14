@@ -137,7 +137,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
         <div key={Math.random()} className={styles.boxTeacher}>
           <img
             alt={course.title}
-            src={`http://localhost:3333/files/${course.teacherphoto}`}
+            src={`${process.env.API_URL}/files/${course.teacherphoto}`}
           />
           <div className={styles.infoTeacher}>
             <h1>{course.teachername}</h1>
