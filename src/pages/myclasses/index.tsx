@@ -112,7 +112,7 @@ export default function MyClasses({ info }: infoCourses) {
                   src={`http://localhost:3333/files/${item.image}`}
                 />
                 <p>{item.title}</p>
-                <text title="Copiar" onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
+                <text onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
               </div>
             ))}
           </div>
