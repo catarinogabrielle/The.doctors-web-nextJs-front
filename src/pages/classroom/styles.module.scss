@@ -24,6 +24,10 @@
         font-weight: normal;
         transition: 0.4s;
     }
+
+    @media (max-width: 1400px) {
+        display: none;
+    }
 }
 
 .boxBack:hover{
