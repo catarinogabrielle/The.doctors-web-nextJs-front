@@ -3,6 +3,11 @@ const webpack = require("webpack")
 
 const nextConfig = {
   api: { bodyParser: false, },
+  
+  env: {
+    API_URL: process.env.API_URL
+  },
+
   reactStrictMode: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(
@@ -14,6 +19,7 @@ const nextConfig = {
     );
     return config;
   }
+  
 }
 
 module.exports = nextConfig
