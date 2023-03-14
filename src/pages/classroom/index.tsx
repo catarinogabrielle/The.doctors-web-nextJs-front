@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
+import Link from 'next/link'
 import { setupAPIClient } from '../../services/api'
 
-import { FiDownload } from "react-icons/fi"
+import { FiDownload, FiArrowLeft } from "react-icons/fi"
 import { FaPlay } from "react-icons/fa"
 
 export default function Classroom() {
@@ -41,6 +42,13 @@ export default function Classroom() {
             <Head>
                 <title>The.Doctors - Aula</title>
             </Head>
+
+            <Link href="/mycourses">
+                <div className={styles.boxBack}>
+                    <FiArrowLeft title="Voltar" className={styles.iconBack} size={17} />
+                    <h2>Voltar</h2>
+                </div>
+            </Link>
 
             <div className={styles.container}>
                 <div className={styles.content}>
