@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, FormEvent } from "react"
+import { useState } from "react"
 import Modal from "react-modal"
 import styles from "./styles.module.scss"
 
@@ -7,6 +7,7 @@ import { FiX } from "react-icons/fi"
 
 import { setupAPIClient } from "../../services/api"
 import { infoProps } from "../../pages/myclasses"
+
 import { toast } from "react-toastify"
 
 interface ModalNewClassesProps {
@@ -75,7 +76,7 @@ export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps
           />
 
           <button className={styles.buttonAdd} title="iniciar curso" onClick={() => handleRegister()}>
-            <p>Iniciar Curso</p>
+            <p>Matricular Aluno</p>
           </button>
         </div>
       </main>

@@ -28,7 +28,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
     email: user.email,
     name: user.name,
     courseName: course.title,
-    link: course.paymentlink
+    paymentlink: course.paymentlink
   })
 
   const handleMyCourse = async () => {
@@ -137,7 +137,7 @@ export function ModalCourses({ isOpen, onRequestClose, infoClasses, course, prem
         <div key={Math.random()} className={styles.boxTeacher}>
           <img
             alt={course.title}
-            src={`https://thdacademy.com:8443/files/${course.teacherphoto}`}
+            src={`http://localhost:3333/files/${course.teacherphoto}`}
           />
           <div className={styles.infoTeacher}>
             <h1>{course.teachername}</h1>

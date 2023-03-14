@@ -6,10 +6,10 @@ import Link from 'next/link'
 import { ThreeDots } from 'react-loader-spinner'
 
 import { Header } from '../../components/Header'
-
 import { AuthContext } from '../../contexts/AuthContext'
 
 import { FiUser, FiBook, FiFile, FiBox, FiVideo } from 'react-icons/fi'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 
 export default function Home() {
     const { user } = useContext(AuthContext)
@@ -63,6 +63,10 @@ export default function Home() {
                             </button>
                         </Link>
                         */}
+                        <a href="https://thedoctorsagencia.com.br/" target="_blank" rel="noopener noreferrer" className={styles.boxMenu}>
+                            <AiOutlineInfoCircle className={styles.iconMenu} size={22} />
+                            <p>Quem Somos</p>
+                        </a>
                     </div>
                 ) : (
                     <div className={styles.contentMenulLoader}>

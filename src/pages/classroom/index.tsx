@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
 import Head from 'next/head'
@@ -25,7 +24,7 @@ export default function Classroom() {
     }
 
     function novaAba(material: string) {
-        var win = window.open(`https://thdacademy.com:8443/files/${material}`)
+        var win = window.open(`http://localhost:3333/files/${material}`)
         win.focus()
     }
 
@@ -42,8 +41,6 @@ export default function Classroom() {
             <Head>
                 <title>The.Doctors - Aula</title>
             </Head>
-
-            <Header />
 
             <div className={styles.container}>
                 <div className={styles.content}>
