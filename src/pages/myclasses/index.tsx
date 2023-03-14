@@ -109,7 +109,7 @@ export default function MyClasses({ info }: infoCourses) {
                 <img
                   className={styles.imageCard}
                   alt={item.title}
-                  src={`http://localhost:3333/files/${item.image}`}
+                  src={`${process.env.API_URL}/files/${item.image}`}
                 />
                 <p>{item.title}</p>
                 <text onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
