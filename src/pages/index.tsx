@@ -46,9 +46,13 @@ export default function Login() {
       </Head>
 
       <div className={styles.containerCenter}>
-        <img className={styles.image} src="./logo.png" alt="logo community" />
+        <h1>Bem-Vindo</h1>
 
         <div className={styles.login}>
+          <img className={styles.image} src="./logo.png" alt="logo community" />
+
+          <div />
+
           <form onSubmit={handleLogin}>
             <Input
               placeholder="Digite seu email"
@@ -68,14 +72,14 @@ export default function Login() {
               type="submit"
               loading={loading}
             >
-              Acessar
+              Entrar
             </Button>
           </form>
-
-          <Link href="/signup">
-            <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
-          </Link>
         </div>
+
+        <Link href="/signup">
+          <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
+        </Link>
       </div>
     </>
   )

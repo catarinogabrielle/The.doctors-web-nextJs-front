@@ -53,9 +53,13 @@ export default function SignUp() {
             </Head>
 
             <div className={styles.containerCenter}>
-                <img className={styles.imageSignUp} src="./logo.png" alt="logo community" />
+                <h1>Cadastre-se</h1>
 
                 <div className={styles.login}>
+                    <img className={styles.image} src="./logo.png" alt="logo community" />
+
+                    <div />
+
                     <form onSubmit={handleSignUp}>
                         <Input
                             placeholder="Digite seu usuário"
@@ -92,11 +96,11 @@ export default function SignUp() {
                             Cadastrar
                         </Button>
                     </form>
-
-                    <Link href="/">
-                        <a className={styles.text}>Já possui uma conta? Faça login!</a>
-                    </Link>
                 </div>
+
+                <Link href="/">
+                    <a className={styles.text}>Já possui uma conta? Faça login!</a>
+                </Link>
             </div>
         </>
     )
