@@ -1,40 +1,43 @@
 .button {
-    max-width: 600px;
-    background-color: var(--Cinza);
-    border: 0;
-    padding: 0.4rem;
-    color: var(--Branco);
-    margin-top: 1rem;
-    border-radius: 5px;
-    transition: filter 0.2s;
+  background-color: var(--Azul);
+  border: 0;
+  padding: 0.4rem;
+  color: var(--Branco);
+  margin-top: 1rem;
+  border-radius: 5px;
+  transition: filter 0.2s;
 
-    &[disabled] {
-        cursor: not-allowed;
+  &[disabled] {
+    cursor: not-allowed;
 
-        svg {
-            animation: animate 2s infinite;
-        }
+    svg {
+      animation: animate 2s infinite;
     }
+  }
 
-    &:hover {
-        filter: brightness(1.08)
-    }
+  &:hover {
+    filter: brightness(1.08);
+  }
 }
 
 .icon {
-    color: var(--Verde);
+  color: var(--Verde);
 }
 
 .buttonText {
-    color: var(--Branco);
+  color: var(--Branco);
+
+  @media (max-width: 620px) {
+    font-size: 13px;
+  }
 }
 
 @keyframes animate {
-    from {
-        transform: rotate(0deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
 
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
