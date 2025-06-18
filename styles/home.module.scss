@@ -1,6 +1,5 @@
 .containerCenter {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -10,13 +9,18 @@
   background-repeat: no-repeat;
   background-position: center center;
 
+  @media (min-width: 659px) {
+    justify-content: center;
+  }
+
   h1 {
     color: var(--Branco2);
     font-size: 54px;
     font-weight: 200;
 
     @media (max-width: 659px) {
-      display: none;
+      font-size: 34px;
+      margin-top: 45px;
     }
   }
 }
@@ -40,6 +44,7 @@
 
   @media (max-width: 659px) {
     flex-direction: column;
+    margin-top: 0px;
   }
 
   div {
