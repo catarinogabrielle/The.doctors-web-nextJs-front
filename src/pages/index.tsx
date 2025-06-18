@@ -46,7 +46,7 @@ export default function Login() {
       </Head>
 
       <div className={styles.containerCenter}>
-        <h1>Bem-Vindo</h1>
+        <h1>Bem-Vindo!</h1>
 
         <div className={styles.login}>
           <img className={styles.image} src="./logo.png" alt="logo community" />
