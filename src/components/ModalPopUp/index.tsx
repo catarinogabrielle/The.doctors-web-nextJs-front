@@ -1,9 +1,11 @@
-import Modal from 'react-modal'
+import Modal from "../ModalWrapper"; // <- wrapper JSX
+import { default as ReactModal } from "react-modal"; // <- módulo original para usar setAppElement
 import styles from './styles.module.scss'
 
 import { FiX } from 'react-icons/fi'
 
 import { infoModalProps } from '../Header'
+import { useEffect } from "react";
 
 interface ModalPopUpProps {
     isOpen: boolean;
@@ -13,6 +15,12 @@ interface ModalPopUpProps {
 
 export function ModalPopUp({ isOpen, onRequestClose, infoUser }: ModalPopUpProps) {
     var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            ReactModal.setAppElement("#__next"); // <- aqui está o fix
+        }
+    }, []);
 
     return (
         <Modal

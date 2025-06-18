@@ -4,7 +4,7 @@ import { canSSRAuth } from "../../utils/canSSRAuth"
 import styles from "./styles.module.scss"
 import Head from "next/head"
 import Modal from "react-modal"
-import { ThreeDots } from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner';
 
 import { setupAPIClient } from "../../services/api"
 import { ModalCourses } from "../../components/ModalCourses"

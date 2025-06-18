@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 80", 
+    "start": "next start -p 80",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,8 +23,8 @@
     "react-debounce-input": "^3.3.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
-    "react-loader-spinner": "^5.3.4",
-    "react-modal": "^3.15.1",
+    "react-loader-spinner": "^6.1.6",
+    "react-modal": "^3.16.1",
     "react-toastify": "^9.0.5",
     "sass": "^1.53.0",
     "vue-runtime-helpers": "^1.1.2"
