@@ -1,0 +1,4 @@
+yarn run v1.22.19
+$ next start -p 80
+ready - started server on 0.0.0.0:80, url: http://localhost:80
+info  - Loaded env from /root/The.doctors-web-nextJs-front/.env.local
