@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useState, ChangeEvent, FormEvent } from "react"
-import Modal from "react-modal"
+import Modal from "../ModalWrapper"; // <- wrapper JSX
+import { default as ReactModal } from "react-modal"; // <- módulo original para usar setAppElement
 import styles from "./styles.module.scss"
 
 import { FiX, FiUpload } from "react-icons/fi"
@@ -17,6 +18,12 @@ interface ModalNewClassesProps {
 
 export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNewClassesProps) {
   var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
+  
+  useEffect(() => {
+      if (typeof window !== "undefined") {
+        ReactModal.setAppElement("#__next"); // <- aqui está o fix
+      }
+    }, []);
 
   const [uploadedFiles, setUploadedFiles] = useState("")
   const [fileAvatar, setFileAvatar] = useState(null)
