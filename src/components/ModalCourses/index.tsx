@@ -119,8 +119,8 @@ export const ModalCourses: React.FC<ModalNewClassesProps> = ({
       <div className={styles.content}>
         <div className={styles.boxVideoInfo}>
           <iframe
-            src={`https://www.youtube.com/embed/${src}`}
-            title="YouTube video player"
+            src={`${src}`}
+            title="Video player"
           ></iframe>
           <div className={styles.class}>
             <h1>Aulas que serão lecionadas durante o curso</h1>
