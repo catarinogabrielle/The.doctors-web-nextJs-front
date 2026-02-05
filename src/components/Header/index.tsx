@@ -45,7 +45,7 @@ export function Header() {
             <div className={styles.headerContent}>
                 <div className={styles.infoContentHeader}>
                     <Link href="/home">
-                        <img alt="logo" src="/new-perfil.png" />
+                        <img alt="logo" src="/new-perfil-crop.png" />
                     </Link>
 
                     <a>Seja Bem Vindo (a) {user?.name}</a>

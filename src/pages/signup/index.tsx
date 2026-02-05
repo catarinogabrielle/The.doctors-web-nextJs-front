@@ -56,7 +56,7 @@ export default function SignUp() {
                 <h1>Cadastre-se</h1>
 
                 <div className={styles.login}>
-                    <img className={styles.image} src="./new-perfil.png" alt="logo community" />
+                    <img className={styles.image} src="./new-perfil-crop.png" alt="logo community" />
 
                     <div />
 

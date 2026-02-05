@@ -49,7 +49,7 @@ export default function Login() {
         <h1>Bem-Vindo!</h1>
 
         <div className={styles.login}>
-          <img className={styles.image} src="./logo.png" alt="logo community" />
+          <img className={styles.image} src="./new-perfil-crop.png" alt="logo community" />
 
           <div />
 
