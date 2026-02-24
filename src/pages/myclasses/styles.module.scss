@@ -124,6 +124,7 @@
         margin: 10px 8px 0 8px;
         cursor: pointer;
         transition: 0.2s;
+        display: block;
     }
 
     text:hover {
@@ -133,6 +134,36 @@
     @media (max-width: 659px) {
         width: 84%;
         margin-right: 0px;
+    }
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.deleteButton {
+    background: transparent;
+    border: 1px solid #FF3F4B;
+    color: #FF3F4B;
+    padding: 8px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin: 12px 8px 0 8px;
+    gap: 6px;
+
+    &:hover {
+        background: #FF3F4B;
+        color: var(--Branco2);
+        
+        svg {
+            color: var(--Branco2) !important;
+        }
     }
 }
 

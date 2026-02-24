@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Modal from 'react-modal'
 import { toast } from 'react-toastify'
 
-import { FiFolderPlus, FiPlus } from "react-icons/fi"
+import { FiFolderPlus, FiPlus, FiTrash2 } from "react-icons/fi"
 import { AiOutlineUserAdd } from "react-icons/ai"
 import { ModalNewClasses } from '../../components/ModalNewClasses'
 import { ModalNewStudent } from '../../components/ModalNewStudent'
@@ -36,6 +36,30 @@ export default function MyClasses({ info }: infoCourses) {
   const [modalVisibleStudent, setModalVisibleStudent] = useState(false)
 
   const [infoList, setInfoList] = useState(info || [])
+
+  async function handleDeleteCourse(id: string) {
+    if (!confirm('Tem certeza que deseja excluir este curso? Todas as aulas serão removidas.')) {
+      return
+    }
+
+    try {
+      const apiClient = setupAPIClient()
+      await apiClient.delete('/myclasses/delete', {
+        params: {
+          myclasse_id: id
+        }
+      })
+
+      // Atualizar a lista removendo o curso excluído
+      const updatedList = infoList.filter(item => item.id !== id)
+      setInfoList(updatedList)
+
+      toast.success('Curso excluído com sucesso!')
+    } catch (error) {
+      toast.error('Erro ao excluir curso')
+      console.error(error)
+    }
+  }
 
   function handleCloseModalClasses() {
     setModalVisibleClasses(false)
@@ -111,8 +135,18 @@ export default function MyClasses({ info }: infoCourses) {
                   alt={item.title}
                   src={`${process.env.API_URL}/files/${item.image}`}
                 />
-                <p>{item.title}</p>
-                <text onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
+                <div className={styles.cardContent}>
+                  <p>{item.title}</p>
+                  <text onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
+                  <button 
+                    className={styles.deleteButton}
+                    onClick={() => handleDeleteCourse(item.id)}
+                    title="Excluir curso"
+                  >
+                    <FiTrash2 color="#FF3F4B" size={18} />
+                    Excluir curso
+                  </button>
+                </div>
               </div>
             ))}
           </div>
