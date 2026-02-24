@@ -7,10 +7,11 @@ import Link from 'next/link'
 import Modal from 'react-modal'
 import { toast } from 'react-toastify'
 
-import { FiFolderPlus, FiPlus, FiTrash2 } from "react-icons/fi"
+import { FiEdit3, FiFolderPlus, FiPlus, FiTrash2 } from "react-icons/fi"
 import { AiOutlineUserAdd } from "react-icons/ai"
 import { ModalNewClasses } from '../../components/ModalNewClasses'
 import { ModalNewStudent } from '../../components/ModalNewStudent'
+import { ModalEditCourse } from '../../components/ModalEditCourse'
 import { setupAPIClient } from '../../services/api'
 
 export type infoProps = {
@@ -23,6 +24,8 @@ export type infoProps = {
   teacherinfo: string;
   description: string;
   time: string;
+  link: string;
+  paymentlink: string;
 }
 
 interface infoCourses {
@@ -34,6 +37,8 @@ export default function MyClasses({ info }: infoCourses) {
   const [modalVisibleClasses, setModalVisibleClasses] = useState(false)
   const [modalItemStudent, setModalItemStudent] = useState<infoProps[]>()
   const [modalVisibleStudent, setModalVisibleStudent] = useState(false)
+  const [modalEditCourse, setModalEditCourse] = useState<infoProps | null>(null)
+  const [modalVisibleEdit, setModalVisibleEdit] = useState(false)
 
   const [infoList, setInfoList] = useState(info || [])
 
@@ -77,6 +82,20 @@ export default function MyClasses({ info }: infoCourses) {
   async function handleOpenModalStudent() {
     setModalItemStudent(infoList)
     setModalVisibleStudent(true)
+  }
+
+  function handleCloseModalEdit() {
+    setModalVisibleEdit(false)
+    setModalEditCourse(null)
+  }
+
+  function handleOpenModalEdit(course: infoProps) {
+    setModalEditCourse(course)
+    setModalVisibleEdit(true)
+  }
+
+  function handleUpdateCourse(updated: infoProps) {
+    setInfoList((prev) => prev.map((item) => (item.id === updated.id ? updated : item)))
   }
 
   Modal.setAppElement('#__next')
@@ -138,6 +157,14 @@ export default function MyClasses({ info }: infoCourses) {
                 <div className={styles.cardContent}>
                   <p>{item.title}</p>
                   <text onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
+                  <button
+                    className={styles.editButton}
+                    onClick={() => handleOpenModalEdit(item)}
+                    title="Editar curso"
+                  >
+                    <FiEdit3 color="#2F6FED" size={18} />
+                    Editar curso
+                  </button>
                   <button 
                     className={styles.deleteButton}
                     onClick={() => handleDeleteCourse(item.id)}
@@ -166,6 +193,15 @@ export default function MyClasses({ info }: infoCourses) {
           isOpen={modalVisibleStudent}
           onRequestClose={handleCloseModalStudent}
           infoClasses={modalItemStudent}
+        />
+      )}
+
+      {modalVisibleEdit && (
+        <ModalEditCourse
+          isOpen={modalVisibleEdit}
+          onRequestClose={handleCloseModalEdit}
+          course={modalEditCourse}
+          onUpdated={handleUpdateCourse}
         />
       )}
     </>

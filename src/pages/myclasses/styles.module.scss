@@ -167,6 +167,31 @@
     }
 }
 
+.editButton {
+    background: transparent;
+    border: 1px solid #2F6FED;
+    color: #2F6FED;
+    padding: 8px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin: 12px 8px 0 8px;
+    gap: 6px;
+
+    &:hover {
+        background: #2F6FED;
+        color: var(--Branco2);
+
+        svg {
+            color: var(--Branco2) !important;
+        }
+    }
+}
+
 .imageCard {
     width: 230px;
     height: 170px;
