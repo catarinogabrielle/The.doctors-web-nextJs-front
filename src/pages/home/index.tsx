@@ -25,7 +25,7 @@ export default function Home() {
             <div className={styles.containerInfoHome}>
                 {user ? (
                     <div className={styles.contentMenu}>
-                        {user?.type === 'teacher' &&
+                        {(user?.type === 'teacher' || user?.type === 'gestor') &&
                             (
                                 <Link href="/myclasses">
                                     <button className={styles.boxMenu}>

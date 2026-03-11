@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Header } from '../../components/Header/index'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import styles from './styles.module.scss'
@@ -7,12 +7,14 @@ import Link from 'next/link'
 import Modal from 'react-modal'
 import { toast } from 'react-toastify'
 
-import { FiEdit3, FiFolderPlus, FiPlus, FiTrash2 } from "react-icons/fi"
+import { FiEdit3, FiFolderPlus, FiPlus, FiTrash2, FiUserPlus } from "react-icons/fi"
 import { AiOutlineUserAdd } from "react-icons/ai"
 import { ModalNewClasses } from '../../components/ModalNewClasses'
 import { ModalNewStudent } from '../../components/ModalNewStudent'
+import { ModalNewTeacher } from '../../components/ModalNewTeacher'
 import { ModalEditCourse } from '../../components/ModalEditCourse'
 import { setupAPIClient } from '../../services/api'
+import { AuthContext } from '../../contexts/AuthContext'
 
 export type infoProps = {
   id: string;
@@ -40,7 +42,11 @@ export default function MyClasses({ info }: infoCourses) {
   const [modalEditCourse, setModalEditCourse] = useState<infoProps | null>(null)
   const [modalVisibleEdit, setModalVisibleEdit] = useState(false)
 
+  const [modalVisibleTeacher, setModalVisibleTeacher] = useState(false)
+
   const [infoList, setInfoList] = useState(info || [])
+
+  const { user } = useContext(AuthContext)
 
   async function handleDeleteCourse(id: string) {
     if (!confirm('Tem certeza que deseja excluir este curso? Todas as aulas serão removidas.')) {
@@ -113,6 +119,20 @@ export default function MyClasses({ info }: infoCourses) {
           <div className={styles.contentButton}>
             <h1>Gerenciar Cursos</h1>
             <div className={styles.boxButton}>
+              {user?.type === 'gestor' && (
+                <button
+                  title="Criar professor"
+                  className={styles.buttonClasses}
+                  onClick={() => setModalVisibleTeacher(true)}
+                >
+                  Criar Professor
+                  <FiUserPlus
+                    color="#FFFFFF"
+                    size={19}
+                    className={styles.icon}
+                  />
+                </button>
+              )}
               <button
                 title="Adicionar aulas"
                 className={styles.buttonClasses}
@@ -193,6 +213,13 @@ export default function MyClasses({ info }: infoCourses) {
           isOpen={modalVisibleStudent}
           onRequestClose={handleCloseModalStudent}
           infoClasses={modalItemStudent}
+        />
+      )}
+
+      {modalVisibleTeacher && (
+        <ModalNewTeacher
+          isOpen={modalVisibleTeacher}
+          onRequestClose={() => setModalVisibleTeacher(false)}
         />
       )}
 
