@@ -1,5 +1,4 @@
-import React, { useEffect } from "react"
-import { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Modal from "../ModalWrapper"; // <- wrapper JSX
 import { default as ReactModal } from "react-modal"; // <- módulo original para usar setAppElement
 import styles from "./styles.module.scss"
@@ -11,18 +10,24 @@ import { infoProps } from "../../pages/myclasses"
 
 import { toast } from "react-toastify"
 
+interface StudentOption {
+  id: string;
+  name: string;
+  email: string;
+}
+
 interface ModalNewClassesProps {
   isOpen: boolean;
   onRequestClose: () => void;
   infoClasses: infoProps[];
 }
 
-export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps) {
+export function ModalNewStudent({ isOpen, onRequestClose, infoClasses }: ModalNewClassesProps) {
   var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
 
   useEffect(() => {
         if (typeof window !== "undefined") {
-          ReactModal.setAppElement("#__next"); // <- aqui está o fix
+          ReactModal.setAppElement("#__next");
         }
       }, []);
 
@@ -30,17 +35,41 @@ export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps
 
   const [courseId, setCourseId] = useState("")
   const [userId, setUserId] = useState("")
+  const [students, setStudents] = useState<StudentOption[]>([])
+  const [loadingStudents, setLoadingStudents] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) {
+      setLoadingStudents(true)
+      apiClient.get("/students")
+        .then((response) => {
+          setStudents(response.data)
+        })
+        .catch(() => {
+          toast.error("Erro ao carregar lista de alunos")
+        })
+        .finally(() => {
+          setLoadingStudents(false)
+        })
+    }
+  }, [isOpen])
 
   async function handleRegister() {
+    if (!userId || !courseId) {
+      toast.warning("Selecione o aluno e o curso")
+      return
+    }
+
     await apiClient
       .put("/users/update", { courseId, userId })
-      .then((response) => {
+      .then(() => {
         toast.success("Curso vinculado ao aluno com sucesso!")
+        setCourseId("")
+        setUserId("")
         onRequestClose()
       })
-      .catch((err) => {
-        console.log("erro", err)
-        toast.error("Ops erro ao vinculado ao aluno!")
+      .catch(() => {
+        toast.error("Ops erro ao vincular ao aluno!")
       })
   }
 
@@ -53,7 +82,7 @@ export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps
     >
       <div className={styles.containerButton}>
         <button
-          title="Usuário"
+          title="Fechar"
           type="button"
           onClick={onRequestClose}
           className="react-modal-close"
@@ -64,25 +93,40 @@ export function ModalNewStudent({ isOpen, onRequestClose }: ModalNewClassesProps
       </div>
 
       <main className={styles.contentForm}>
-        <h1>Nova aula</h1>
+        <h1>Matricular Aluno</h1>
         <div className={styles.form} >
-          <input
-            type="text"
-            placeholder="adicione o id do usuário"
-            className={styles.input}
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-          />
-
-          <input
-            type="text"
-            placeholder="adicione o id do curso"
+          <label className={styles.label}>Curso</label>
+          <select
             className={styles.input}
             value={courseId}
             onChange={(e) => setCourseId(e.target.value)}
-          />
+          >
+            <option value="">Selecione o curso</option>
+            {infoClasses && infoClasses.map((course) => (
+              <option key={course.id} value={course.id}>
+                {course.title}
+              </option>
+            ))}
+          </select>
 
-          <button className={styles.buttonAdd} title="iniciar curso" onClick={() => handleRegister()}>
+          <label className={styles.label}>Aluno</label>
+          <select
+            className={styles.input}
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            disabled={loadingStudents}
+          >
+            <option value="">
+              {loadingStudents ? "Carregando alunos..." : "Selecione o aluno"}
+            </option>
+            {students.map((student) => (
+              <option key={student.id} value={student.id}>
+                {student.name} - {student.email}
+              </option>
+            ))}
+          </select>
+
+          <button className={styles.buttonAdd} title="Matricular aluno" onClick={() => handleRegister()}>
             <p>Matricular Aluno</p>
           </button>
         </div>
