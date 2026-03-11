@@ -54,7 +54,7 @@ export default function Classroom() {
                 <div className={styles.content}>
                     <div className={styles.boxVideo}>
                         <iframe
-                            src={`https://www.youtube.com/embed/${src}`}
+                            src={src}
                             title="YouTube video player"
                         ></iframe>
                         <div className={styles.boxDescription}>
