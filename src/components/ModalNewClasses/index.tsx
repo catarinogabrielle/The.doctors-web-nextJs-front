@@ -38,14 +38,16 @@ export function ModalNewClasses({ isOpen, onRequestClose, infoClasses }: ModalNe
     try {
       const data = new FormData()
 
-      if (title === "" || description === "" || fileAvatar === null || link === "") {
+      if (title === "" || description === "" || link === "") {
         toast.warning("Preencha todos os campos!")
         return
       }
 
       data.append("title", title)
       data.append("description", description)
-      data.append("material", fileAvatar)
+      if (fileAvatar) {
+        data.append("material", fileAvatar)
+      }
       data.append("link", link)
       data.append("myclasse_id", infoClasses[infoClassesSelected].id)
 
