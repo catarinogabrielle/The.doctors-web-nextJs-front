@@ -139,3 +139,243 @@
     border-radius: 8px;
     object-fit: cover;
 }
+
+// Classes (aulas) section
+.classesSection {
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(30, 30, 42, 0.15);
+    margin-bottom: 30px;
+}
+
+.classesSectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h2 {
+        color: var(--Preto);
+        font-size: 22px;
+        font-weight: bold;
+    }
+}
+
+.addClassButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #2F6FED;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.noClasses {
+    color: var(--Cinza);
+    font-size: 14px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.classesList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.classeItem {
+    background: var(--Branco2);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.classeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.03);
+    }
+}
+
+.classeHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.classeIndex {
+    background: #2F6FED;
+    color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.classeTitle {
+    color: var(--Preto);
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.classeHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.deleteClassBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(255, 63, 75, 0.1);
+    }
+}
+
+.classeBody {
+    padding: 0 14px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+    textarea {
+        min-height: 80px;
+        resize: none;
+        padding: 0.5rem;
+    }
+}
+
+.labelMaterial {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--Branco2);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+    input {
+        display: none;
+    }
+
+    span {
+        opacity: 0.7;
+        transition: opacity 0.3s;
+        display: flex;
+    }
+
+    &:hover span {
+        opacity: 1;
+    }
+}
+
+.materialName {
+    color: var(--Cinza);
+    font-size: 13px;
+    margin: 0;
+}
+
+.saveClassButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #09c00f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: flex-start;
+
+    &:hover {
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.cancelClassButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--Cinza);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.newClassForm {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+        color: var(--Preto);
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    textarea {
+        min-height: 80px;
+        resize: none;
+        padding: 0.5rem;
+    }
+}
+
+.newClassActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}

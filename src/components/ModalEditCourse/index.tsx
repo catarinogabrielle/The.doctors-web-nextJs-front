@@ -3,11 +3,22 @@ import Modal from "../ModalWrapper"
 import { default as ReactModal } from "react-modal"
 import styles from "./styles.module.scss"
 
-import { FiX, FiUpload } from "react-icons/fi"
+import { FiX, FiUpload, FiChevronDown, FiChevronUp, FiTrash2, FiPlus, FiSave } from "react-icons/fi"
 
 import { setupAPIClient } from "../../services/api"
 import { infoProps } from "../../pages/myclasses"
 import { toast } from "react-toastify"
+
+interface ClasseItem {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+  material: string | null;
+  status: boolean;
+  draft: boolean;
+  myclasse_id: string;
+}
 
 interface ModalEditCourseProps {
   isOpen: boolean;
@@ -39,6 +50,17 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
   const [avatarUrlTeacher, setAvatarUrlTeacher] = useState("")
   const [imageAvatarTeacher, setImageAvatarTeacher] = useState<File | null>(null)
 
+  // Classes (aulas) state
+  const [classes, setClasses] = useState<ClasseItem[]>([])
+  const [expandedClassId, setExpandedClassId] = useState<string | null>(null)
+  const [editingClasses, setEditingClasses] = useState<Record<string, { title: string; description: string; link: string; material: File | null }>>({})
+  const [showNewClassForm, setShowNewClassForm] = useState(false)
+  const [newClassTitle, setNewClassTitle] = useState("")
+  const [newClassDescription, setNewClassDescription] = useState("")
+  const [newClassLink, setNewClassLink] = useState("")
+  const [newClassMaterial, setNewClassMaterial] = useState<File | null>(null)
+  const [newClassMaterialName, setNewClassMaterialName] = useState("")
+
   useEffect(() => {
     if (!course) {
       return
@@ -57,7 +79,155 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
     setAvatarUrlTeacher(course.teacherphoto ? `${process.env.API_URL}/files/${course.teacherphoto}` : "")
     setImageAvatarBanner(null)
     setImageAvatarTeacher(null)
+
+    fetchClasses(course.id)
   }, [course])
+
+  async function fetchClasses(courseId: string) {
+    try {
+      const apiClient = setupAPIClient()
+      const response = await apiClient.get("/myclasses/classes", {
+        params: { myclasse_id: courseId },
+      })
+      setClasses(response.data)
+      setEditingClasses({})
+      setExpandedClassId(null)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  function toggleClassExpand(classeId: string) {
+    if (expandedClassId === classeId) {
+      setExpandedClassId(null)
+      return
+    }
+    setExpandedClassId(classeId)
+    const classe = classes.find((c) => c.id === classeId)
+    if (classe && !editingClasses[classeId]) {
+      setEditingClasses((prev) => ({
+        ...prev,
+        [classeId]: {
+          title: classe.title,
+          description: classe.description,
+          link: classe.link,
+          material: null,
+        },
+      }))
+    }
+  }
+
+  function handleClassFieldChange(classeId: string, field: string, value: string) {
+    setEditingClasses((prev) => ({
+      ...prev,
+      [classeId]: {
+        ...prev[classeId],
+        [field]: value,
+      },
+    }))
+  }
+
+  function handleClassMaterialChange(classeId: string, e: ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files || !e.target.files[0]) return
+    setEditingClasses((prev) => ({
+      ...prev,
+      [classeId]: {
+        ...prev[classeId],
+        material: e.target.files[0],
+      },
+    }))
+  }
+
+  async function handleSaveClass(classeId: string) {
+    const editing = editingClasses[classeId]
+    if (!editing) return
+
+    if (editing.title === "" || editing.description === "" || editing.link === "") {
+      toast.warning("Preencha todos os campos da aula!")
+      return
+    }
+
+    try {
+      const data = new FormData()
+      data.append("classe_id", classeId)
+      data.append("title", editing.title)
+      data.append("description", editing.description)
+      data.append("link", editing.link)
+      if (editing.material) {
+        data.append("material", editing.material)
+      }
+
+      const apiClient = setupAPIClient()
+      const response = await apiClient.put("/classes/update", data)
+
+      setClasses((prev) =>
+        prev.map((c) => (c.id === classeId ? { ...c, ...response.data } : c))
+      )
+      toast.success("Aula atualizada com sucesso!")
+    } catch (err) {
+      console.log(err)
+      toast.error("Erro ao atualizar aula!")
+    }
+  }
+
+  async function handleDeleteClass(classeId: string) {
+    if (!confirm("Tem certeza que deseja excluir esta aula?")) return
+
+    try {
+      const apiClient = setupAPIClient()
+      await apiClient.delete("/classes/delete", {
+        params: { classe_id: classeId },
+      })
+      setClasses((prev) => prev.filter((c) => c.id !== classeId))
+      if (expandedClassId === classeId) setExpandedClassId(null)
+      toast.success("Aula excluída com sucesso!")
+    } catch (err) {
+      console.log(err)
+      toast.error("Erro ao excluir aula!")
+    }
+  }
+
+  function handleNewClassMaterial(e: ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files || !e.target.files[0]) return
+    setNewClassMaterial(e.target.files[0])
+    setNewClassMaterialName(e.target.files[0].name)
+  }
+
+  async function handleAddNewClass() {
+    if (!course) return
+
+    if (newClassTitle === "" || newClassDescription === "" || newClassLink === "") {
+      toast.warning("Preencha todos os campos da nova aula!")
+      return
+    }
+
+    try {
+      const data = new FormData()
+      data.append("title", newClassTitle)
+      data.append("description", newClassDescription)
+      data.append("link", newClassLink)
+      data.append("myclasse_id", course.id)
+      if (newClassMaterial) {
+        data.append("material", newClassMaterial)
+      }
+
+      const apiClient = setupAPIClient()
+      await apiClient.post("/classes", data)
+
+      toast.success("Aula adicionada com sucesso!")
+      setNewClassTitle("")
+      setNewClassDescription("")
+      setNewClassLink("")
+      setNewClassMaterial(null)
+      setNewClassMaterialName("")
+      setShowNewClassForm(false)
+
+      fetchClasses(course.id)
+    } catch (err) {
+      console.log(err)
+      toast.error("Erro ao adicionar aula!")
+    }
+  }
 
   async function handleUpdate(event: FormEvent) {
     event.preventDefault()
@@ -264,6 +434,177 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
             <p>Salvar alteracoes</p>
           </button>
         </form>
+
+        {/* Seção de Aulas */}
+        <div className={styles.classesSection}>
+          <div className={styles.classesSectionHeader}>
+            <h2>Aulas do curso</h2>
+            <button
+              type="button"
+              className={styles.addClassButton}
+              onClick={() => setShowNewClassForm(!showNewClassForm)}
+            >
+              <FiPlus size={18} />
+              Nova aula
+            </button>
+          </div>
+
+          {/* Formulário de nova aula */}
+          {showNewClassForm && (
+            <div className={styles.newClassForm}>
+              <h5>Adicionar nova aula</h5>
+              <input
+                type="text"
+                placeholder="Título da aula"
+                className={styles.input}
+                value={newClassTitle}
+                onChange={(e) => setNewClassTitle(e.target.value)}
+              />
+              <textarea
+                placeholder="Descreva sobre a aula..."
+                className={styles.input}
+                value={newClassDescription}
+                onChange={(e) => setNewClassDescription(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Chave de link para aula"
+                className={styles.input}
+                value={newClassLink}
+                onChange={(e) => setNewClassLink(e.target.value)}
+              />
+              <label className={styles.labelMaterial}>
+                <span>
+                  <FiUpload size={18} color="#3d424a" />
+                </span>
+                <input
+                  type="file"
+                  accept=".docx, .pptx, .pdf"
+                  onChange={handleNewClassMaterial}
+                />
+                {newClassMaterialName && (
+                  <p className={styles.materialName}>{newClassMaterialName}</p>
+                )}
+                {!newClassMaterialName && (
+                  <p className={styles.materialName}>Material (opcional)</p>
+                )}
+              </label>
+              <div className={styles.newClassActions}>
+                <button
+                  type="button"
+                  className={styles.saveClassButton}
+                  onClick={handleAddNewClass}
+                >
+                  <FiPlus size={16} />
+                  Adicionar
+                </button>
+                <button
+                  type="button"
+                  className={styles.cancelClassButton}
+                  onClick={() => {
+                    setShowNewClassForm(false)
+                    setNewClassTitle("")
+                    setNewClassDescription("")
+                    setNewClassLink("")
+                    setNewClassMaterial(null)
+                    setNewClassMaterialName("")
+                  }}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Lista de aulas existentes */}
+          {classes.length === 0 ? (
+            <p className={styles.noClasses}>Nenhuma aula cadastrada neste curso.</p>
+          ) : (
+            <div className={styles.classesList}>
+              {classes.map((classe, index) => (
+                <div key={classe.id} className={styles.classeItem}>
+                  <div
+                    className={styles.classeHeader}
+                    onClick={() => toggleClassExpand(classe.id)}
+                  >
+                    <div className={styles.classeHeaderLeft}>
+                      <span className={styles.classeIndex}>{index + 1}</span>
+                      <span className={styles.classeTitle}>{classe.title}</span>
+                    </div>
+                    <div className={styles.classeHeaderRight}>
+                      <button
+                        type="button"
+                        className={styles.deleteClassBtn}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleDeleteClass(classe.id)
+                        }}
+                        title="Excluir aula"
+                      >
+                        <FiTrash2 size={16} color="#FF3F4B" />
+                      </button>
+                      {expandedClassId === classe.id ? (
+                        <FiChevronUp size={20} color="#666" />
+                      ) : (
+                        <FiChevronDown size={20} color="#666" />
+                      )}
+                    </div>
+                  </div>
+
+                  {expandedClassId === classe.id && editingClasses[classe.id] && (
+                    <div className={styles.classeBody}>
+                      <input
+                        type="text"
+                        placeholder="Título da aula"
+                        className={styles.input}
+                        value={editingClasses[classe.id].title}
+                        onChange={(e) => handleClassFieldChange(classe.id, "title", e.target.value)}
+                      />
+                      <textarea
+                        placeholder="Descrição da aula"
+                        className={styles.input}
+                        value={editingClasses[classe.id].description}
+                        onChange={(e) => handleClassFieldChange(classe.id, "description", e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Chave de link para aula"
+                        className={styles.input}
+                        value={editingClasses[classe.id].link}
+                        onChange={(e) => handleClassFieldChange(classe.id, "link", e.target.value)}
+                      />
+                      <label className={styles.labelMaterial}>
+                        <span>
+                          <FiUpload size={18} color="#3d424a" />
+                        </span>
+                        <input
+                          type="file"
+                          accept=".docx, .pptx, .pdf"
+                          onChange={(e) => handleClassMaterialChange(classe.id, e)}
+                        />
+                        <p className={styles.materialName}>
+                          {editingClasses[classe.id].material
+                            ? editingClasses[classe.id].material.name
+                            : classe.material
+                            ? classe.material
+                            : "Nenhum material"}
+                        </p>
+                      </label>
+                      <button
+                        type="button"
+                        className={styles.saveClassButton}
+                        onClick={() => handleSaveClass(classe.id)}
+                      >
+                        <FiSave size={16} />
+                        Salvar aula
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </main>
     </Modal>
   )
