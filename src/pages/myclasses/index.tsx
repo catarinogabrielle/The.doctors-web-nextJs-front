@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Modal from 'react-modal'
 import { toast } from 'react-toastify'
 
-import { FiEdit3, FiFolderPlus, FiPlus, FiTrash2, FiUserPlus } from "react-icons/fi"
+import { FiEdit3, FiFolderPlus, FiLink, FiPlus, FiTrash2, FiUserPlus } from "react-icons/fi"
 import { AiOutlineUserAdd } from "react-icons/ai"
 import { ModalNewClasses } from '../../components/ModalNewClasses'
 import { ModalNewStudent } from '../../components/ModalNewStudent'
@@ -177,6 +177,17 @@ export default function MyClasses({ info }: infoCourses) {
                 <div className={styles.cardContent}>
                   <p>{item.title}</p>
                   <text onClick={() => { navigator.clipboard.writeText(`${item.id}`), toast.success("Id do Curso Copiado!") }}>{item.id}</text>
+                  <button
+                    className={styles.editButton}
+                    onClick={() => {
+                      navigator.clipboard.writeText(`${process.env.API_URL}/webhook/live7/${item.id}`)
+                      toast.success("Link de integração copiado!")
+                    }}
+                    title="Copiar link de integração"
+                  >
+                    <FiLink color="#10b2aa" size={18} />
+                    Copiar link de integração
+                  </button>
                   <button
                     className={styles.editButton}
                     onClick={() => handleOpenModalEdit(item)}
