@@ -49,7 +49,7 @@ export default function Home({ courses }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const apiUrl = process.env.API_URL || 'http://localhost:8443';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8443';
     const response = await axios.get<BackendCourse[]>(`${apiUrl}/myclasses/public`, {
       timeout: 5000,
     });

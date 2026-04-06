@@ -8,8 +8,7 @@ export function setupAPIClient(ctx = undefined) {
     let cookies = parseCookies(ctx)
 
     const api = axios.create({
-        // baseURL: "https://thdacademy.com:8443",
-        baseURL: "http://localhost:8443",
+        baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8443",
         headers: {
             Authorization: `Bearer ${cookies['@nextauth.token']}`
         }
