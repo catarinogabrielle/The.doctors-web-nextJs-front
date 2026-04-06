@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Landing page theme tokens */
+:root {
+  --tw-background: oklch(0.08 0.005 250);
+  --tw-foreground: oklch(0.95 0.005 80);
+  --tw-card: oklch(0.12 0.005 250);
+  --tw-card-foreground: oklch(0.93 0.005 80);
+  --tw-popover: oklch(0.14 0.005 250);
+  --tw-popover-foreground: oklch(0.93 0.005 80);
+  --tw-primary: oklch(0.78 0.12 80);
+  --tw-primary-foreground: oklch(0.1 0.005 250);
+  --tw-secondary: oklch(0.16 0.005 250);
+  --tw-secondary-foreground: oklch(0.85 0.005 80);
+  --tw-muted: oklch(0.18 0.005 250);
+  --tw-muted-foreground: oklch(0.6 0.01 250);
+  --tw-accent: oklch(0.16 0.005 250);
+  --tw-accent-foreground: oklch(0.93 0.005 80);
+  --tw-destructive: oklch(0.55 0.22 20);
+  --tw-destructive-foreground: oklch(0.98 0 0);
+  --tw-border: oklch(1 0 0 / 8%);
+  --tw-input: oklch(1 0 0 / 12%);
+  --tw-ring: oklch(0.78 0.12 80);
+}
+
+@layer components {
+  .gold-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, oklch(0.78 0.12 80), transparent);
+  }
+
+  .spotlight-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), oklch(0.78 0.12 80 / 0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .spotlight-hover:hover::after {
+    opacity: 1;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      110deg,
+      oklch(0.55 0.22 20) 0%,
+      oklch(0.62 0.22 20) 40%,
+      oklch(0.68 0.18 30) 50%,
+      oklch(0.62 0.22 20) 60%,
+      oklch(0.55 0.22 20) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Landing page scrollbar */
+.landing-page::-webkit-scrollbar {
+  width: 8px;
+}
+.landing-page::-webkit-scrollbar-track {
+  background: oklch(0.08 0.005 250);
+}
+.landing-page::-webkit-scrollbar-thumb {
+  background: oklch(0.25 0.005 250);
+  border-radius: 4px;
+}
+.landing-page::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.35 0.005 250);
+}

@@ -16,7 +16,11 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -24,6 +28,7 @@
     "**/*.tsx"
 , "src/store/actions/searchAC.ts", "src/store/index.tsx", "src/components/ModalNewClasses/index.tsx"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "target"
   ]
 }
