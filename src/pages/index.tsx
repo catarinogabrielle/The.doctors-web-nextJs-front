@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import { GetServerSideProps } from 'next'
+import axios from 'axios'
 import Navbar from '@/components/landing/Navbar'
 import HeroSection from '@/components/landing/HeroSection'
 import PartnersSection from '@/components/landing/PartnersSection'
@@ -12,8 +14,13 @@ import FAQSection from '@/components/landing/FAQSection'
 import Footer from '@/components/landing/Footer'
 import StickyBar from '@/components/landing/StickyBar'
 import SalesAssistant from '@/components/landing/SalesAssistant'
+import { Course, BackendCourse, mapBackendCourses } from '@/lib/courses'
 
-export default function Home() {
+interface HomeProps {
+  courses: Course[];
+}
+
+export default function Home({ courses }: HomeProps) {
   return (
     <>
       <Head>
@@ -26,7 +33,7 @@ export default function Home() {
           <PartnersSection />
           <BenefitsSection />
           <FeaturedSection />
-          <CoursesSection />
+          <CoursesSection courses={courses} />
           <ForBusinessSection />
           <CTASection />
           <TestimonialsSection />
@@ -38,4 +45,17 @@ export default function Home() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const apiUrl = process.env.API_URL || 'http://localhost:8443';
+    const response = await axios.get<BackendCourse[]>(`${apiUrl}/myclasses/public`, {
+      timeout: 5000,
+    });
+    const courses = mapBackendCourses(response.data);
+    return { props: { courses } };
+  } catch {
+    return { props: { courses: [] } };
+  }
 }

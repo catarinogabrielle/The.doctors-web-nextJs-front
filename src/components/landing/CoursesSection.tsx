@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useInView } from "@/hooks/useInView";
-import { categories, getCoursesByCategory } from "@/lib/courses";
+import { categories, getCoursesByCategory, Course } from "@/lib/courses";
 import {
   TrendingUp, Briefcase, Cpu, Heart, Palette, Megaphone,
   DollarSign, Users, Mic, Video, Clock, BookOpen, ArrowRight,
@@ -12,10 +12,24 @@ const iconMap: Record<string, React.ElementType> = {
   DollarSign, Users, Mic, Video,
 };
 
-export default function CoursesSection() {
+interface CoursesSectionProps {
+  courses?: Course[];
+}
+
+export default function CoursesSection({ courses = [] }: CoursesSectionProps) {
   const [activeCategory, setActiveCategory] = useState("trending");
   const { ref, isVisible } = useInView();
-  const filteredCourses = getCoursesByCategory(activeCategory);
+  const filteredCourses = getCoursesByCategory(courses, activeCategory);
+
+  // Compute which categories actually have courses
+  const activeCategories = categories.filter((cat) => {
+    if (cat.id === "trending") return courses.length > 0;
+    return courses.some((c) => c.category === cat.id);
+  });
+
+  if (courses.length === 0) {
+    return null;
+  }
 
   return (
     <section id="cursos" className="py-24 relative" ref={ref}>
@@ -42,7 +56,7 @@ export default function CoursesSection() {
           }`}
         >
           <div className="flex flex-wrap justify-center gap-2 lg:gap-3">
-            {categories.map((cat) => {
+            {activeCategories.map((cat) => {
               const Icon = iconMap[cat.icon];
               return (
                 <button
@@ -109,14 +123,18 @@ export default function CoursesSection() {
                 {/* Meta */}
                 <div className="p-4 flex items-center justify-between text-xs text-white/40">
                   <div className="flex items-center gap-3">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {course.duration}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      {course.lessons} aulas
-                    </span>
+                    {course.duration && (
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5" />
+                        {course.duration}
+                      </span>
+                    )}
+                    {course.lessons > 0 && (
+                      <span className="flex items-center gap-1">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        {course.lessons} aulas
+                      </span>
+                    )}
                   </div>
                 </div>
 
