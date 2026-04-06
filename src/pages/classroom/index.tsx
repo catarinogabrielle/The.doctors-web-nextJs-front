@@ -25,7 +25,7 @@ export default function Classroom() {
     }
 
     function novaAba(material: string) {
-        var win = window.open(`${process.env.API_URL}/files/${material}`)
+        var win = window.open(`${process.env.NEXT_PUBLIC_API_URL}/files/${material}`)
         win.focus()
     }
 

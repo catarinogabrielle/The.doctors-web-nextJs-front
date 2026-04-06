@@ -8,6 +8,7 @@ import { setupAPIClient } from '../../services/api'
 import { toast } from 'react-toastify'
 
 import { FiUpload, FiArrowLeft } from 'react-icons/fi'
+import { categories } from '../../lib/courses'
 
 export default function Classes() {
     const [avatarUrlBanner, setAvatarUrlBanner] = useState('')
@@ -23,6 +24,7 @@ export default function Classes() {
     const [info, setInfo] = useState('')
     const [description, setDescription] = useState('')
     const [time, setTime] = useState('')
+    const [category, setCategory] = useState('')
 
     async function handleRegister(event: FormEvent) {
         event.preventDefault()
@@ -43,6 +45,7 @@ export default function Classes() {
             data.append('teacherinfo', info)
             data.append('description', description)
             data.append('time', time)
+            data.append('category', category)
             data.append('image', imageAvatarBanner)
             data.append('teacherphoto', imageAvatarTeacher)
 
@@ -65,6 +68,7 @@ export default function Classes() {
         setInfo('')
         setDescription('')
         setTime('')
+        setCategory('')
         setImageAvatarBanner(null)
         setAvatarUrlBanner('')
         setImageAvatarTeacher(null)
@@ -151,6 +155,17 @@ export default function Classes() {
                             value={time}
                             onChange={(e) => setTime(e.target.value)}
                         />
+
+                        <select
+                            className={styles.input}
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value="">Selecione uma categoria</option>
+                            {categories.filter(c => c.id !== 'trending').map((cat) => (
+                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                            ))}
+                        </select>
 
                         <h5>Banner do curso</h5>
                         <label className={styles.labelAvatar}>

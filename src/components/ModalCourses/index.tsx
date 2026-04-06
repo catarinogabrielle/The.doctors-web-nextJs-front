@@ -149,7 +149,7 @@ export const ModalCourses: React.FC<ModalNewClassesProps> = ({
         <div className={styles.boxTeacher}>
           <img
             alt={course.title}
-            src={`${process.env.API_URL}/files/${course.teacherphoto}`}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${course.teacherphoto}`}
           />
           <div className={styles.infoTeacher}>
             <h1>{course.teachername}</h1>

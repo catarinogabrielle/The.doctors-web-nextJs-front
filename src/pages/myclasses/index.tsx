@@ -28,6 +28,7 @@ export type infoProps = {
   time: string;
   link: string;
   paymentlink: string;
+  category: string;
 }
 
 interface infoCourses {
@@ -172,7 +173,7 @@ export default function MyClasses({ info }: infoCourses) {
                 <img
                   className={styles.imageCard}
                   alt={item.title}
-                  src={`${process.env.API_URL}/files/${item.image}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/files/${item.image}`}
                 />
                 <div className={styles.cardContent}>
                   <p>{item.title}</p>
@@ -180,7 +181,7 @@ export default function MyClasses({ info }: infoCourses) {
                   <button
                     className={styles.editButton}
                     onClick={() => {
-                      navigator.clipboard.writeText(`${process.env.API_URL}/webhook/live7/${item.id}`)
+                      navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_API_URL}/webhook/live7/${item.id}`)
                       toast.success("Link de integração copiado!")
                     }}
                     title="Copiar link de integração"

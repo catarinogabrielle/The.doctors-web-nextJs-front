@@ -8,6 +8,7 @@ import { FiX, FiUpload, FiChevronDown, FiChevronUp, FiTrash2, FiPlus, FiSave } f
 import { setupAPIClient } from "../../services/api"
 import { infoProps } from "../../pages/myclasses"
 import { toast } from "react-toastify"
+import { categories } from "../../lib/courses"
 
 interface ClasseItem {
   id: string;
@@ -44,6 +45,7 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
   const [info, setInfo] = useState("")
   const [description, setDescription] = useState("")
   const [time, setTime] = useState("")
+  const [category, setCategory] = useState("")
 
   const [avatarUrlBanner, setAvatarUrlBanner] = useState("")
   const [imageAvatarBanner, setImageAvatarBanner] = useState<File | null>(null)
@@ -74,9 +76,10 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
     setInfo(course.teacherinfo || "")
     setDescription(course.description || "")
     setTime(course.time || "")
+    setCategory(course.category || "")
 
-    setAvatarUrlBanner(course.image ? `${process.env.API_URL}/files/${course.image}` : "")
-    setAvatarUrlTeacher(course.teacherphoto ? `${process.env.API_URL}/files/${course.teacherphoto}` : "")
+    setAvatarUrlBanner(course.image ? `${process.env.NEXT_PUBLIC_API_URL}/files/${course.image}` : "")
+    setAvatarUrlTeacher(course.teacherphoto ? `${process.env.NEXT_PUBLIC_API_URL}/files/${course.teacherphoto}` : "")
     setImageAvatarBanner(null)
     setImageAvatarTeacher(null)
 
@@ -262,6 +265,7 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
       data.append("teacherinfo", info)
       data.append("description", description)
       data.append("time", time)
+      data.append("category", category)
 
       if (imageAvatarBanner) {
         data.append("image", imageAvatarBanner)
@@ -373,6 +377,17 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
             value={time}
             onChange={(e) => setTime(e.target.value)}
           />
+
+          <select
+            className={styles.input}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Selecione uma categoria</option>
+            {categories.filter(c => c.id !== 'trending').map((cat) => (
+              <option key={cat.id} value={cat.id}>{cat.name}</option>
+            ))}
+          </select>
 
           <h5>Banner do curso</h5>
           <label className={styles.labelAvatar}>

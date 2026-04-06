@@ -27,7 +27,7 @@ export default function Materials({ info, premium }: infoClasses) {
     const [infoList, setInfoList] = useState(info || [])
 
     function novaAba(material: string) {
-        var win = window.open(`${process.env.API_URL}/files/${material}`)
+        var win = window.open(`${process.env.NEXT_PUBLIC_API_URL}/files/${material}`)
         win.focus()
     }
 

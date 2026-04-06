@@ -50,7 +50,7 @@ export default function MyCourses({ info, premium }: infoCourses) {
                     <img
                       className={styles.imageCard}
                       alt={course.title}
-                      src={`${process.env.API_URL}/files/${course.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/files/${course.image}`}
                     />
                     <div className={styles.descriptionCard}>
                       <p>{course.title}</p>
