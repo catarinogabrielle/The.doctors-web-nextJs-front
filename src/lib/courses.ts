@@ -3,7 +3,6 @@ export interface Course {
   title: string;
   instructor: string;
   category: string;
-  duration: string;
   lessons: number;
   image: string;
   description: string;
@@ -53,7 +52,6 @@ export function mapBackendCourses(backendCourses: BackendCourse[]): Course[] {
     title: c.title,
     instructor: c.teachername,
     category: c.category || "trending",
-    duration: c.time,
     lessons: c._count.classes,
     image: c.image.startsWith("http") ? c.image : `${API_URL}/files/${c.image}`,
     description: c.description,

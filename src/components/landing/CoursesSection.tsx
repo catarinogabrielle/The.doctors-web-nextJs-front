@@ -3,7 +3,7 @@ import { useInView } from "@/hooks/useInView";
 import { categories, getCoursesByCategory, Course } from "@/lib/courses";
 import {
   TrendingUp, Briefcase, Cpu, Heart, Palette, Megaphone,
-  DollarSign, Users, Mic, Video, Clock, BookOpen, ArrowRight,
+  DollarSign, Users, Mic, Video, BookOpen, ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -121,14 +121,8 @@ export default function CoursesSection({ courses = [] }: CoursesSectionProps) {
                 </div>
 
                 {/* Meta */}
-                <div className="p-4 flex items-center justify-between text-xs text-white/40">
+                <div className="p-4 flex items-center text-xs text-white/40">
                   <div className="flex items-center gap-3">
-                    {course.duration && (
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
-                        {course.duration}
-                      </span>
-                    )}
                     {course.lessons > 0 && (
                       <span className="flex items-center gap-1">
                         <BookOpen className="w-3.5 h-3.5" />
