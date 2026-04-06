@@ -98,7 +98,7 @@ export default function SignUp() {
                     </form>
                 </div>
 
-                <Link href="/">
+                <Link href="/login">
                     <a className={styles.text}>Já possui uma conta? Faça login!</a>
                 </Link>
             </div>

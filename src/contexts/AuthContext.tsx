@@ -45,7 +45,7 @@ export const AuthContext = createContext({} as AuthContextData)
 export function signOut() {
     try {
         destroyCookie(undefined, '@nextauth.token')
-        Router.push('/')
+        Router.push('/login')
     } catch {
         console.log('erro ao deslogar')
     }
@@ -121,7 +121,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             toast.success("Conta criada com sucesso!")
 
             // redirecionar o user para /login
-            Router.push('/')
+            Router.push('/login')
 
         } catch (err) {
             toast.error("Erro ao cadastrar!")
