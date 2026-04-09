@@ -6,8 +6,8 @@
     right: auto;
     padding: 30px 30px 0px 30px;
     transform: translate(-50%, -50%);
-    background: var(--Branco2);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
     border-radius: 14px;
     width: 56%;
     max-height: 88vh;
@@ -19,13 +19,31 @@
     }
 }
 
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 14px 14px 0;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
 .containerButton {
     justify-content: flex-end;
     display: flex;
 }
 
 .icon {
-    color: var(--Cinza);
+    color: var(--app-text-secondary);
 }
 
 .contentForm {
@@ -33,9 +51,10 @@
     flex-direction: column;
 
     h1 {
-        color: var(--Preto);
+        color: var(--app-text);
         font-size: 25px;
         font-weight: normal;
+        font-family: 'Playfair Display', serif;
     }
 }
 
@@ -48,10 +67,20 @@
         min-height: 120px;
         resize: none;
         padding: 0.5rem;
+        color: var(--app-text);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--app-gold-dim);
+        }
     }
 
     h2 {
-        color: var(--Preto);
+        color: var(--app-text);
         font-size: 25px;
         font-weight: normal;
         margin-bottom: 15px;
@@ -59,7 +88,7 @@
     }
 
     h5 {
-        color: var(--Preto);
+        color: var(--app-text-secondary);
         font-size: 15px;
         font-weight: normal;
         margin-bottom: 8px;
@@ -70,19 +99,26 @@
 .input {
     border-radius: 8px;
     margin-bottom: 1rem;
-    color: var(--Preto);
-    background: var(--Branco2);
-    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
-    border: none;
+    color: var(--app-text);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--app-border);
     height: 40px;
     padding: 0 0.5rem;
+    transition: border-color 0.3s;
+
+    &:focus {
+        outline: none;
+        border-color: var(--app-gold-dim);
+    }
 }
 
 .buttonAdd {
     border-radius: 8px;
     height: 40px;
     border: 0;
-    background-color: #09c00f;
+    background: linear-gradient(135deg, oklch(0.55 0.22 20), oklch(0.48 0.2 30));
+    background-size: 200% 200%;
+    animation: shimmerEdit 3s ease infinite;
     transition: 0.4s;
     margin-top: 28px;
     margin-bottom: 20px;
@@ -92,21 +128,27 @@
     cursor: pointer;
 
     p {
-        color: var(--Branco2);
+        color: #fff;
         font-size: 1.1rem;
         font-weight: bold;
     }
 }
 
+@keyframes shimmerEdit {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .buttonAdd:hover {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px oklch(0.55 0.22 20 / 0.35);
 }
 
 .labelAvatar {
-    color: var(--Preto);
-    background: var(--Branco2);
-    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
-    border: none;
+    color: var(--app-text);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed var(--app-border);
     margin-bottom: 1rem;
     border-radius: 8px;
     display: flex;
@@ -144,7 +186,7 @@
 .classesSection {
     margin-top: 10px;
     padding-top: 20px;
-    border-top: 1px solid rgba(30, 30, 42, 0.15);
+    border-top: 1px solid var(--app-border);
     margin-bottom: 30px;
 }
 
@@ -155,7 +197,7 @@
     margin-bottom: 16px;
 
     h2 {
-        color: var(--Preto);
+        color: var(--app-text);
         font-size: 22px;
         font-weight: bold;
     }
@@ -165,8 +207,8 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #2F6FED;
-    color: #fff;
+    background: var(--app-gold);
+    color: oklch(0.15 0.01 250);
     border: none;
     border-radius: 8px;
     padding: 8px 14px;
@@ -176,12 +218,12 @@
     transition: 0.3s;
 
     &:hover {
-        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px oklch(0.78 0.12 80 / 0.3);
     }
 }
 
 .noClasses {
-    color: var(--Cinza);
+    color: var(--app-text-muted);
     font-size: 14px;
     text-align: center;
     padding: 20px 0;
@@ -194,8 +236,8 @@
 }
 
 .classeItem {
-    background: var(--Branco2);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -209,7 +251,7 @@
     transition: background 0.2s;
 
     &:hover {
-        background: rgba(0, 0, 0, 0.03);
+        background: rgba(255, 255, 255, 0.05);
     }
 }
 
@@ -222,8 +264,8 @@
 }
 
 .classeIndex {
-    background: #2F6FED;
-    color: #fff;
+    background: var(--app-gold);
+    color: oklch(0.15 0.01 250);
     border-radius: 50%;
     width: 26px;
     height: 26px;
@@ -236,7 +278,7 @@
 }
 
 .classeTitle {
-    color: var(--Preto);
+    color: var(--app-text);
     font-size: 15px;
     font-weight: 500;
     white-space: nowrap;
@@ -270,12 +312,22 @@
     padding: 0 14px 14px 14px;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid var(--app-border);
 
     textarea {
         min-height: 80px;
         resize: none;
         padding: 0.5rem;
+        color: var(--app-text);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--app-gold-dim);
+        }
     }
 }
 
@@ -284,8 +336,8 @@
     align-items: center;
     gap: 8px;
     padding: 10px 12px;
-    background: var(--Branco2);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed var(--app-border);
     border-radius: 8px;
     cursor: pointer;
     margin-bottom: 1rem;
@@ -306,7 +358,7 @@
 }
 
 .materialName {
-    color: var(--Cinza);
+    color: var(--app-text-muted);
     font-size: 13px;
     margin: 0;
 }
@@ -316,8 +368,8 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background: #09c00f;
-    color: #fff;
+    background: var(--app-gold);
+    color: oklch(0.15 0.01 250);
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
@@ -336,8 +388,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--Cinza);
-    color: #fff;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    color: var(--app-text-secondary);
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
@@ -352,8 +405,8 @@
 }
 
 .newClassForm {
-    background: rgba(0, 0, 0, 0.02);
-    border: 1px dashed rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--app-border);
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 16px;
@@ -361,7 +414,7 @@
     flex-direction: column;
 
     h5 {
-        color: var(--Preto);
+        color: var(--app-text);
         font-size: 16px;
         font-weight: 600;
         margin-bottom: 12px;
@@ -371,6 +424,16 @@
         min-height: 80px;
         resize: none;
         padding: 0.5rem;
+        color: var(--app-text);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--app-gold-dim);
+        }
     }
 }
 

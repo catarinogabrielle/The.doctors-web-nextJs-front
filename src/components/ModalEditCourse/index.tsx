@@ -29,7 +29,7 @@ interface ModalEditCourseProps {
 }
 
 export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: ModalEditCourseProps) {
-  const modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
+  const modalStyles = { overlay: { zIndex: 10, background: "rgba(0, 0, 0, 0.7)" } }
 
   useEffect(() => {
     if (typeof window !== "undefined") {

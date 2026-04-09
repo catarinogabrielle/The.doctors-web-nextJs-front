@@ -6,8 +6,8 @@
     right: auto;
     padding: 20px;
     transform: translate(-50%, -50%);
-    background: var(--Branco2);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
     border-radius: 14px;
     width: 90%;
     max-height: 84vh;
@@ -28,17 +28,17 @@
 }
 
 .container::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 0 14px 14px 0;
 }
 
 .container::-webkit-scrollbar-thumb {
-    background: rgb(153, 153, 153);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 14px;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-    background: rgb(107, 107, 107);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 14px;
 }
 
@@ -48,8 +48,9 @@
 
     h1 {
         font-size: 26px;
-        color: var(--Preto);
+        color: var(--app-text);
         font-weight: bold;
+        font-family: 'Playfair Display', serif;
 
         @media (max-width: 659px) {
             font-size: 20px;
@@ -58,7 +59,7 @@
 }
 
 .icon {
-    color: var(--Cinza);
+    color: var(--app-text-secondary);
 
     @media (max-width: 659px) {
         width: 23px;
@@ -113,14 +114,14 @@
 .class {
     display: flex;
     width: 30%;
-    background: var(--Branco2);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
     border-radius: 8px;
     flex-direction: column;
 
     h1 {
         font-size: 20px;
-        color: var(--Preto);
+        color: var(--app-text);
         font-weight: bold;
         margin: 15px 0 0 12px;
 
@@ -161,7 +162,7 @@
 }
 
 .boxScrollClass::-webkit-scrollbar-thumb {
-    background: var(--Cinza2);
+    background: var(--app-text-faint);
     border-radius: 10px;
 }
 
@@ -173,17 +174,17 @@
     margin-bottom: 14px;
     margin-top: 4px;
     align-items: center;
-    border-bottom: 1px solid rgba(30, 30, 42, 0.19);
+    border-bottom: 1px solid var(--app-border);
 
     text {
         font-size: 14px;
-        color: var(--Cinza);
+        color: var(--app-text-secondary);
     }
 }
 
 .contentInfoCourse {
-    background: var(--Branco2);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
     border-radius: 8px;
     display: flex;
     flex-direction: row;
@@ -193,7 +194,7 @@
 
     h1 {
         font-size: 17px;
-        color: var(--Cinza);
+        color: var(--app-text-secondary);
         font-weight: bold;
     }
 
@@ -213,20 +214,20 @@
 .description {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid rgba(30, 30, 42, 0.2);
+    border-bottom: 1px solid var(--app-border);
     margin-top: 34px;
     padding-bottom: 20px;
 
     h1 {
         font-size: 20px;
-        color: var(--Preto);
+        color: var(--app-text);
         font-weight: bold;
     }
 
     text {
         font-size: 14px;
         margin-top: 8px;
-        color: var(--Preto);
+        color: var(--app-text-secondary);
     }
 
     @media (max-width: 659px) {
@@ -247,8 +248,8 @@
 .boxTeacher {
     display: flex;
     flex-direction: row;
-    background: var(--Branco2);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
     border-radius: 8px;
     padding: 20px;
     margin: 30px 0 0 0;
@@ -269,20 +270,20 @@
 
     h1 {
         font-size: 20px;
-        color: var(--Preto);
+        color: var(--app-text);
         font-weight: bold;
     }
 
     h2 {
         font-size: 17px;
-        color: var(--Preto);
+        color: var(--app-text);
         font-weight: bold;
     }
 
     text {
         font-size: 14px;
         margin-top: 14px;
-        color: var(--Preto);
+        color: var(--app-text-secondary);
     }
 
     @media (max-width: 659px) {
@@ -304,7 +305,9 @@
 
 .button {
     display: flex;
-    background: #09c00f;
+    background: linear-gradient(135deg, oklch(0.55 0.22 20), oklch(0.48 0.2 30));
+    background-size: 200% 200%;
+    animation: shimmer 3s ease infinite;
     border-radius: 8px;
     justify-content: center;
     align-items: center;
@@ -312,10 +315,11 @@
     text-decoration: none;
     padding: 10px 0;
     font-size: 20px;
-    color: var(--Branco2);
+    color: #fff;
     font-weight: bold;
     margin: 50px 0 12px 0;
     transition: 0.4s;
+    cursor: pointer;
 
     @media (max-width: 659px) {
         margin: 30px 0 12px 0;
@@ -323,21 +327,28 @@
     }
 }
 
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .button:hover {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px oklch(0.55 0.22 20 / 0.35);
 }
 
 .buttonPayment {
     display: flex;
-    background: var(--Cinza3);
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
     border-radius: 8px;
     justify-content: center;
     align-items: center;
-    border: none;
     text-decoration: none;
     padding: 10px 0;
     font-size: 20px;
-    color: var(--Branco2);
+    color: var(--app-text-muted);
     font-weight: bold;
     margin: 50px 0 12px 0;
     transition: 0.4s;
@@ -349,5 +360,5 @@
 }
 
 .buttonPayment:hover {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    border-color: var(--app-border-hover);
 }

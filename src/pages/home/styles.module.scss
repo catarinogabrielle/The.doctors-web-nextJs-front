@@ -3,14 +3,11 @@
     flex-direction: row;
     padding: 0 50px;
     justify-content: center;
-    background: url("../../../public/new-bg.jpeg") no-repeat fixed center;
-    background-size: 100% auto;
-    height: 100vh;
+    background: var(--app-bg);
+    min-height: 100vh;
 
     @media (max-width: 659px) {
-        padding: 0;
-        background: none;
-        height: 0vh;
+        padding: 0 1rem;
     }
 }
 
@@ -18,11 +15,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 130px;
-    width: 90%;
+    margin-top: 7rem;
+    width: 100%;
+    max-width: 1280px;
+    gap: 1rem;
 
     @media (max-width: 659px) {
-        margin-top: 100px;
+        margin-top: 6rem;
         justify-content: flex-start;
     }
 }
@@ -40,34 +39,38 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
-    margin-right: 33px;
-    border: 0;
+    border: 1px solid var(--app-border);
     width: 160px;
     height: 130px;
-    transition: 0.8s;
-    background: var(--Branco2);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
+    transition: all 0.4s ease;
+    background: var(--app-surface);
+    border-radius: 0.75rem;
+    cursor: pointer;
 
     p {
-        color: var(--Verde);
-        font-size: 17px;
+        color: var(--app-gold);
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-top: 0.25rem;
     }
 
     @media (max-width: 659px) {
-        margin-right: 8px;
+        width: calc(50% - 0.5rem);
+        height: 110px;
     }
 }
 
 .iconMenu {
-    color: var(--Verde);
-    transition: 0.8s;
-    margin-bottom: 6px;
+    color: var(--app-gold);
+    transition: color 0.3s;
+    margin-bottom: 0.5rem;
 }
 
 .boxMenu:hover {
-    transform: scale(1.1);
+    border-color: var(--app-gold-border);
+    background: var(--app-surface-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 
     @media (max-width: 659px) {
         transform: none;

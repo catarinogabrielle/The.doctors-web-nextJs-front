@@ -2,44 +2,40 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    background: var(--app-bg);
+    min-height: 100vh;
 }
 
 .content {
     display: flex;
     width: 90%;
+    max-width: 1280px;
+    margin-top: 7rem;
     flex-direction: column;
-    margin-top: 130px;
-}
-
-.content {
-    display: flex;
-    width: 90%;
-    margin-top: 130px;
-    flex-direction: column;
-    margin-bottom: 22px;
+    padding-bottom: 3rem;
 
     @media (max-width: 659px) {
-        margin-top: 100px;
+        margin-top: 6rem;
     }
 }
 
 .boxTitle {
     display: flex;
     flex-direction: row;
-    padding-bottom: 5px;
+    padding-bottom: 1rem;
     align-items: center;
+    border-bottom: 1px solid var(--app-border);
 
     h1 {
-        color: var(--Preto);
-        font-size: 33px;
-        margin-left: 12px;
+        color: var(--app-text);
+        font-size: 1.75rem;
+        font-weight: 700;
+        font-family: "Playfair Display", Georgia, serif;
     }
 
     @media (max-width: 659px) {
         h1 {
-            font-size: 26px;
-            margin-left: 0px;
-            margin-bottom: 12px;
+            font-size: 1.5rem;
         }
     }
 }
@@ -47,29 +43,30 @@
 .boxCard {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-
-    @media (max-width: 659px) {
-        margin-top: 2px;
-    }
+    margin-top: 1rem;
+    gap: 0.75rem;
 }
 
 .card {
     display: flex;
-    padding: 10px 18px;
+    padding: 0.75rem 1.25rem;
     width: 65%;
     align-items: center;
-    background: var(--Branco2);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-    margin-top: 20px;
-    transition: .4s;
-    border: none;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--app-gold-border);
+        background: var(--app-surface-hover);
+    }
 
     text {
-        font-size: 18px;
-        margin-left: 14px;
-        color: var(--Preto);
+        font-size: 0.875rem;
+        margin-left: 0.875rem;
+        color: var(--app-text-secondary);
     }
 
     @media (max-width: 659px) {
@@ -77,27 +74,22 @@
     }
 }
 
-.card:hover {
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
-}
-
 .contentLength {
     display: flex;
-    margin: 22px 0px 0 11px;
+    margin: 1.5rem 0 0 0;
 
     h2 {
-        color: var(--Preto);
-        font-size: 18px;
-        font-weight: normal;
+        color: var(--app-text-muted);
+        font-size: 1rem;
+        font-weight: 400;
     }
 
     @media (max-width: 659px) {
-        margin: 15px 0 0 0;
         align-items: center;
         justify-content: center;
 
         h2 {
-            font-size: 16px;
+            font-size: 0.9rem;
         }
     }
 }

@@ -1,11 +1,17 @@
 .input {
   margin-bottom: 1rem;
-  border: 0;
-  background-color: var(--Branco3);
-  color: var(--Cinza);
-  padding: 1rem;
-  border-radius: 5px;
-  font-size: 14px;
+  border: 1px solid var(--app-border);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--app-text);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: border-color 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--app-gold-border);
+  }
 
   @media (max-width: 620px) {
     font-size: 12px;
@@ -13,5 +19,5 @@
 }
 
 .input::placeholder {
-  color: var(--Preto);
+  color: var(--app-text-faint);
 }

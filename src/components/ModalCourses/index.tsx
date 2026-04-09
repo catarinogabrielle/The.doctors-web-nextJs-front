@@ -26,7 +26,7 @@ export const ModalCourses: React.FC<ModalNewClassesProps> = ({
   premium,
 }) => {
   const modalStyles = {
-    overlay: { zIndex: 10, background: "#41413f81" },
+    overlay: { zIndex: 10, background: "rgba(0, 0, 0, 0.7)" },
   };
 
   useEffect(() => {

@@ -2,6 +2,8 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    background: var(--app-bg);
+    min-height: 100vh;
 }
 
 .boxBack {
@@ -9,20 +11,21 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin: 22px 0 0 50px;
+    margin: 1.5rem 0 0 3rem;
     width: max-content;
-    background-color: var(--Branco4);
-    padding: 5px 10px;
-    border-radius: 8px;
-    transition: 0.4s;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--app-border);
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
     justify-content: center;
 
     h2 {
-        font-size: 17px;
-        margin-left: 6px;
-        color: var(--Preto);
-        font-weight: normal;
-        transition: 0.4s;
+        font-size: 0.875rem;
+        margin-left: 0.375rem;
+        color: var(--app-text-secondary);
+        font-weight: 500;
+        transition: color 0.3s;
     }
 
     @media (max-width: 1400px) {
@@ -30,29 +33,32 @@
     }
 }
 
-.boxBack:hover{
-    background-color: var(--Cinza2);
+.boxBack:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--app-border-hover);
 
     h2 {
-        color: var(--Branco);
+        color: var(--app-gold);
     }
 }
 
 .iconBack {
-    color: var(--Preto);
-    transition: 0.4s;
+    color: var(--app-text-secondary);
+    transition: color 0.3s;
 }
 
-.boxBack:hover .iconBack{
-    color: var(--Branco);
+.boxBack:hover .iconBack {
+    color: var(--app-gold);
 }
 
 .content {
     display: flex;
     width: 94%;
-    margin-top: 24px;
+    max-width: 1600px;
+    margin-top: 1.5rem;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 2rem;
 
     @media (max-width: 659px) {
         flex-direction: column;
@@ -63,31 +69,30 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-right: 22px;
+    margin-right: 1.5rem;
 
     iframe {
         width: 100%;
         height: 820px;
         border: none;
-        border-radius: 8px;
+        border-radius: 0.75rem;
     }
 
     @media (max-width: 1800px) {
         iframe {
             height: 750px;
         }
-
     }
 
     @media (max-width: 1400px) {
         iframe {
             height: 530px;
         }
-
     }
 
     @media (max-width: 659px) {
         width: 100%;
+        margin-right: 0;
 
         iframe {
             height: 200px;
@@ -98,31 +103,34 @@
 .boxDescription {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
-    border-bottom: 1px solid rgba(30, 30, 42, 0.2);
+    margin-top: 2.5rem;
+    border-bottom: 1px solid var(--app-border);
+    padding-bottom: 1rem;
 
     h1 {
-        font-size: 24px;
-        color: var(--Preto);
+        font-size: 1.25rem;
+        color: var(--app-text);
+        font-weight: 700;
+        font-family: "Playfair Display", Georgia, serif;
     }
 
     p {
-        margin-top: 5px;
-        font-size: 14px;
-        color: var(--Preto);
-        margin-bottom: 12px;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--app-text-secondary);
+        line-height: 1.6;
     }
 
     @media (max-width: 659px) {
         width: 100%;
-        margin-top: 30px;
+        margin-top: 1.5rem;
 
         h1 {
-            font-size: 18px;
+            font-size: 1.1rem;
         }
 
         p {
-            font-size: 13px;
+            font-size: 0.8rem;
         }
     }
 }
@@ -130,22 +138,23 @@
 .material {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
-    margin-bottom: 50px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 
     h2 {
-        font-size: 24px;
-        color: var(--Preto);
-        margin-bottom: 3px;
+        font-size: 1.1rem;
+        color: var(--app-text);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
     }
 
     @media (max-width: 659px) {
-        margin-top: 20px;
-        margin-bottom: 30px;
-    }
+        margin-top: 1.25rem;
+        margin-bottom: 1.5rem;
 
-    h2 {
-        font-size: 18px;
+        h2 {
+            font-size: 1rem;
+        }
     }
 }
 
@@ -158,33 +167,39 @@
     display: flex;
     flex-direction: row;
     width: 400px;
-    padding: 10px;
-    background: var(--Branco2);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-    margin-top: 12px;
+    padding: 0.75rem;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
     align-items: center;
-    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        border-color: var(--app-gold-border);
+        background: var(--app-surface-hover);
+    }
 
     text {
-        font-size: 14px;
-        color: var(--Preto);
-        margin-left: 10px;
+        font-size: 0.875rem;
+        color: var(--app-text-secondary);
+        margin-left: 0.75rem;
     }
 
     @media (max-width: 659px) {
         width: 100%;
-        padding: 7px 10px;
+        padding: 0.5rem 0.75rem;
     }
 }
 
 .cardVideos {
-    background: var(--Branco2);
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 0.75rem;
     width: 370px;
     height: 820px;
-    padding: 10px 10px 0 25px;
+    padding: 0.75rem 0.75rem 0 1.25rem;
 
     @media (max-width: 1800px) {
         height: 750px;
@@ -196,9 +211,9 @@
 
     @media (max-width: 659px) {
         width: 95%;
-        padding: 10px;
+        padding: 0.75rem;
         height: 26vh;
-        margin-bottom: 18px;
+        margin-bottom: 1rem;
     }
 }
 
@@ -212,44 +227,48 @@
 }
 
 .scroll::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 .scroll::-webkit-scrollbar-track {
-    opacity: 0;
+    background: transparent;
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    background: var(--Cinza2);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .boxInfo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 5px;
-    border-bottom: 1px solid rgba(30, 30, 42, 0.2);
-    margin: 12px 0 0 0;
-    transition: 0.4s;
-    border-radius: 4px;
+    padding: 0.625rem 0.375rem;
+    border-bottom: 1px solid var(--app-border);
+    margin: 0.75rem 0 0 0;
+    transition: background 0.3s;
+    border-radius: 0.375rem;
 
     h1 {
-        font-size: 15px;
-        color: var(--Preto);
-        font-weight: normal;
-        margin-left: 10px;
+        font-size: 0.875rem;
+        color: var(--app-text-secondary);
+        font-weight: 400;
+        margin-left: 0.625rem;
     }
 
     @media (max-width: 659px) {
         h1 {
-            font-size: 14px;
+            font-size: 0.8rem;
         }
     }
 }
 
 .boxInfo:hover {
-    background-color: var(--Branco3);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .button {
@@ -258,10 +277,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--Branco2);
-    border: 1px solid var(--Verde);
-    margin-right: 12px;
+    background: transparent;
+    border: 1px solid var(--app-gold);
+    margin-right: 0.75rem;
     border-radius: 30px;
+    flex-shrink: 0;
 }
 
 .buttonChech {
@@ -269,9 +289,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--Verde);
+    background: var(--app-gold);
     width: 23px;
     height: 22px;
     border: none;
-    margin-right: 12px;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
 }

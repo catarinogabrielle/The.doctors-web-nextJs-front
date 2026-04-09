@@ -6,8 +6,8 @@
     right: auto;
     padding: 30px 30px 0px 30px;
     transform: translate(-50%, -50%);
-    background: var(--Branco2);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
     border-radius: 14px;
     width: 50%;
 
@@ -23,7 +23,7 @@
 }
 
 .icon {
-    color: var(--Cinza);
+    color: var(--app-text-secondary);
 }
 
 .contentForm {
@@ -31,9 +31,10 @@
     flex-direction: column;
 
     h1 {
-        color: var(--Preto);
+        color: var(--app-text);
         font-size: 25px;
         font-weight: normal;
+        font-family: 'Playfair Display', serif;
     }
 }
 
@@ -46,6 +47,16 @@
         min-height: 80px;
         resize: none;
         padding: 0.5rem;
+        color: var(--app-text);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--app-gold-dim);
+        }
     }
 
     select {
@@ -53,15 +64,18 @@
         height: 40px;
         border-radius: 8px;
         margin-bottom: 1rem;
-        color: var(--Preto);
-        background: var(--Branco2);
-        box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+        color: var(--app-text);
+        background: var(--app-surface);
+        box-shadow: none;
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        color: var(--app-text);
         border: none;
         padding: 0 0.5rem;
     }
 
     h2 {
-        color: var(--Preto);
+        color: var(--app-text);
         font-size: 25px;
         font-weight: normal;
         margin-bottom: 15px;
@@ -69,7 +83,7 @@
     }
 
     h5 {
-        color: var(--Preto);
+        color: var(--app-text-secondary);
         font-size: 15px;
         font-weight: normal;
         margin-bottom: 8px;
@@ -80,19 +94,26 @@
 .input {
     border-radius: 8px;
     margin-bottom: 1rem;
-    color: var(--Preto);
-    background: var(--Branco2);
-    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
-    border: none;
+    color: var(--app-text);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--app-border);
     height: 40px;
     padding: 0 0.5rem;
+    transition: border-color 0.3s;
+
+    &:focus {
+        outline: none;
+        border-color: var(--app-gold-dim);
+    }
 }
 
 .buttonAdd {
     border-radius: 8px;
     height: 40px;
     border: 0;
-    background-color: #09c00f;
+    background: linear-gradient(135deg, oklch(0.55 0.22 20), oklch(0.48 0.2 30));
+    background-size: 200% 200%;
+    animation: shimmerNC 3s ease infinite;
     transition: 0.4s;
     margin-top: 28px;
     margin-bottom: 15px;
@@ -102,21 +123,27 @@
     cursor: pointer;
 
     p {
-        color: var(--Branco2);
+        color: #fff;
         font-size: 1.2rem;
         font-weight: bold;
     }
 }
 
+@keyframes shimmerNC {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .buttonAdd:hover {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px oklch(0.55 0.22 20 / 0.35);
 }
 
 .labelAvatar {
-    color: var(--Preto);
-    background: var(--Branco2);
-    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
-    border: none;
+    color: var(--app-text);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed var(--app-border);
     margin-bottom: 1rem;
     border-radius: 8px;
     display: flex;
@@ -152,7 +179,7 @@
     margin-bottom: 10px;
 
     h1 {
-        color: var(--Cinza);
+        color: var(--app-text-muted);
         font-size: 13px;
         font-weight: lighter;
     }

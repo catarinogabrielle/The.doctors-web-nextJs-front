@@ -23,7 +23,7 @@ interface ModalNewClassesProps {
 }
 
 export function ModalNewStudent({ isOpen, onRequestClose, infoClasses }: ModalNewClassesProps) {
-  var modalStyles = { overlay: { zIndex: 10, background: "#41413f81" } }
+  var modalStyles = { overlay: { zIndex: 10, background: "rgba(0, 0, 0, 0.7)" } }
 
   useEffect(() => {
         if (typeof window !== "undefined") {
