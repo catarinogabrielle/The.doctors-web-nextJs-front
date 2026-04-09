@@ -8,6 +8,12 @@ export interface Course {
   description: string;
   badge?: string;
   featured?: boolean;
+  videoUrl: string;
+  paymentlink: string;
+  teacherphoto: string;
+  teacherwork: string;
+  teacherinfo: string;
+  time: string;
 }
 
 export interface BackendCourse {
@@ -16,8 +22,11 @@ export interface BackendCourse {
   image: string;
   teachername: string;
   teacherphoto: string;
+  teacherwork: string;
+  teacherinfo: string;
   description: string;
   time: string;
+  link: string;
   category: string | null;
   paymentlink: string;
   _count: {
@@ -55,6 +64,12 @@ export function mapBackendCourses(backendCourses: BackendCourse[]): Course[] {
     lessons: c._count.classes,
     image: c.image.startsWith("http") ? c.image : `${API_URL}/files/${c.image}`,
     description: c.description,
+    videoUrl: c.link,
+    paymentlink: c.paymentlink,
+    teacherphoto: c.teacherphoto?.startsWith("http") ? c.teacherphoto : `${API_URL}/files/${c.teacherphoto}`,
+    teacherwork: c.teacherwork,
+    teacherinfo: c.teacherinfo,
+    time: c.time,
   }));
 }
 

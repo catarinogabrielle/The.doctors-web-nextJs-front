@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useInView } from "@/hooks/useInView";
 import { categories, getCoursesByCategory, Course } from "@/lib/courses";
 import {
@@ -6,6 +6,7 @@ import {
   DollarSign, Users, Mic, Video, BookOpen, ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import CourseDetailModal from "./CourseDetailModal";
 
 const iconMap: Record<string, React.ElementType> = {
   TrendingUp, Briefcase, Cpu, Heart, Palette, Megaphone,
@@ -18,8 +19,10 @@ interface CoursesSectionProps {
 
 export default function CoursesSection({ courses = [] }: CoursesSectionProps) {
   const [activeCategory, setActiveCategory] = useState("trending");
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const { ref, isVisible } = useInView();
   const filteredCourses = getCoursesByCategory(courses, activeCategory);
+  const handleCloseModal = useCallback(() => setSelectedCourse(null), []);
 
   // Compute which categories actually have courses
   const activeCategories = categories.filter((cat) => {
@@ -138,7 +141,10 @@ export default function CoursesSection({ courses = [] }: CoursesSectionProps) {
                     <p className="text-sm text-white/80 mb-4 leading-relaxed">
                       {course.description}
                     </p>
-                    <button className="inline-flex items-center gap-2 shimmer text-white text-sm font-semibold px-6 py-2.5 rounded-lg">
+                    <button
+                      onClick={() => setSelectedCourse(course)}
+                      className="inline-flex items-center gap-2 shimmer text-white text-sm font-semibold px-6 py-2.5 rounded-lg"
+                    >
                       Ver Curso
                       <ArrowRight className="w-4 h-4" />
                     </button>
@@ -160,6 +166,8 @@ export default function CoursesSection({ courses = [] }: CoursesSectionProps) {
           </a>
         </div>
       </div>
+
+      <CourseDetailModal course={selectedCourse} onClose={handleCloseModal} />
     </section>
   );
 }
