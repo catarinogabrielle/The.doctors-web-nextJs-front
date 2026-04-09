@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   X, Clock, BookOpen, Monitor, Award, ShoppingCart, User,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 interface CourseDetailModalProps {
   course: Course | null;
@@ -11,6 +11,16 @@ interface CourseDetailModalProps {
 }
 
 export default function CourseDetailModal({ course, onClose }: CourseDetailModalProps) {
+  const buyLink = useMemo(() => {
+    if (!course?.paymentlink) return "";
+    const url = new URL(course.paymentlink);
+    const loginUrl = typeof window !== "undefined"
+      ? `${window.location.origin}/login`
+      : "/login";
+    url.searchParams.set("redirect_to", loginUrl);
+    return url.toString();
+  }, [course?.paymentlink]);
+
   useEffect(() => {
     if (course) {
       document.body.style.overflow = "hidden";
@@ -147,7 +157,7 @@ export default function CourseDetailModal({ course, onClose }: CourseDetailModal
               {/* Buy button */}
               {course.paymentlink && (
                 <a
-                  href={course.paymentlink}
+                  href={buyLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full shimmer text-white text-base font-semibold px-6 py-3.5 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-gold/10"
