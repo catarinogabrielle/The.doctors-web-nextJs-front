@@ -44,7 +44,7 @@ export function Header() {
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <div className={styles.infoContentHeader}>
-                    <Link href="/">
+                    <Link href="/home">
                         <img alt="logo" src="/new-perfil-crop.png" />
                     </Link>
 
@@ -52,7 +52,7 @@ export function Header() {
                 </div>
 
                 <nav className={styles.menuNav}>
-                    <Link href="/home">
+                    <Link href="/">
                         <a className={styles.linkHeader}>Home</a>
                     </Link>
 
