@@ -3,7 +3,7 @@ import Modal from "../ModalWrapper"
 import { default as ReactModal } from "react-modal"
 import styles from "./styles.module.scss"
 
-import { FiX, FiUpload, FiChevronDown, FiChevronUp, FiTrash2, FiPlus, FiSave } from "react-icons/fi"
+import { FiX, FiUpload, FiChevronDown, FiChevronUp, FiTrash2, FiPlus, FiSave, FiMenu } from "react-icons/fi"
 
 import { setupAPIClient } from "../../services/api"
 import { infoProps } from "../../pages/myclasses"
@@ -15,6 +15,7 @@ interface ClasseItem {
   title: string;
   description: string;
   link: string;
+  sort_order?: number;
   material: string | null;
   status: boolean;
   draft: boolean;
@@ -62,6 +63,9 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
   const [newClassLink, setNewClassLink] = useState("")
   const [newClassMaterial, setNewClassMaterial] = useState<File | null>(null)
   const [newClassMaterialName, setNewClassMaterialName] = useState("")
+  const [draggingClassId, setDraggingClassId] = useState<string | null>(null)
+  const [dragOverClassId, setDragOverClassId] = useState<string | null>(null)
+  const [isSavingOrder, setIsSavingOrder] = useState(false)
 
   useEffect(() => {
     if (!course) {
@@ -230,6 +234,88 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
       console.log(err)
       toast.error("Erro ao adicionar aula!")
     }
+  }
+
+  function reorderClasses(sourceId: string, targetId: string, currentClasses: ClasseItem[]) {
+    const sourceIndex = currentClasses.findIndex((item) => item.id === sourceId)
+    const targetIndex = currentClasses.findIndex((item) => item.id === targetId)
+
+    if (sourceIndex === -1 || targetIndex === -1 || sourceIndex === targetIndex) {
+      return currentClasses
+    }
+
+    const ordered = [...currentClasses]
+    const [moved] = ordered.splice(sourceIndex, 1)
+    ordered.splice(targetIndex, 0, moved)
+
+    return ordered
+  }
+
+  async function persistClassesOrder(nextClasses: ClasseItem[], previousClasses: ClasseItem[]) {
+    if (!course) return
+
+    try {
+      setIsSavingOrder(true)
+      const apiClient = setupAPIClient()
+
+      await apiClient.put("/classes/reorder", {
+        myclasse_id: course.id,
+        ordered_class_ids: nextClasses.map((item) => item.id),
+      })
+
+      toast.success("Ordem das aulas atualizada!")
+    } catch (err) {
+      console.log(err)
+      setClasses(previousClasses)
+      toast.error("Erro ao atualizar a ordem das aulas!")
+    } finally {
+      setIsSavingOrder(false)
+    }
+  }
+
+  function handleClassDragStart(e: React.DragEvent<HTMLButtonElement>, classeId: string) {
+    e.stopPropagation()
+    e.dataTransfer.effectAllowed = "move"
+    e.dataTransfer.setData("text/plain", classeId)
+    setDraggingClassId(classeId)
+  }
+
+  function handleClassDragOver(e: React.DragEvent<HTMLDivElement>, classeId: string) {
+    e.preventDefault()
+
+    if (draggingClassId && draggingClassId !== classeId) {
+      e.dataTransfer.dropEffect = "move"
+      setDragOverClassId(classeId)
+    }
+  }
+
+  async function handleClassDrop(e: React.DragEvent<HTMLDivElement>, targetClassId: string) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const sourceClassId = e.dataTransfer.getData("text/plain") || draggingClassId
+
+    setDragOverClassId(null)
+    setDraggingClassId(null)
+
+    if (!sourceClassId || sourceClassId === targetClassId || isSavingOrder) {
+      return
+    }
+
+    const previousClasses = [...classes]
+    const nextClasses = reorderClasses(sourceClassId, targetClassId, classes)
+
+    if (nextClasses === classes) {
+      return
+    }
+
+    setClasses(nextClasses)
+    await persistClassesOrder(nextClasses, previousClasses)
+  }
+
+  function handleClassDragEnd() {
+    setDraggingClassId(null)
+    setDragOverClassId(null)
   }
 
   async function handleUpdate(event: FormEvent) {
@@ -537,12 +623,29 @@ export function ModalEditCourse({ isOpen, onRequestClose, course, onUpdated }: M
           ) : (
             <div className={styles.classesList}>
               {classes.map((classe, index) => (
-                <div key={classe.id} className={styles.classeItem}>
+                <div
+                  key={classe.id}
+                  className={`${styles.classeItem} ${draggingClassId === classe.id ? styles.classeDragging : ""} ${dragOverClassId === classe.id ? styles.classeDragOver : ""}`}
+                  onDragOver={(e) => handleClassDragOver(e, classe.id)}
+                  onDrop={(e) => handleClassDrop(e, classe.id)}
+                >
                   <div
                     className={styles.classeHeader}
                     onClick={() => toggleClassExpand(classe.id)}
                   >
                     <div className={styles.classeHeaderLeft}>
+                      <button
+                        type="button"
+                        className={styles.dragHandleButton}
+                        draggable={!isSavingOrder}
+                        onDragStart={(e) => handleClassDragStart(e, classe.id)}
+                        onDragEnd={handleClassDragEnd}
+                        onClick={(e) => e.stopPropagation()}
+                        title="Arrastar para reordenar"
+                        aria-label={`Arrastar aula ${classe.title}`}
+                      >
+                        <FiMenu size={16} />
+                      </button>
                       <span className={styles.classeIndex}>{index + 1}</span>
                       <span className={styles.classeTitle}>{classe.title}</span>
                     </div>

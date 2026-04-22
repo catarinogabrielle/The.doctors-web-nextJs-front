@@ -242,6 +242,15 @@
     overflow: hidden;
 }
 
+.classeDragging {
+    opacity: 0.55;
+}
+
+.classeDragOver {
+    border-color: var(--app-gold);
+    box-shadow: 0 0 0 1px rgba(230, 179, 101, 0.35);
+}
+
 .classeHeader {
     display: flex;
     justify-content: space-between;
@@ -261,6 +270,31 @@
     gap: 10px;
     flex: 1;
     min-width: 0;
+}
+
+.dragHandleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    flex-shrink: 0;
+    color: var(--app-text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    cursor: grab;
+    transition: 0.2s;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    &:hover {
+        color: var(--app-text);
+        border-color: var(--app-gold-dim);
+    }
 }
 
 .classeIndex {
